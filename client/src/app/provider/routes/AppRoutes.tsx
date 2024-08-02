@@ -15,6 +15,7 @@ function AppRoutes({}: AppRoutesProps): JSX.Element {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/arenas" element={<ArenasPage />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
       </Routes>

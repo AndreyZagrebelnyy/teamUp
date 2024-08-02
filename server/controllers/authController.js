@@ -38,34 +38,37 @@ exports.registration = async (req, res) => {
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
-  exports.authorization = async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      if (email.trim() === "" || password.trim() === "") {
-        res.status(400).json({ message: "Проверьте на заполнение поля!" });
+};
+
+exports.authorization = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (email.trim() === "" || password.trim() === "") {
+      res.status(400).json({ message: "Проверьте на заполнение поля!" });
+      return;
+    }
+    const user = await UserService.getUserByEmail(email);
+
+    if (user) {
+      const isCompare = await bcrypt.compare(password, user.password);
+      if (isCompare) {
+        delete user.dataValues.password;
+        const { accessToken, refreshToken } = generateTokens({ user });
+        res
+          .status(200)
+          .cookie("refresh", refreshToken, { httpOnly: true })
+          .json({ message: "success", accessToken, user });
         return;
       }
-      const user = await UserService.getUserByEmail(email);
-
-      if (user) {
-        const isCompare = await bcrypt.compare(password, user.password);
-        if (isCompare) {
-          delete user.dataValues.password;
-          const { accessToken, refreshToken } = generateTokens({ user });
-          res
-            .status(200)
-            .cookie("refresh", refreshToken, { httpOnly: true })
-            .json({ message: "success", accessToken, user });
-          return;
-        }
-        res.status(400).json({ message: "email  или password не совпадают " });
-      }
-    } catch ({ message }) {
-      res.status(500).json({ error: message });
+      res.status(400).json({ message: "email  или password не совпадают " });
+      return;
     }
-  };
-  exports.logout = (req, res) => {
-    res.locals.user = undefined;
-    res.status(200).clearCookie("refresh").json({ message: "success" });
-  };
+  } catch ({ message }) {
+    res.status(500).json({ error: message });
+  }
+};
+
+exports.logout = (req, res) => {
+  res.locals.user = undefined;
+  res.status(200).clearCookie("refresh").json({ message: "success" });
 };

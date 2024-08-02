@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../app/providers/store/store';
+import { useAppDispatch } from '../../app/provider/store/store';
 import { authorization } from '../../entities/user/authSlice';
 import './styles/auth.css';
 
