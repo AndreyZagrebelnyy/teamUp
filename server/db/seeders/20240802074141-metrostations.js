@@ -27,6 +27,7 @@ module.exports = {
     ]
    )
   },
+  //удалить этот комент
 
   async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete("MetroStations", null, {})
