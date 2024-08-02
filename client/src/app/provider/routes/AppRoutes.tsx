@@ -1,10 +1,11 @@
 import React from 'react';
-import './AppRoutes.css';
 import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
+import EventsPage from '../../../page/events/EventsPage';
+
 
 type AppRoutesProps = {};
 

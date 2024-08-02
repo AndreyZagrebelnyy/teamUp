@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Date extends Model {
     static associate(models) {
       this.belongsToMany(models.Arena, {
-        through: arenadate,
+        through: models.ArenaDate,
         foreignKey: "dateId",
       });
     }
