@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert(
-    "Metrostations",
+    "MetroStations",
     [
       {
         title: "Старая Деревня"
@@ -27,8 +27,9 @@ module.exports = {
     ]
    )
   },
+  //удалить этот комент
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Metrostations", null, {})
+    await queryInterface.bulkDelete("MetroStations", null, {})
   },
 };

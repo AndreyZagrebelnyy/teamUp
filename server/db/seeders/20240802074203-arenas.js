@@ -39,7 +39,7 @@ module.exports = {
           building: '19Д',
           coordX: 59.931783,
           coordY: 30.450651,
-          creatorId: 2,
+          creatorId: 1,
           metroStationId: 3,
         },
         {
@@ -51,7 +51,7 @@ module.exports = {
           building: '8',
           coordX: 59.966755,
           coordY: 30.265760,
-          creatorId: 2,
+          creatorId: 1,
           metroStationId: 4,
         },
         {
@@ -63,7 +63,7 @@ module.exports = {
           building: '11/7с1',
           coordX: 59.967592,
           coordY: 30.289107,
-          creatorId: 3,
+          creatorId: 1,
           metroStationId: 5,
         },
         {
@@ -75,7 +75,7 @@ module.exports = {
           building: '9 к2',
           coordX: 59.984544,
           coordY: 30.355466,
-          creatorId: 3,
+          creatorId: 1,
           metroStationId: 6,
         },
       ]
