@@ -3,19 +3,22 @@ import './AppRoutes.css';
 import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
+import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
+import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 
-type AppRoutesProps = {
-}
+type AppRoutesProps = {};
 
-const AppRoutes = ({}: AppRoutesProps): JSX.Element => {
+function AppRoutes({}: AppRoutesProps): JSX.Element {
   return (
-	 <div className='AppRoutes'>
-		<Routes>
-			<Route path = '/' element = {<MainPage/>}></Route>
-			<Route path = '/arenas' element = {<ArenasPage/>}></Route>
-		</Routes>
-	 </div>
+    <div className="AppRoutes">
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/arenas" element={<ArenasPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/authorization" element={<AuthorizationPage />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default AppRoutes;

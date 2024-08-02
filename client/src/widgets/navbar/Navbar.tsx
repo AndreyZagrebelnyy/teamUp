@@ -1,14 +1,16 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = (): JSX.Element => {
+function Navbar(): JSX.Element {
   return (
-	 <div className='Navbar'>
-		<NavLink to = '/'>Главная</NavLink>
-		<NavLink to = '/arenas'>Площадки</NavLink>
-	 </div>
+    <div className="Navbar">
+      <NavLink to="/">Главная</NavLink>
+      <NavLink to="/arenas">Площадки</NavLink>
+      <NavLink to="/registration">Регистрация</NavLink>
+      <NavLink to="/authorization">Вход</NavLink>
+    </div>
   );
-};
+}
 
 export default Navbar;
