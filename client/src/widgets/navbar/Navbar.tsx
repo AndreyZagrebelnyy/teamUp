@@ -6,6 +6,7 @@ const Navbar = (): JSX.Element => {
   return (
 	 <div className='Navbar'>
 		<NavLink to = '/'>Главная</NavLink>
+		<NavLink to = '/events'>Игры</NavLink>
 		<NavLink to = '/arenas'>Площадки</NavLink>
 	 </div>
   );
