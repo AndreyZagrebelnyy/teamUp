@@ -15,7 +15,16 @@ module.exports = {
 		 description: {
 			type: Sequelize.TEXT,
 		 },
-      address: {
+      country: {
+        type: Sequelize.STRING,
+      },
+      city: {
+        type: Sequelize.STRING,
+      },
+      street: {
+        type: Sequelize.STRING,
+      },
+      building: {
         type: Sequelize.STRING,
       },
       coordX: {
