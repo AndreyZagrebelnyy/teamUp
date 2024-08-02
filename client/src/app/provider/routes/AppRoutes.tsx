@@ -4,12 +4,9 @@ import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
-import EventsPage from '../../../page/events/EventsPage';
+// import EventsPage from '../../../page/events/EventsPage';
 
-
-type AppRoutesProps = {};
-
-function AppRoutes({}: AppRoutesProps): JSX.Element {
+function AppRoutes(): JSX.Element {
   return (
     <div className="AppRoutes">
       <Routes>

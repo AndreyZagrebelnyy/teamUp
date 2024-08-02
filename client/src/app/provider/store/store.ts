@@ -1,7 +1,9 @@
+
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSlice } from '../../../entities/user/authSlice';
 import { arenaSlice } from '../../../entities/arena/ArenaSlice';
+
 
 const store = configureStore({
   reducer: {

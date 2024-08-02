@@ -4,8 +4,8 @@ const UserService = require("../services/userServices");
 
 exports.registration = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+    const { email, password } = req.body;
+    if (email.trim() === "" || password.trim() === "") {
       res.status(400).json({ message: "Заполните все поля" });
       return;
     }
@@ -21,7 +21,6 @@ exports.registration = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
 
     const user = await UserService.createUser({
-      name,
       email,
       password: hashPassword,
     });
