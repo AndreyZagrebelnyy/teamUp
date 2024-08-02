@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	 "dbr": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-	 "createDB": "npx sequelize db:create",
-	 "dev": "nodemon app.js"
+    "dbr": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
+    "createDB": "npx sequelize db:create",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,6 @@
     "typescript-eslint": "^8.0.0"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
