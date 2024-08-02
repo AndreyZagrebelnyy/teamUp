@@ -1,16 +1,19 @@
 import React from 'react';
 import './EventsPage.css';
 import TimeLine from '../../widgets/timline/TimeLine';
+import { useAppSelector } from '../../app/provider/store/store';
+import EventItem from '../../entities/event/ui/EventItem';
 
-type EventsPageProps = {};
+function EventsPage(): JSX.Element {
+  const events = useAppSelector((store) => store.events.events);
 
-const EventsPage = ({}: EventsPageProps): JSX.Element => {
   return (
     <>
       <TimeLine />
-      <div className="EventsPage"></div>
+      <div className="EventsPage" />
+      {events && events.map((event) => <EventItem key={event.id} event={event} />)}
     </>
   );
-};
+}
 
 export default EventsPage;

@@ -1,7 +1,6 @@
 export type User = {
     id: number;
     email: string;
-  
   };
   
   export type UserWithoutId = Omit<User, 'id'>;

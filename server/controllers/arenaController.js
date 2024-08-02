@@ -5,6 +5,6 @@ exports.getAllArenas = async (req, res) => {
     const arenas = await ArenaServices.getAllArenas();
     res.status(200).json({ message: "success", arenas });
   } catch ({ message }) {
-    res.json({ error: message });
+    res.status(500).json({ error: message });
   }
 };
