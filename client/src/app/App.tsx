@@ -12,9 +12,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getAllArenas());
-  }, []);
-    dispatch(tokensRefresh());
-    dispatch(getAllEvents());
+    void dispatch(getAllEvents());
+    void dispatch(tokensRefresh());
   }, [dispatch]);
 
   return (
