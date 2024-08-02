@@ -1,6 +1,6 @@
 import { MetroStation } from "../../metroStation/type/MetroStationType";
 
-export type Arena = {
+export type BaseArena = {
   id: number;
   title: string;
   description: string;
@@ -12,23 +12,14 @@ export type Arena = {
   coordY: number;
   creatorId: number;
   metroStationId: number;
-  MetroStation: MetroStation
-};
-export type ArenaWithMetroStation = {
-  id: number;
-  title: string;
-  description: string;
-  country: string;
-  city: string;
-  street: string;
-  building: string;
-  coordX: number;
-  coordY: number;
-  creatorId: number;
-  metroStationId: number;
-  MetroStation: MetroStation
 };
 
-export type ArenaWithoutId = Omit<Arena, 'id'>;
+export type Arena = BaseArena
+
+export type ArenaWithMetroStation = BaseArena & {MetroStation: MetroStation}
+
+export type ArenaWithoutId = Omit<BaseArena, 'id'>;
+
+export type ArenaWithoutIdAndUserId = Omit<ArenaWithoutId, 'creatorId'>;
 
 export type ArenaId = Arena['id']

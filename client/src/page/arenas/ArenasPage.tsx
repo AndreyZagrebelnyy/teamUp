@@ -3,7 +3,7 @@ import './ArenasPage.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
-import { Arena } from '../../entities/arena/types/ArenaType';
+import {  ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
 import ArenaAddForm from '../../entities/arena/ui/ArenaAddForm';
 
 type ArenasPageProps = {};
@@ -14,7 +14,7 @@ const ArenasPage = ({}: ArenasPageProps): JSX.Element => {
   return (
     <>
       <div className="ArenasPage">Площадки</div>
-      <div>{arenas && arenas.map((arena: Arena) => <ArenaItem arena={arena} />)}</div>
+      <div>{arenas && arenas.map((arena: ArenaWithMetroStation) => <ArenaItem arena={arena} key = {arena.id}/>)}</div>
       <span>{errors}</span>
 		<button>Добавить площадку</button>
 		<ArenaAddForm/>

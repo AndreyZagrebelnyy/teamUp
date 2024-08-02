@@ -1,9 +1,9 @@
 import React from 'react';
 import './ArenaItem.css';
-import { Arena } from '../types/ArenaType';
+import { ArenaWithMetroStation } from '../types/ArenaType';
 
 type ArenaItemProps = {
-  arena: Arena;
+  arena: ArenaWithMetroStation;
 };
 
 const ArenaItem = ({arena}: ArenaItemProps): JSX.Element => {
