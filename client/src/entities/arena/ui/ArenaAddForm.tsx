@@ -47,7 +47,7 @@ const ArenaAddForm = ({}: ArenaAddFormProps): JSX.Element => {
       <input type="number" placeholder='Здание/строение/корпус'{...register('building')} />
       <input type="number" placeholder='Коорд X'{...register('coordX')} />
       <input type="number" placeholder='Коорд Y'{...register('coordY')} />
-      <input type="number" placeholder='Название площадки'{...register('metroStationId')} />
+      <input type="number" placeholder='Станция метро'{...register('metroStationId')} />
       <input type="submit" />
     </form>
   );

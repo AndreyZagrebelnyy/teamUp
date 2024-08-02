@@ -8,6 +8,7 @@ type ArenaItemProps = {
 
 const ArenaItem = ({arena}: ArenaItemProps): JSX.Element => {
 
+console.log(arena);
 
   return (
   <>

@@ -18,6 +18,10 @@ export type Arena = BaseArena
 
 export type ArenaWithMetroStation = BaseArena & {MetroStation: MetroStation}
 
+export type ArenaWithEvents = BaseArena & {Events: Event[]}
+
+export type ArenaWithEventsAndMetroStation = ArenaWithMetroStation & {Events: Event[]}
+
 export type ArenaWithoutId = Omit<BaseArena, 'id'>;
 
 export type ArenaWithoutIdAndUserId = Omit<ArenaWithoutId, 'creatorId'>;
