@@ -1,14 +1,12 @@
-
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSlice } from '../../../entities/user/authSlice';
-import { arenaSlice } from '../../../entities/arena/ArenaSlice';
-
+import { eventSlice } from '../../../entities/event/eventSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    arenas: arenaSlice.reducer,
+    events: eventSlice.reducer,
   },
 });
 export type StoreType = typeof store;

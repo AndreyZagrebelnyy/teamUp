@@ -23,6 +23,7 @@ function Navbar(): JSX.Element {
     <div className="Navbar">
       <NavLink to="/">Главная</NavLink>
       <NavLink to="/arenas">Площадки</NavLink>
+      <NavLink to="/events">События</NavLink>
 
       {user ? (
         <>
