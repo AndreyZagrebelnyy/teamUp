@@ -1,12 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { useDispatch, useSelector } from "react-redux";
-import { authSlice } from "../../../entities/user/authSlice";
+
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSlice } from '../../../entities/user/authSlice';
+import { arenaSlice } from '../../../entities/arena/ArenaSlice';
+
 
 const store = configureStore({
-    reducer:{ 
-        auth: authSlice.reducer
-    }
-})
+  reducer: {
+    auth: authSlice.reducer,
+    arenas: arenaSlice.reducer,
+  },
+});
 export type StoreType = typeof store;
 
 export type RootState = ReturnType<typeof store.getState>;
