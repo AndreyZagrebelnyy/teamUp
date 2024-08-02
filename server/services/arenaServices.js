@@ -1,12 +1,18 @@
-const { Arena, MetroStation, Event } = require("../db/models");
+const { Arena, MetroStation, Event, Date, ArenaDate } = require("../db/models");
 
 class ArenaServices {
   async getAllArenas() {
     return Arena.findAll({
       include: [
         { model: MetroStation },
-        { model: Event }
-      ]
+        { model: Event },
+        {
+          model: Date,
+          through: {
+            model: ArenaDate,
+          },
+        },
+      ],
     });
   }
 }

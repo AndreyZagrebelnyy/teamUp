@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ArenaId, ArenaWithEventsAndMetroStation } from './types/ArenaType';
+import type { Arena, ArenaId } from './types/ArenaType';
 import ArenaApi from './api/ArenaApi';
 
 type ArenaState = {
-  arenas: ArenaWithEventsAndMetroStation[];
+  arenas: Arena[];
   errors: string | undefined;
 };
 
@@ -54,12 +54,12 @@ export const arenaSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllArenas.fulfilled, (state, action) => {
-		console.log(action.payload);
-      state.arenas = action.payload
-    })
-    .addCase(addArena.fulfilled, (state, action) => {
-      state.arenas.push(action.payload)
-    });
+    builder
+      .addCase(getAllArenas.fulfilled, (state, action) => {
+        state.arenas = action.payload;
+      })
+      .addCase(addArena.fulfilled, (state, action) => {
+        state.arenas.push(action.payload);
+      });
   },
 });

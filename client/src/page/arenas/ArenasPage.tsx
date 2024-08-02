@@ -1,26 +1,29 @@
 import React from 'react';
 import './ArenasPage.css';
-import { RootState } from '@reduxjs/toolkit/query';
+import type { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
-import {  ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
+import type { ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
 import ArenaAddForm from '../../entities/arena/ui/ArenaAddForm';
 import { useAppSelector } from '../../app/provider/store/store';
 
 type ArenasPageProps = {};
 
-const ArenasPage = ({}: ArenasPageProps): JSX.Element => {
+function ArenasPage({}: ArenasPageProps): JSX.Element {
   const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
   console.log(arenas);
 
   return (
     <>
       <div className="ArenasPage">Площадки</div>
-      <div>{arenas && arenas.map((arena: ArenaWithMetroStation) => <ArenaItem arena={arena} key = {arena.id}/>)}</div>
+      <div>
+        {arenas &&
+          arenas.map((arena: ArenaWithMetroStation) => <ArenaItem arena={arena} key={arena.id} />)}
+      </div>
       <span>{errors}</span>
-		<button>Добавить площадку</button>
-		<ArenaAddForm/>
+      <button>Добавить площадку</button>
+      <ArenaAddForm />
     </>
   );
-};
+}
 
 export default ArenasPage;
