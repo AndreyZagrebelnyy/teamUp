@@ -1,15 +1,18 @@
 import React from 'react';
 import './MainPage.css';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../app/provider/store/store';
+import SportItem from '../../entities/sports/ui/SportItem';
 
-type MainPageProps = {
-}
+function MainPage(): JSX.Element {
+  const { sports } = useSelector((store: RootState) => store.sports);
 
-const MainPage = ({}: MainPageProps): JSX.Element => {
   return (
-	 <div className='MainPage'>
-		Главная страница
-	 </div>
+    <>
+      <div className="MainPage">Главная страница</div>
+      {sports && sports.map((sport) => <SportItem sport={sport} key={sport.id} />)}
+    </>
   );
-};
+}
 
 export default MainPage;

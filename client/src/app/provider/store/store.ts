@@ -11,6 +11,7 @@ const store = configureStore({
     arenas: arenaSlice.reducer,
   },
 });
+
 export type StoreType = typeof store;
 
 export type RootState = ReturnType<typeof store.getState>;
