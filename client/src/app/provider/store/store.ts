@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from 'react-redux';
 import { authSlice } from "../../../entities/user/authSlice";
+// import profilered
+import { profileSlice } from "../../../entities/profile/profileSlice";
+
 
 const store = configureStore({
     reducer:{ 
-        auth: authSlice.reducer
+        auth: authSlice.reducer,
+        profile: profileSlice.reducer,
     }
 })
 export type StoreType = typeof store;
