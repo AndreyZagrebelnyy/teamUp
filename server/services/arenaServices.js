@@ -1,8 +1,9 @@
-const { Arena } = require("../db/models");
+const { Arena, MetroStation } = require("../db/models");
+
 
 class ArenaServices {
   async getAllArenas() {
-    return Arena.findAll();
+    return Arena.findAll({include: MetroStation});
   }
 }
 
