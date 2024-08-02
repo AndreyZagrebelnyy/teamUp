@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './ArenaAddForm.css';
 import { ArenaWithoutIdAndUserId } from '../types/ArenaType';
-import { useDispatch } from 'react-redux';
 import { addArena } from '../ArenaSlice';
+import { useAppDispatch } from '../../../app/provider/store/store';
 
 type Inputs = ArenaWithoutIdAndUserId;
 
@@ -28,7 +28,7 @@ type ArenaAddFormProps = {};
 
 const ArenaAddForm = ({}: ArenaAddFormProps): JSX.Element => {
 
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
   const { register, handleSubmit } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });

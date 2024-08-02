@@ -1,15 +1,15 @@
 import React from 'react';
 import './ArenasPage.css';
-import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import {  ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
 import ArenaAddForm from '../../entities/arena/ui/ArenaAddForm';
+import { useAppSelector } from '../../app/provider/store/store';
 
 type ArenasPageProps = {};
 
 const ArenasPage = ({}: ArenasPageProps): JSX.Element => {
-  const { arenas, errors } = useSelector((store: RootState) => store.arenas);
+  const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
 
   return (
     <>
