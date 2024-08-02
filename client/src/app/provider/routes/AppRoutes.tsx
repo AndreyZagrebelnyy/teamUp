@@ -2,21 +2,24 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
+import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
+import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import EventsPage from '../../../page/events/EventsPage';
 
-type AppRoutesProps = {
-}
 
-const AppRoutes = ({}: AppRoutesProps): JSX.Element => {
+type AppRoutesProps = {};
+
+function AppRoutes({}: AppRoutesProps): JSX.Element {
   return (
-	 <div className='AppRoutes'>
-		<Routes>
-			<Route path = '/' element = {<MainPage/>}></Route>
-			<Route path = '/events' element = {<EventsPage/>}></Route>
-			<Route path = '/arenas' element = {<ArenasPage/>}></Route>
-		</Routes>
-	 </div>
+    <div className="AppRoutes">
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/arenas" element={<ArenasPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/authorization" element={<AuthorizationPage />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default AppRoutes;
