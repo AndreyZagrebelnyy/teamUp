@@ -41,6 +41,7 @@ class AuthApi {
 
   static tokensRefresh = async (): Promise<AuthResponse> => {
     const response: AxiosResponse<AuthResponse> = await axiosInstance.get('/tokens/refresh');
+    
     return response.data;
   };
 }

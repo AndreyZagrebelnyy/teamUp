@@ -36,18 +36,12 @@ function RegistrationPage(): JSX.Element {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onHadleSubmit = async (user): Promise<void> => {
-    void dispatch(registration({ name: user.name, email: user.email, password: user.password }));
+    void dispatch(registration({ email: user.email, password: user.password }));
     navigate('/');
   };
 
   return (
     <form onSubmit={handleSubmit(onHadleSubmit)}>
-      <label htmlFor="name">
-        Name:
-        <input type="text" {...register('name')} />
-        <span>{errors.name?.message}</span>
-      </label>
-      <br />
       <label htmlFor="email">
         Email:
         <input type="email" {...register('email')} />
