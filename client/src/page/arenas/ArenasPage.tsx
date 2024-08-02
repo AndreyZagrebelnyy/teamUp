@@ -10,6 +10,7 @@ type ArenasPageProps = {};
 
 const ArenasPage = ({}: ArenasPageProps): JSX.Element => {
   const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
+  console.log(arenas);
 
   return (
     <>
