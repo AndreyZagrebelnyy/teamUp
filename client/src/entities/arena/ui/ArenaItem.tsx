@@ -13,8 +13,8 @@ const ArenaItem = ({arena}: ArenaItemProps): JSX.Element => {
   <>
   <div>{arena.title}</div>
   <div>{arena.description}</div>
-  <div>{`Адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</div>
-  <div>{`Ст. метро: ${arena.MetroStation.title}`}</div>
+  <div>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</div>
+  <div>{`станция метро: ${arena.MetroStation.title}`}</div>
   </>
   );
 };
