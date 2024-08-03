@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './ArenaAddForm.css';
-import { ArenaWithoutIdAndUserId } from '../types/ArenaType';
+import { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
 import { useAppDispatch } from '../../../app/provider/store/store';
 
-type Inputs = ArenaWithoutIdAndUserId;
+type Inputs = ArenaWithoutIdAndCreatorId;
 
 const schema = yup
   .object()
@@ -21,6 +21,7 @@ const schema = yup
     coordX: yup.number().required(),
     coordY: yup.number().required(),
     metroStationId: yup.number().required(),
+    Dates: yup.object().required(),
   })
   .required();
 
