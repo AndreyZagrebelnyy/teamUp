@@ -1,3 +1,7 @@
+import { Arena, ArenaWithDates } from "../../arena/types/ArenaType";
+import { Date } from "../../date/types/dateType";
+import { UserEvent } from "../../userEvent/types/userEventType";
+
 export type Event = {
   id: number;
   arenaId: number;
@@ -8,4 +12,4 @@ export type Event = {
   teamSize: number;
 };
 
-export type EventIncludeAll = Event & { Arena: []; Date: []; UserEvent: [] };
+export type EventIncludeAll = Event & { Arena: ArenaWithDates};

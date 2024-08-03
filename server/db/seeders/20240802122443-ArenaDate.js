@@ -42,6 +42,42 @@ module.exports = {
           arenaId: 3,
           dateId: 3,
         },
+        {
+          arenaId: 4,
+          dateId: 1,
+        },
+        {
+          arenaId: 4,
+          dateId: 2,
+        },
+        {
+          arenaId: 4,
+          dateId: 3,
+        },
+        {
+          arenaId: 5,
+          dateId: 1,
+        },
+        {
+          arenaId: 5,
+          dateId: 2,
+        },
+        {
+          arenaId: 5,
+          dateId: 3,
+        },
+        {
+          arenaId: 6,
+          dateId: 1,
+        },
+        {
+          arenaId: 6,
+          dateId: 2,
+        },
+        {
+          arenaId: 6,
+          dateId: 3,
+        },
       ],
       {}
     );

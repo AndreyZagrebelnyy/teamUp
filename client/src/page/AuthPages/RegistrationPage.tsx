@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { object, ref, string } from 'yup';
-
 import { useNavigate } from 'react-router-dom';
 import { registration } from '../../entities/user/authSlice';
 import './styles/auth.css';
 import { useAppDispatch } from '../../app/provider/store/store';
+import type { UserRegistrationForm } from '../../entities/user/types/userType';
 
 const schema = object().shape({
 
@@ -35,7 +36,8 @@ function RegistrationPage(): JSX.Element {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onHadleSubmit = async (user): Promise<void> => {
+  const onHadleSubmit = async (user: UserRegistrationForm): Promise<void> => {
+    console.log('asdasdasd');
     void dispatch(registration({ email: user.email, password: user.password }));
     navigate('/');
   };

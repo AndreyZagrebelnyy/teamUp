@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Arena.init(
     {
-		  title:DataTypes.STRING,
-		  description: DataTypes.TEXT,
+      title: DataTypes.STRING,
+      description: DataTypes.TEXT,
       country: DataTypes.STRING,
       city: DataTypes.STRING,
       street: DataTypes.STRING,

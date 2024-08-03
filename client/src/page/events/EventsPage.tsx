@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventsPage.css';
-import TimeLine from '../../widgets/timline/TimeLine';
+// import TimeLine from '../../widgets/timline/TimeLine';
 import { useAppSelector } from '../../app/provider/store/store';
 import EventItem from '../../entities/event/ui/EventItem';
 
@@ -9,7 +9,7 @@ function EventsPage(): JSX.Element {
 
   return (
     <>
-      <TimeLine />
+      {/* <TimeLine /> */}
       <div className="EventsPage" />
       {events && events.map((event) => <EventItem key={event.id} event={event} />)}
     </>

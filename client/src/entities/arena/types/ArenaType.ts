@@ -1,6 +1,7 @@
-import { MetroStation } from "../../metroStation/type/MetroStationType";
+import type { Dates } from '../../date/types/dateType';
+import type { MetroStation } from '../../metroStation/type/MetroStationType';
 
-export type BaseArena = {
+export type Arena = {
   id: number;
   title: string;
   description: string;
@@ -14,12 +15,11 @@ export type BaseArena = {
   metroStationId: number;
 };
 
-export type Arena = BaseArena
+export type ArenaWithMetroStation = Arena & { MetroStation: MetroStation; Dates: Dates[] };
+export type ArenaWithDates = Arena & { Dates: Dates[] };
 
-export type ArenaWithMetroStation = BaseArena & {MetroStation: MetroStation}
+export type ArenaWithoutId = Omit<Arena, 'id'>;
 
-export type ArenaWithoutId = Omit<BaseArena, 'id'>;
+export type ArenaWithoutIdAndCreatorId = Omit<ArenaWithoutId, 'creatorId'>;
 
-export type ArenaWithoutIdAndUserId = Omit<ArenaWithoutId, 'creatorId'>;
-
-export type ArenaId = Arena['id']
+export type ArenaId = Arena['id'];

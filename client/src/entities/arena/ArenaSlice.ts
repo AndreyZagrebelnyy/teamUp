@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Arena, ArenaId } from './types/ArenaType';
+import type { Arena, ArenaId } from './types/ArenaType';
 import ArenaApi from './api/ArenaApi';
 
 type ArenaState = {
@@ -54,11 +54,12 @@ export const arenaSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllArenas.fulfilled, (state, action) => {
-      state.arenas = action.payload
-    })
-    .addCase(addArena.fulfilled, (state, action) => {
-      state.arenas.push(action.payload)
-    });
+    builder
+      .addCase(getAllArenas.fulfilled, (state, action) => {
+        state.arenas = action.payload;
+      })
+      .addCase(addArena.fulfilled, (state, action) => {
+        state.arenas.push(action.payload);
+      });
   },
 });
