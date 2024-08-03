@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Sport } from '../types/sportTypes';
 
-type sportItemProps = {
+type SportItemProps = {
   sport: Sport;
 };
 
-function SportItem({ sport }: sportItemProps): JSX.Element {
+function SportItem({ sport }: SportItemProps): JSX.Element {
   return (
     <div>
       <h1>{sport.title}</h1>

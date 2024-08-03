@@ -5,12 +5,14 @@ import type { RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
 
 function MainPage(): JSX.Element {
-  const { sports } = useSelector((store: RootState) => store.sports);
+  const  sports  = useSelector((store: RootState) => store.sports.sports);
 
+  console.log(sports);
   return (
     <>
       <div className="MainPage">Главная страница</div>
       {sports && sports.map((sport) => <SportItem sport={sport} key={sport.id} />)}
+	  
     </>
   );
 }

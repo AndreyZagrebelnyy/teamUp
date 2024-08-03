@@ -21,8 +21,9 @@ export const sportSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder
-        .addCase(getAllSports.fulfilled,(state,action)=>{
+        .addCase(getAllSports.fulfilled, (state,action) => {
 state.sports = action.payload})
+
 .addCase(getAllSports.rejected, (state, action) => {
     state.errors = action.error.message;
   })

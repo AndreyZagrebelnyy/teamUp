@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authSlice } from '../../../entities/user/authSlice';
 import { eventSlice } from '../../../entities/event/eventSlice';
 import { arenaSlice } from '../../../entities/arena/ArenaSlice';
+import { sportSlice } from '../../../entities/sports/sportSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     events: eventSlice.reducer,
     arenas: arenaSlice.reducer,
+    sports:sportSlice.reducer,
   },
 });
 

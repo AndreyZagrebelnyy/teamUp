@@ -11,7 +11,7 @@ import './styles/auth.css';
 import { useAppDispatch } from '../../app/provider/store/store';
 
 const schema = object().shape({
-  name: string().nullable().trim().required('Обязательно для заполнения'),
+
   email: string().email().nullable().trim().required('Не email'),
   password: string()
     .trim()
