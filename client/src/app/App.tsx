@@ -7,6 +7,7 @@ import { getAllArenas } from '../entities/arena/ArenaSlice';
 import { tokensRefresh } from '../entities/user/authSlice';
 import { getAllEvents } from '../entities/event/eventSlice';
 import { getAllSports } from '../entities/sports/sportSlice';
+import Footer from '../widgets/footer/Footer'; 
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ function App(): JSX.Element {
     <>
       <Navbar />
       <AppRoutes />
+      <Footer /> 
     </>
   );
 }
