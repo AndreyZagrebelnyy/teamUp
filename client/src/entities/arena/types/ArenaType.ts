@@ -20,6 +20,6 @@ export type ArenaWithDates = Arena & { Dates: Dates[] };
 
 export type ArenaWithoutId = Omit<Arena, 'id'>;
 
-export type ArenaWithoutIdAndUserId = Omit<ArenaWithoutId, 'creatorId'>;
+export type ArenaWithoutIdAndCreatorId = Omit<ArenaWithoutId, 'creatorId'>;
 
 export type ArenaId = Arena['id'];

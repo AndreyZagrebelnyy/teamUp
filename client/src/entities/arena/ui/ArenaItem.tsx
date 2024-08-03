@@ -15,13 +15,13 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       <div>{arena.description}</div>
       <div>
         <h1>
-          {new Date(arena.Dates[0].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[0].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
             .join(':')}{' '}
           -
-          {new Date(arena.Dates[0].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[0].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
@@ -30,13 +30,13 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       </div>
       <div>
         <h1>
-          {new Date(arena.Dates[1].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[1].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
             .join(':')}{' '}
           -
-          {new Date(arena.Dates[1].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[1].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
@@ -45,13 +45,13 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       </div>
       <div>
         <h1>
-          {new Date(arena.Dates[2].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[2].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
             .join(':')}{' '}
           -
-          {new Date(arena.Dates[2].startDate)
+          {arena.Dates.length > 0 && new Date(arena.Dates[2].startDate)
             .toLocaleTimeString()
             .split(':')
             .splice(0, 2)
