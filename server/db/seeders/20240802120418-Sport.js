@@ -7,13 +7,13 @@ module.exports = {
       "Sports",
       [
         {
-          title: "Basketball",
+          title: "Баскетбол",
         },
         {
-          title: "Volleyball",
+          title: "Волейбол",
         },
         {
-          title: "Football",
+          title: "Футбол",
         },
       ],
       {}

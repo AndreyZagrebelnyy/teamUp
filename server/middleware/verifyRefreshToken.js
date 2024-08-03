@@ -9,7 +9,9 @@ async function verifyRefreshToken(req, res, next) {
       where: { id: user.id },
       attributes: ["id", "email"],
     });
+
     res.locals.user = user;
+
     next();
   } catch (error) {
     console.log("Invalid refresh token");

@@ -6,6 +6,7 @@ import { useAppDispatch } from './provider/store/store';
 import { getAllArenas } from '../entities/arena/ArenaSlice';
 import { tokensRefresh } from '../entities/user/authSlice';
 import { getAllEvents } from '../entities/event/eventSlice';
+import { getAllSports } from '../entities/sports/sportSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ function App(): JSX.Element {
     void dispatch(getAllArenas());
     void dispatch(getAllEvents());
     void dispatch(tokensRefresh());
+    void dispatch(getAllSports());
   }, [dispatch]);
 
   return (

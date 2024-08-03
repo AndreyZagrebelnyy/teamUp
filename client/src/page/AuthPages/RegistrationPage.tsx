@@ -12,6 +12,7 @@ import { useAppDispatch } from '../../app/provider/store/store';
 import type { UserRegistrationForm } from '../../entities/user/types/userType';
 
 const schema = object().shape({
+
   email: string().email().nullable().trim().required('Не email'),
   password: string()
     .trim()
