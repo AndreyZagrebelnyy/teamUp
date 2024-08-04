@@ -4,6 +4,7 @@ import { authSlice } from '../../../entities/user/authSlice';
 import { eventSlice } from '../../../entities/event/eventSlice';
 import { arenaSlice } from '../../../entities/arena/ArenaSlice';
 import { sportSlice } from '../../../entities/sports/sportSlice';
+import { profileSlice } from '../../../entities/profile/profileSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     events: eventSlice.reducer,
     arenas: arenaSlice.reducer,
     sports:sportSlice.reducer,
+    profile:profileSlice.reducer
   },
 });
 

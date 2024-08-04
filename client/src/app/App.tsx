@@ -8,6 +8,7 @@ import { tokensRefresh } from '../entities/user/authSlice';
 import { getAllEvents } from '../entities/event/eventSlice';
 import { getAllSports } from '../entities/sports/sportSlice';
 import Footer from '../widgets/footer/Footer'; 
+import { getAllProfiles } from '../entities/profile/profileSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ function App(): JSX.Element {
     void dispatch(getAllEvents());
     void dispatch(tokensRefresh());
     void dispatch(getAllSports());
+    void dispatch(getAllProfiles());
   }, [dispatch]);
 
   return (
