@@ -8,14 +8,13 @@ import EventsPage from '../../../page/events/EventsPage';
 import ProfilePage from '../../../page/profilePage/ProfilePage';
 
 
-type AppRoutesProps = {};
-
-function AppRoutes({}: AppRoutesProps): JSX.Element {
+function AppRoutes(): JSX.Element {
   return (
     <div className="AppRoutes">
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/arenas" element={<ArenasPage />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
         <Route path="/profile" element={<ProfilePage />} />

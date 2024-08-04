@@ -1,90 +1,79 @@
-// src/store/profileSlice.ts
-
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/provider/store/store';
-
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import ProfileApi from './api/profileApi';
+import type { Profile, ProfileId } from './types/ProfileType';
 
 
-interface ProfileState {
-    firstName: string;
-    lastName: string;
-    telegram: string;
-    image: string;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-}
-
-const initialState: ProfileState = {
-    firstName: '',
-    lastName: '',
-    telegram: '',
-    image: '',
-    status: 'idle',
+type ProfileState = {
+    profiles: Profile[];
+  errors: string | undefined;
+  isLoading: boolean;
 };
 
-// Асинхронное действие для получения профиля
-export const fetchProfile = createAsyncThunk(
-    'profile/fetchProfile',
-    async (_, { getState }) => {
-        const state = getState() as RootState;
-        const authToken = state.auth.token;
+const initialState: ProfileState = {
+    profiles: [],
+  errors: undefined,
+  isLoading: false,
+};
 
-        const response = await new Promise<ProfileState>((resolve) =>
-            setTimeout(() => resolve({ ...initialState, firstName: 'John', lastName: 'Doe' }), 1000)
-        );
-        
-        return response;
-    }
+export const getAllProfiles = createAsyncThunk('load/profiles', () => ProfileApi.getAllProfiles());
+
+export const addProfile = createAsyncThunk(
+  'add/profile',
+  (data: { firstName: string; lastName: string; telegram: string; image: string; userId: number }) => ProfileApi.addProfile(data),
 );
 
-// Асинхронное действие для обновления профиля
+export const removeProfile = createAsyncThunk('remove/profile', (id: ProfileId) => ProfileApi.removeProfile(id));
+
 export const updateProfile = createAsyncThunk(
-    'profile/updateProfile',
-    async (updatedProfile: Partial<ProfileState>, { getState }) => {
-        const state = getState() as RootState;
-        const authToken = state.auth.token;
-
-        const response = await new Promise<ProfileState>((resolve) =>
-            setTimeout(() => resolve({ ...updatedProfile, status: 'succeeded' }), 1000)
-        );
-        
-        return response;
-    }
+  'update/profile',
+  (data: { id: number; firstName: string; lastName: string; telegram: string; image: string; userId: number }) => ProfileApi.updateProfile(data),
 );
 
-// Создание slice для профиля
 export const profileSlice = createSlice({
-    name: 'profile',
-    initialState,
-    reducers: {
-        // Определите любые синхронные действия здесь, если нужно
-        clearProfile: (state) => {
-            return { ...initialState };
-        }
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProfile.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(fetchProfile.fulfilled, (state, action) => {
-                return { ...state, ...action.payload, status: 'succeeded' };
-            })
-            .addCase(fetchProfile.rejected, (state) => {
-                state.status = 'failed';
-            })
-            .addCase(updateProfile.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(updateProfile.fulfilled, (state, action) => {
-                return { ...state, ...action.payload, status: 'succeeded' };
-            })
-            .addCase(updateProfile.rejected, (state) => {
-                state.status = 'failed';
-            });
-    },
+  name: 'profiles',
+  initialState,
+  // синхронный редюсер
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // если все успешно выполнилось
+      .addCase(getAllProfiles.fulfilled, (state, action) => {
+        state.profiles = action.payload;
+      })
+      // если все плохо
+      .addCase(getAllProfiles.rejected, (state, action) => {
+        state.errors = action.error.message;
+      })
+      // в процессе
+      .addCase(getAllProfiles.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addProfile.fulfilled, (state, action) => {
+        state.profiles.push(action.payload);
+      })
+      .addCase(addProfile.rejected, (state, action) => {
+        state.errors = action.error.message;
+      })
+      // в процессе
+      .addCase(addProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(removeProfile.fulfilled, (state, action) => {
+        state.profiles = state.profiles.filter((profile) => profile.id !== action.payload);
+        state.isLoading = false;
+      })
+      .addCase(removeProfile.rejected, (state, action) => {
+        state.errors = action.error.message;
+        state.isLoading = false;
+      })
+      // в процессе
+      .addCase(removeProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.profiles = state.profiles.map((profile) =>
+            profile.id === action.payload.id ? action.payload : profile,
+        );
+      });
+  },
 });
-
-// Экспортируем actions и reducer
-export const { clearProfile } = profileSlice.actions;
-export default profileSlice.reducer;
-

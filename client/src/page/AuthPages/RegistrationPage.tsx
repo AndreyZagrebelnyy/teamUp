@@ -1,17 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/no-misused-promises */
+
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { object, ref, string } from 'yup';
-
 import { useNavigate } from 'react-router-dom';
 import { registration } from '../../entities/user/authSlice';
 import './styles/auth.css';
 import { useAppDispatch } from '../../app/provider/store/store';
+import type { UserRegistrationForm } from '../../entities/user/types/userType';
 
 const schema = object().shape({
-  name: string().nullable().trim().required('Обязательно для заполнения'),
+
   email: string().email().nullable().trim().required('Не email'),
   password: string()
     .trim()
@@ -35,19 +36,14 @@ function RegistrationPage(): JSX.Element {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onHadleSubmit = async (user): Promise<void> => {
-    void dispatch(registration({ name: user.name, email: user.email, password: user.password }));
+  const onHadleSubmit = async (user: UserRegistrationForm): Promise<void> => {
+    console.log('asdasdasd');
+    void dispatch(registration({ email: user.email, password: user.password }));
     navigate('/');
   };
 
   return (
     <form onSubmit={handleSubmit(onHadleSubmit)}>
-      <label htmlFor="name">
-        Name:
-        <input type="text" {...register('name')} />
-        <span>{errors.name?.message}</span>
-      </label>
-      <br />
       <label htmlFor="email">
         Email:
         <input type="email" {...register('email')} />
