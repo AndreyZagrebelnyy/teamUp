@@ -1,4 +1,6 @@
 const ProfileServices = require("../services/profileServices");
+const path = require('path');
+const fs = require('fs');
 
 exports.getAllProfiles = async (req, res) => {
   try {
@@ -97,3 +99,17 @@ exports.deleteProfile = async (req, res) => {
     res.status(500).json({ error: message });
   }
 };
+
+
+
+
+
+exports.uploadProfilePhoto = (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+
+  res.status(200).json({ filename: req.file.filename });
+};
+
