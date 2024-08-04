@@ -28,6 +28,7 @@ function Navbar(): JSX.Element {
       {user ? (
         <>
           <div className="user-info">
+            <NavLink to="/profile">Профиль</NavLink>
             <FontAwesomeIcon icon={faUserSecret} size="3x" onClick={onHandleLogout} />
           </div>
           <p onClick={onHandleLogout}>Выход</p>

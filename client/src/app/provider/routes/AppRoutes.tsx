@@ -5,6 +5,7 @@ import MainPage from '../../../page/main/MainPage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import EventsPage from '../../../page/events/EventsPage';
+import ProfilePage from '../../../page/profile/ProfilePage';
 // import EventsPage from '../../../page/events/EventsPage';
 
 function AppRoutes(): JSX.Element {
@@ -16,6 +17,7 @@ function AppRoutes(): JSX.Element {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );
