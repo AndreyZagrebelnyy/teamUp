@@ -1,24 +1,24 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { useAppDispatch } from '../../../app/provider/store/store';
+import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import { addProfile } from '../profileSlice';
 
 const schemaProfile = yup
   .object()
   .shape({
-    firstName: yup.string().required('заполните все поля'),
-    lastName: yup.string().required('заполните все поля'),
-    telegram: yup.string().required('заполните все поля'),
-    image: yup.string().required('заполните все поля'),
+    firstName: yup.string().required('Заполните все поля'),
+    lastName: yup.string().required('Заполните все поля'),
+    telegram: yup.string().required('Заполните все поля'),
+    image: yup.string().required('Заполните все поля'),
   })
   .required();
 
 function FormAddProfile(): JSX.Element {
   const dispatch = useAppDispatch();
-  
+  const userId = useAppSelector((state) => state.auth.user?.id);
+
   const {
     register,
     handleSubmit,
@@ -26,16 +26,25 @@ function FormAddProfile(): JSX.Element {
     formState: { errors },
   } = useForm({
     defaultValues: {
-        firstName: '',
-        lastName: '',
-        telegram: '',
-        image: '',
+      firstName: '',
+      lastName: '',
+      telegram: '',
+      image: '',
     },
-    resolver: yupResolver(schemaProfile), // yup, joi and even your own.
+    resolver: yupResolver(schemaProfile),
   });
 
-  const onSubmit = (profile: { firstName: string; lastName: string; telegram: string; image: string }): void => {
-    void dispatch(addProfile(profile));
+  const onSubmit = (data: {
+    firstName: string;
+    lastName: string;
+    telegram: string;
+    image: string;
+  }): void => {
+    if (!userId) {
+      console.error('User ID is not available');
+      return;
+    }
+    void dispatch(addProfile({ ...data, userId }));
     reset();
   };
 
@@ -55,16 +64,16 @@ function FormAddProfile(): JSX.Element {
         <span>{errors.lastName?.message}</span>
       </label>
       <label htmlFor="telegram">
-      telegram
+        Telegram
         <input type="text" {...register('telegram')} />
         <span>{errors.telegram?.message}</span>
       </label>
       <label htmlFor="image">
-      image
+        Изображение
         <input type="text" {...register('image')} />
         <span>{errors.image?.message}</span>
       </label>
-      <button type="submit">add</button>
+      <button type="submit">Создать профиль</button>
     </form>
   );
 }
