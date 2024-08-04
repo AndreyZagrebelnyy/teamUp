@@ -26,15 +26,13 @@ exports.createProfile = async (req, res) => {
         firstName,
         lastName,
         telegram,
-        image,
-     
+        image
     } = req.body;
     const profile = await ProfileServices.createProfile({
         firstName,
         lastName,
         telegram,
         image,
-
     });
     if (profile) {
       res.status(201).json({ message: "success", profile });

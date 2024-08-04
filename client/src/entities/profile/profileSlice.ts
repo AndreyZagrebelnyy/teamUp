@@ -72,7 +72,7 @@ export const profileSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.profiles = state.profiles.map((profile) =>
-            profile.id === action.payload.id ? action.payload : profile,
+      	profile.id === action.payload.id ? action.payload : profile,
         );
       });
   },

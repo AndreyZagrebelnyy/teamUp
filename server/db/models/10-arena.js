@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.ArenaDate,
         foreignKey: "arenaId",
       });
+      this.belongsToMany(models.User, {
+        through: models.Favourite,
+        foreignKey: "arenaId",
+      });
 
       this.hasMany(models.Image, {
         foreignKey: "arenaId",
