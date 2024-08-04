@@ -8,8 +8,8 @@ class FavouriteServices {
   async deleteFavourite(data) {
 	console.log(11111111, data);
 	const {user, arenaId} = data
-    const arena = await Favourite.findOne({ where: { userId: user.id & arenaId} });
-    if (movie) {
+    const arena = await Favourite.findOne({ where: { userId: user.id, arenaId} });
+    if (data) {
       arena.destroy();
       return true;
     }

@@ -9,10 +9,11 @@ function MainPage(): JSX.Element {
   const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
   const user = useAppSelector((store: RootState) => store.auth.user);
 
-  // Предполагается, что arena.Users - это массив объектов User
-  const favouriteArenas = arenas.filter((arena) =>
-    arena.Users.some((userFromArena) => userFromArena.id === user.id),
-  );
+  const favouriteArenas = user
+    ? arenas.filter((arena) => arena.Users.some((userFromArena) => userFromArena.id === user.id))
+    : [];
+  console.log(arenas);
+  console.log(favouriteArenas);
 
   return (
     <div className="main-page">
