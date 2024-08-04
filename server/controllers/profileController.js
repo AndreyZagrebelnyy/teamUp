@@ -31,7 +31,7 @@ exports.createProfile = async (req, res) => {
     } = req.body;
     const userId = req.body.userId;
 
-    console.log("Received userId:", userId);
+  
     const profile = await ProfileServices.createProfile({
         firstName,
         lastName,
@@ -40,7 +40,6 @@ exports.createProfile = async (req, res) => {
         userId
 
     });
-    console.log(req.body);
     
     if (profile) {
       res.status(201).json({ message: "success", profile });
@@ -56,7 +55,7 @@ exports.createProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const { user } = res.locals;
-    const { profileId } = req.params;
+    const { userId } = req.params;
     const {
         firstName,
         lastName,
@@ -64,7 +63,7 @@ exports.updateProfile = async (req, res) => {
         image,
     } = req.body;
 
-    const profile = await ProfileServices.updateProfile(+profileId, user.id, {
+    const profile = await ProfileServices.updateProfile(+userId, user.id, {
         firstName,
         lastName,
         telegram,
@@ -85,8 +84,8 @@ exports.updateProfile = async (req, res) => {
 exports.deleteProfile = async (req, res) => {
   try {
     const { user } = res.locals;
-    const { profileId } = req.params;
-    const result = await ProfileServices.deleteProfile(+profileId);
+    const { userId } = req.params;
+    const result = await ProfileServices.deleteProfile(+userId);
 
     if (result > 0) {
       res.status(200).json({ message: "success" });
