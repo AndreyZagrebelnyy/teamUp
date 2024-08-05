@@ -1,5 +1,5 @@
 import type { Dates } from '../../date/types/dateType';
-import type { MetroStation } from '../../metroStation/type/MetroStationType';
+import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
 export type Arena = {
   id: number;

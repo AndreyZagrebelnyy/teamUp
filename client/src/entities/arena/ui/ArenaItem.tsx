@@ -10,58 +10,28 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   console.log(arena);
 
   return (
-    <>
-      <div>{arena.title}</div>
-      <div>{arena.description}</div>
-      <div>
-        <h1>
-          {arena.Dates.length > 0 && new Date(arena.Dates[0].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}{' '}
-          -
-          {arena.Dates.length > 0 && new Date(arena.Dates[0].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}
-        </h1>
+    <div className="arena-card">
+      <div className="arena-card-header">
+        <h2 className="arena-title">{arena.title}</h2>
       </div>
-      <div>
-        <h1>
-          {arena.Dates.length > 0 && new Date(arena.Dates[1].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}{' '}
-          -
-          {arena.Dates.length > 0 && new Date(arena.Dates[1].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}
-        </h1>
+      <div className="arena-card-body">
+        <p className="arena-description">{arena.description}</p>
+        <div className="arena-dates">
+          {arena.Dates.map((date) => (
+            <span key={date.id} className="arena-date">
+              {new Date(date.startDate).toLocaleTimeString()} - {' '}
+              {new Date(date.endDate).toLocaleTimeString()}
+            </span>
+          ))}
+        </div>
+        <div className="arena-address">
+          <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
+        </div>
+        <div className="arena-metro">
+          <span>{`станция метро: ${arena.MetroStation.title}`}</span>
+        </div>
       </div>
-      <div>
-        <h1>
-          {arena.Dates.length > 0 && new Date(arena.Dates[2].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}{' '}
-          -
-          {arena.Dates.length > 0 && new Date(arena.Dates[2].startDate)
-            .toLocaleTimeString()
-            .split(':')
-            .splice(0, 2)
-            .join(':')}
-        </h1>
-      </div>
-
-      <div>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</div>
-      <div>{`станция метро: ${arena.MetroStation.title}`}</div>
-    </>
+    </div>
   );
 }
 

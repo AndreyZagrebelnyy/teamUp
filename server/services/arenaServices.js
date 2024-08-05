@@ -34,7 +34,7 @@ class ArenaServices {
 
   async deleteArena(id) {
     const arena = await Arena.findOne({ where: { id } });
-    if (movie) {
+    if (arena) {
       arena.destroy();
       return true;
     }

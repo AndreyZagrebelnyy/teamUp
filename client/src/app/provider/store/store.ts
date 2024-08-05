@@ -2,15 +2,19 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSlice } from '../../../entities/user/authSlice';
 import { eventSlice } from '../../../entities/event/eventSlice';
-import { arenaSlice } from '../../../entities/arena/ArenaSlice';
+import arenasSlice, { arenaSlice } from '../../../entities/arena/ArenaSlice';
 import { sportSlice } from '../../../entities/sports/sportSlice';
+import { dateSlice } from '../../../entities/date/DateSlice';
+import metroSlice from '../../../entities/metroStation/MetroSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     events: eventSlice.reducer,
-    arenas: arenaSlice.reducer,
-    sports:sportSlice.reducer,
+    arenas: arenasSlice.reducer,
+    sports: sportSlice.reducer,
+    dates: dateSlice.reducer,
+    metro: metroSlice.reducer,
   },
 });
 

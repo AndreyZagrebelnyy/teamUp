@@ -1,5 +1,3 @@
-import { object } from 'yup';
-
 export type Date = {
   id: number;
   startDate: string;

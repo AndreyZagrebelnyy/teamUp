@@ -1,15 +1,10 @@
+/* AdminArenasItem.css */
 .arena-card {
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 16px;
-    margin: 16px;
-    max-width: 400px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .arena-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .arena-card-header {
@@ -19,15 +14,12 @@
   }
   
   .arena-title {
-    font-size: 1.5em;
+    font-size: 20px;
     margin: 0;
   }
   
-  .arena-card-body {
-    font-size: 1em;
-  }
-  
   .arena-description {
+    font-size: 16px;
     margin: 8px 0;
   }
   
@@ -35,17 +27,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 8px 0;
   }
   
   .arena-date {
-    background-color: #f0f0f0;
-    border-radius: 4px;
+    background-color: #e9e9e9;
     padding: 4px 8px;
+    border-radius: 4px;
   }
   
-  .arena-address,
-  .arena-metro {
-    margin: 8px 0;
+  .arena-address, .arena-metro {
+    margin-top: 8px;
   }
   

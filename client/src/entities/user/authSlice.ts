@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { User, UserLoginForm, UserRegistrationForm } from './types/userType';
+import type { User, UserRegistrationForm } from './types/userType';
 import AuthApi from "./api/authApi";
 
 type UserState = {
@@ -16,7 +16,7 @@ const initialState:UserState ={
 export const registration = createAsyncThunk('registration/user',(data:UserRegistrationForm)=>  AuthApi.registration(data),
 );
 
-export const authorization = createAsyncThunk('authorization/user',(data:UserLoginForm)=>AuthApi.authorization(data))
+export const authorization = createAsyncThunk('authorization/user',(data:UserRegistrationForm)=>AuthApi.authorization(data))
 
 export const logout = createAsyncThunk('logout/user',()=>AuthApi.logout())
 export const tokensRefresh = createAsyncThunk('refresh/tokens',()=>AuthApi.tokensRefresh())

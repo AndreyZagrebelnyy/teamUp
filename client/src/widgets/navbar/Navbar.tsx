@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
@@ -19,6 +19,9 @@ function Navbar(): JSX.Element {
     void dispatch(logout());
   };
 
+  useEffect(() => {
+    
+  },[])
   return (
     <div className="Navbar">
       <NavLink to="/">Главная</NavLink>
@@ -27,10 +30,11 @@ function Navbar(): JSX.Element {
 
       {user ? (
         <>
+        {user.isAdmin && <NavLink to="/admin_panel">Админ панель</NavLink>}
           <div className="user-info">
             <FontAwesomeIcon icon={faUserSecret} size="3x" onClick={onHandleLogout} />
           </div>
-          <p onClick={onHandleLogout}>Выход</p>
+          <NavLink onClick={onHandleLogout}>Выход</NavLink>
         </>
       ) : (
         <ul>

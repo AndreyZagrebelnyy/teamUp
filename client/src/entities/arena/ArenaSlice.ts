@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Arena, ArenaId } from './types/ArenaType';
+import type { Arena, ArenaWithoutIdAndCreatorId } from './types/ArenaType';
 import ArenaApi from './api/ArenaApi';
 
 type ArenaState = {
@@ -14,42 +14,11 @@ const initialState: ArenaState = {
 
 export const getAllArenas = createAsyncThunk('load/arenas', () => ArenaApi.getAllArenas());
 
-export const removeArena = createAsyncThunk('remove/arena', (id: ArenaId) =>
-  ArenaApi.removeArena(id),
+export const addArena = createAsyncThunk('add/arena', async (data: ArenaWithoutIdAndCreatorId) =>
+  ArenaApi.addArena(data),
 );
 
-export const updateArena = createAsyncThunk(
-  'update/arena',
-  (data: {
-    id: number;
-    title: string;
-    description: string;
-    country: string;
-    city: string;
-    street: string;
-    building: string;
-    coordX: number;
-    coordY: number;
-    metroStationId: number;
-  }) => ArenaApi.updateArena(data),
-);
-
-export const addArena = createAsyncThunk(
-  'add/arena',
-  (data: {
-    title: string;
-    description: string;
-    country: string;
-    city: string;
-    street: string;
-    building: string;
-    coordX: number;
-    coordY: number;
-    metroStationId: number;
-  }) => ArenaApi.addArena(data),
-);
-
-export const arenaSlice = createSlice({
+const arenasSlice = createSlice({
   name: 'arenas',
   initialState,
   reducers: {},
@@ -60,6 +29,11 @@ export const arenaSlice = createSlice({
       })
       .addCase(addArena.fulfilled, (state, action) => {
         state.arenas.push(action.payload);
+      })
+      .addCase(addArena.rejected, (state, action) => {
+        state.errors = action.error.message;
       });
   },
 });
+
+export default arenasSlice;
