@@ -1,32 +1,24 @@
 import React from 'react';
-import './MainPage.css';
-import { useAppSelector, type RootState } from '../../app/provider/store/store';
+import { useAppSelector } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
-import ArenaItem from '../../entities/arena/ui/ArenaItem';
+import './MainPage.css';
 
 function MainPage(): JSX.Element {
-  const sports = useAppSelector((store: RootState) => store.sports.sports);
-  const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
-  const user = useAppSelector((store: RootState) => store.auth.user);
+  const sports = useAppSelector((store) => store.sports.sports);
 
-  const favouriteArenas = user
-    ? arenas.filter((arena) => arena.Users.some((userFromArena) => userFromArena.id === user.id))
-    : [];
-  console.log(arenas);
-  console.log(favouriteArenas);
+  const handleSportClick = (sportId: number) => {
+    history.push(`/events?sport=${sportId}`);
+  };
 
   return (
     <div className="main-page">
-      <h1 className="MainPage">Главная страница</h1>
-      <div className="sport-list">
-        {sports && sports.map((sport) => <SportItem sport={sport} key={sport.id} />)}
-      </div>
-      <div>
-        <h2>Избранные площадки</h2>
-      </div>
-      <div>
-        {favouriteArenas &&
-          favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
+      <h1>Выберите вид спорта</h1>
+      <div className="sport-icons">
+        {sports.map((sport) => (
+          <div key={sport.id} className="sport-icon" onClick={() => handleSportClick(sport.id)}>
+            <SportItem sport={sport} />
+          </div>
+        ))}
       </div>
     </div>
   );

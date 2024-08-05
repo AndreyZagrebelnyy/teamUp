@@ -8,9 +8,12 @@ type EventsItemProps = {
 };
 
 function EventItem({ event }: EventsItemProps): JSX.Element {
-  const sport = useAppSelector((store) => store.sports.sports);
+  const sports = useAppSelector((store) => store.sports.sports);
   const levels = useAppSelector((store) => store.level.levels);
-  console.log(event);
+
+  const sport = sports.find((el) => el.id === event.sportId);
+  const level = levels.find((el) => el.id === event.levelId);
+
   return (
     <div className="event-card">
       <div className="event-card-header">
@@ -25,12 +28,8 @@ function EventItem({ event }: EventsItemProps): JSX.Element {
           })}
         </h1>
         <p className="event-price">{event.price}</p>
-        <p className="event-price">
-          {sport && sport.map((el) => (el.id === event.id ? el.title : ''))}
-        </p>
-        <p className="event-price">
-          {levels && levels.map((el) => (el.id === event.levelId ? el.title : ''))}
-        </p>
+        <p className="event-price">{sport?.title}</p>
+        <p className="event-price">{level?.title}</p>
       </div>
     </div>
   );
