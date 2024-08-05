@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Arena, ArenaId } from './types/ArenaType';
+import type { Arena, ArenaId, ArenaWithMetroStation } from './types/ArenaType';
 import ArenaApi from './api/ArenaApi';
 
 type ArenaState = {
-  arenas: Arena[];
+  arenas: ArenaWithMetroStation[];
   errors: string | undefined;
 };
 

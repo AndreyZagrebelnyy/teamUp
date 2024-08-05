@@ -28,8 +28,7 @@ exports.createProfile = async (req, res) => {
         firstName,
         lastName,
         telegram,
-        image,
-     
+        image
     } = req.body;
     const userId = req.body.userId;
 
@@ -40,7 +39,6 @@ exports.createProfile = async (req, res) => {
         telegram,
         image,
         userId
-
     });
     
     if (profile) {
