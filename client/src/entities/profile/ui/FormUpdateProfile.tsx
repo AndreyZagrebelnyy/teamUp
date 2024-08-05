@@ -5,9 +5,9 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import { updateProfile } from '../profileSlice';
-import { Profile } from '../profileTypes';
+import type { Profile } from '../types/ProfileType';
 
-// Styled Components
+
 const FormContainer = styled.form`
   display: flex;
   justify-content: center;
@@ -72,7 +72,7 @@ const Button = styled.button`
   }
 `;
 
-// Validation Schema
+
 const schemaProfile = yup
   .object()
   .shape({
@@ -189,6 +189,9 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
 }
 
 export default FormUpdateProfile;
+
+
+
 
 
 

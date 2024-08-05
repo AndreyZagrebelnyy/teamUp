@@ -24,7 +24,7 @@ function ProfileItem({ profile, user }: ProfileItemProps): JSX.Element {
       <p>{profile.firstName}</p>
       <p>{profile.lastName}</p>
       <p>{profile.telegram}</p>
-      <img src={profile.image} alt='123'/>
+      <img src={profile.image} alt='123'/> 
       {user && user.id === profile.userId && (
         <>
           <button onClick={onHandleDelete} type="button">
