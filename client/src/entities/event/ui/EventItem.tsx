@@ -1,20 +1,38 @@
-import React from'react';
-import { EventIncludeAll } from '../types/eventType';
-
+import React from 'react';
+import './EventItem.css';
+import type { EventIncludeAll } from '../types/eventType';
+import { useAppSelector } from '../../../app/provider/store/store';
 
 type EventsItemProps = {
-  event: EventIncludeAll
-}
+  event: EventIncludeAll;
+};
 
-function EventItem({event}: EventsItemProps):JSX.Element {
+function EventItem({ event }: EventsItemProps): JSX.Element {
+  const sport = useAppSelector((store) => store.sports.sports);
+  const levels = useAppSelector((store) => store.level.levels);
+  console.log(event);
   return (
-      <div key={event.id}>
-        <h1>{new Date(event.Arena.Dates[0].startDate).getDate()}</h1>
-        <h1>{new Date(event.Arena.Dates[1].startDate).getDate()}</h1>
-        <h1>{new Date(event.Arena.Dates[2].startDate).getDate()}</h1>
-        <h1>{event.price}</h1>
-        <h1>{event.arenaDateId}</h1>
+    <div className="event-card">
+      <div className="event-card-header">
+        <p className="event-price">{event.Arena.title}</p>
       </div>
+      <div className="event-card-body">
+        <h1 className="event-title">
+          {event.Arena.Dates.map((data) => {
+            if (data.id === event.arenaDateId) {
+              return new Date(data.startDate).toLocaleDateString();
+            }
+          })}
+        </h1>
+        <p className="event-price">{event.price}</p>
+        <p className="event-price">
+          {sport && sport.map((el) => (el.id === event.id ? el.title : ''))}
+        </p>
+        <p className="event-price">
+          {levels && levels.map((el) => (el.id === event.levelId ? el.title : ''))}
+        </p>
+      </div>
+    </div>
   );
 }
 
