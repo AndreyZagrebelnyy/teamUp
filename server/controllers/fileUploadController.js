@@ -1,13 +1,13 @@
 const multer = require('multer');
 const path = require('path');
 
-// Настройка multer для сохранения файлов в серверную директорию
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../client/public/profilePhoto')); // путь к папке на сервере
+    cb(null, path.join(__dirname, '../../client/public/profilePhoto')); 
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // оставляем оригинальное имя файла
+    cb(null, file.originalname); 
   }
 });
 
