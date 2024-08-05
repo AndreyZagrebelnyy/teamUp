@@ -1,0 +1,31 @@
+.sport-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px; /* фиксированная ширина для карточек */
+    transition: transform 0.2s ease-in-out;
+    background-color: #fff;
+    flex-shrink: 0; /* предотвращает уменьшение размера карточки */
+  }
+  
+  .sport-item:hover {
+    transform: translateY(-10px);
+  }
+  
+  .sport-item h1 {
+    font-size: 20px;
+    margin: 0 16px 0 0;
+    flex: 1;
+    color: #333;
+  }
+  
+  .sport-item .icon {
+    width: 40px;
+    height: 40px;
+    color: #555;
+  }
+  
