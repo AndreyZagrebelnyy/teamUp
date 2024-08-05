@@ -37,34 +37,35 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   };
 
   return (
-    <>
-      <div>{arena.title}</div>
-      <div>{arena.description}</div>
-      {arena.Dates.slice(0, 3).map((date, index) => (
-        <div key={index}>
-          <h1>
-            {new Date(date.startDate).toLocaleTimeString().split(':').splice(0, 2).join(':')} -
-            {new Date(date.endDate).toLocaleTimeString().split(':').splice(0, 2).join(':')}
-          </h1>
+    <div className="arena-card">
+      <div className="arena-card-header">
+        <h2 className="arena-title">{arena.title}</h2>
+      </div>
+      <div className="arena-card-body">
+        <p className="arena-description">{arena.description}</p>
+        <div className="arena-dates">
+          {arena.Dates.map((date) => (
+            <span key={date.id} className="arena-date">
+              {new Date(date.startDate).toLocaleTimeString()} - {' '}
+              {new Date(date.endDate).toLocaleTimeString()}
+            </span>
+          ))}
         </div>
-      ))}
-      <div>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</div>
-		<div>
+        <div className="arena-address">
+          <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
+        </div>
+        <div className="arena-metro">
+          <span>{`станция метро: ${arena.MetroStation.title}`}</span>
+        </div>
+        	<div>
         <button onClick={addToFavourites}>Добавить в избранное</button>
       </div>
 		<div>
         <button onClick={deleteFromFavourites}>Убрать из избранного</button>
       </div>
-      <div>{`станция метро: ${arena.MetroStation.title}`}</div>
-      <div className="carousels-container">
-        {carousels[arena.id] && (
-          <div className="carousel-item">
-            <Carousel1 images={carousels[arena.id]} />
-          </div>
-        )}
       </div>
-      
-    </>
+    </div>
+
   );
 }
 

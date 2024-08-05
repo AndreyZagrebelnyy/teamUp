@@ -3,14 +3,11 @@ import './ArenasPage.css';
 import type { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import type { ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
-import ArenaAddForm from '../../entities/arena/ui/ArenaAddForm';
+
 import { useAppSelector } from '../../app/provider/store/store';
 
-type ArenasPageProps = {};
-
-function ArenasPage({}: ArenasPageProps): JSX.Element {
+function ArenasPage(): JSX.Element {
   const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
-  console.log(arenas);
 
   return (
     <>
@@ -20,8 +17,6 @@ function ArenasPage({}: ArenasPageProps): JSX.Element {
           arenas.map((arena: ArenaWithMetroStation) => <ArenaItem arena={arena} key={arena.id} />)}
       </div>
       <span>{errors}</span>
-      <button>Добавить площадку</button>
-      <ArenaAddForm />
     </>
   );
 }

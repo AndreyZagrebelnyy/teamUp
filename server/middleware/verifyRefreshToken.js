@@ -7,7 +7,7 @@ async function verifyRefreshToken(req, res, next) {
     let { user } = jwt.verify(refresh, process.env.REFRESH_TOKEN);
     user = await User.findOne({
       where: { id: user.id },
-      attributes: ["id", "email"],
+      attributes: ["id", "email", "isAdmin"],
     });
 
     res.locals.user = user;

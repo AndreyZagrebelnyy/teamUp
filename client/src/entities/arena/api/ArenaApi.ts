@@ -1,12 +1,12 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Arena, ArenaId } from '../types/ArenaType';
+import type { AxiosError, AxiosResponse } from 'axios';
+import type { Arena, ArenaId } from '../types/ArenaType';
 import axiosInstance from '../../../services/axiosInstance';
 
 class ArenaApi {
   static getAllArenas = async (): Promise<Arena[] | undefined> => {
     try {
       const response: AxiosResponse<{ message: string; arenas: Arena[] }> =
-        await axios.get('/api/arenas');
+        await axiosInstance.get('/arenas');
       return response.data.arenas;
     } catch (error) {
       const axiosError = error as AxiosError;

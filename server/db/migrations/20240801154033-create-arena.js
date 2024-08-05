@@ -9,12 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-		title: {
-			type: Sequelize.STRING,
-		 },
-		 description: {
-			type: Sequelize.TEXT,
-		 },
+      title: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.TEXT,
+      },
       country: {
         type: Sequelize.STRING,
       },
