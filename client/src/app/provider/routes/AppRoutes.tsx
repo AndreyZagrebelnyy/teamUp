@@ -2,12 +2,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
-import RegistrationPage from '../../../page/authPages/RegistrationPage';
-import AuthorizationPage from '../../../page/authPages/AuthorizationPage';
+
 import AdminPanel from '../../../page/admin/AdminPage';
 
 import EventsPage from '../../../page/events/EventsPage';
 import ProfilePage from '../../../page/profile/ProfilePage';
+import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
+import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 
 
 function AppRoutes(): JSX.Element {

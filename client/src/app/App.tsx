@@ -9,7 +9,7 @@ import { tokensRefresh } from '../entities/user/authSlice';
 import { getAllEvents } from '../entities/event/eventSlice';
 import { getAllSports } from '../entities/sports/sportSlice';
 import { getAllMetro } from '../entities/metroStation/MetroSlice';
-import Footer from '../widgets/footer/Footer'; 
+import Footer from '../widgets/footer/Footer';
 import { getAllProfiles } from '../entities/profile/profileSlice';
 
 function App(): JSX.Element {
@@ -25,11 +25,12 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <MantineProvider>
-      <Navbar />
-      <AppRoutes />
-    </MantineProvider>
-      <Footer /> 
+    <>
+      <MantineProvider>
+        <Navbar />
+        <AppRoutes />
+      </MantineProvider>
+      <Footer />
     </>
   );
 }
