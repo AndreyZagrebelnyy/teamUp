@@ -1,9 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { getAllProfiles } from '../../entities/profile/profileSlice';
 import ProfileItem from '../../entities/profile/ui/ProfileItem';
 import type { RootState } from '../../app/provider/store/store';
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';
+
+
+const Button = styled.button`
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
 
 
 function ProfilePage(): JSX.Element {
@@ -28,11 +42,10 @@ function ProfilePage(): JSX.Element {
         <ProfileItem key={userProfile.id} profile={userProfile} user={user} />
       ) : (
         <>
-          <div>No profile found for this user</div>
           {isAdding && <FormAddProfile />}
-          <button onClick={() => setIsAdding(!isAdding)} type="button">
-            {isAdding ? 'Cancel' : 'Add Profile'}
-          </button>
+          <Button onClick={() => setIsAdding(!isAdding)} type="button">
+            {isAdding ? 'Отмена' : 'Открыть профиль'}
+          </Button>
         </>
       )}
     </div>

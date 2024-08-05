@@ -149,7 +149,7 @@ function FormAddProfile(): JSX.Element {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <FormImage>
-        <ImagePreview src={imagePreview} alt="Profile Preview" />
+        <ImagePreview src={imagePreview} alt="" />
         <UploadButton type="button" onClick={() => document.getElementById('imageUpload').click()}>
           Загрузить фото
         </UploadButton>
