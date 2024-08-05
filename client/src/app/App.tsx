@@ -1,3 +1,4 @@
+// App.js or App.tsx
 import React, { useEffect } from 'react';
 import './App.css';
 import { MantineProvider } from '@mantine/core';
@@ -27,13 +28,15 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app-container">
       <MantineProvider>
         <Navbar />
-        <AppRoutes />
+        <div className="content">
+          <AppRoutes />
+        </div>
       </MantineProvider>
       <Footer />
-    </>
+    </div>
   );
 }
 
