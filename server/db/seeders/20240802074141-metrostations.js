@@ -1,34 +1,64 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-   await queryInterface.bulkInsert(
-    "MetroStations",
-    [
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("MetroStations", [
       {
-        title: "Старая Деревня"
+        title: "Старая Деревня",
       },
       {
-        title: "Бухарестская"
+        title: "Бухарестская",
       },
       {
-        title: "Ладожская"
+        title: "Ладожская",
       },
       {
-        title: "Крестовский остров"
+        title: "Крестовский остров",
       },
       {
-        title: "Чкаловская"
+        title: "Чкаловская",
       },
       {
-        title: "Лесная"
+        title: "Лесная",
       },
-    ]
-   )
+      {
+        title: "Приморская",
+      },
+      {
+        title: "Спортивная",
+      },
+      {
+        title: "Балтийская",
+      },
+      {
+        title: "Василеостровская",
+      },
+      {
+        title: "Площадь Восстания",
+      },
+      {
+        title: "Новочеркасская",
+      },
+      {
+        title: "Петроградская",
+      },
+      {
+        title: "Горьковская",
+      },
+      {
+        title: "Парк Победы",
+      },
+      {
+        title: "Московская",
+      },
+      {
+        title: "Фрунзенская",
+      },
+    ]);
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("MetroStations", null, {})
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("MetroStations", null, {});
   },
 };

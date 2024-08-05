@@ -16,9 +16,23 @@ function MainPage(): JSX.Element {
     void dispatch(getAllFavouriteArenas());
   }, [dispatch]);
 
+      const handleSportClick = (sportId: number) => {
+    history.push(`/events?sport=${sportId}`);
+  };
+
   return (
     <div className="main-page">
       <h1 className="MainPage">Главная страница</h1>
+      <div className="main-page">
+      <h1>Выберите вид спорта</h1>
+      <div className="sport-icons">
+        {sports.map((sport) => (
+          <div key={sport.id} className="sport-icon" onClick={() => handleSportClick(sport.id)}>
+            <SportItem sport={sport} />
+          </div>
+        ))}
+      </div>
+    </div>
       <div className="sport-list">
         {sports && sports.map((sport) => <SportItem sport={sport} key={sport.id} />)}
       </div>
@@ -29,9 +43,5 @@ function MainPage(): JSX.Element {
         {favouriteArenas &&
           user &&
           favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
-      </div>
-    </div>
-  );
-}
 
 export default MainPage;

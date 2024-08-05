@@ -8,6 +8,8 @@ import { sportSlice } from '../../../entities/sports/sportSlice';
 import { dateSlice } from '../../../entities/date/DateSlice';
 import metroSlice from '../../../entities/metroStation/MetroSlice';
 import { profileSlice } from '../../../entities/profile/profileSlice';
+import { levelSlice } from '../../../entities/level/levelSlice';
+
 
 const store = configureStore({
   reducer: {
@@ -18,6 +20,7 @@ const store = configureStore({
     sports: sportSlice.reducer,
     dates: dateSlice.reducer,
     metro: metroSlice.reducer,
+    level: levelSlice.reducer,
     profile: profileSlice.reducer,
   },
 });

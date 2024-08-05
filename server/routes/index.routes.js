@@ -11,6 +11,7 @@ const eventRoutes = require("./api/event.routes");
 const sportRoutes = require("./api/sports.routes");
 const metroRoutes = require("./api/metro.routes");
 const profileRoutes = require("./api/profile.routes");
+const levelRoutes = require("./api/level.routes");
 
 
 router.use("/auth", authRoutes);
@@ -24,5 +25,6 @@ router.use("/events", eventRoutes);
 router.use("/sports", sportRoutes);
 router.use("/metro", metroRoutes);
 router.use("/profile", profileRoutes);
+router.use("/levels", levelRoutes);
 
 module.exports = router;

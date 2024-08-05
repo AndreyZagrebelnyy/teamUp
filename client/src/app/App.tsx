@@ -1,3 +1,4 @@
+// App.js or App.tsx
 import React, { useEffect } from 'react';
 import './App.css';
 import { MantineProvider } from '@mantine/core';
@@ -11,6 +12,7 @@ import { getAllSports } from '../entities/sports/sportSlice';
 import { getAllMetro } from '../entities/metroStation/MetroSlice';
 import Footer from '../widgets/footer/Footer';
 import { getAllProfiles } from '../entities/profile/profileSlice';
+import { getAllLevels } from '../entities/level/levelSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,16 +25,19 @@ function App(): JSX.Element {
     void dispatch(getAllSports());
     void dispatch(getAllMetro());
     void dispatch(getAllProfiles());
+    void dispatch(getAllLevels());
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app-container">
       <MantineProvider>
         <Navbar />
-        <AppRoutes />
+        <div className="content">
+          <AppRoutes />
+        </div>
       </MantineProvider>
       <Footer />
-    </>
+    </div>
   );
 }
 
