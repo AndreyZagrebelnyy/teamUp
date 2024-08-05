@@ -1,4 +1,4 @@
-const { Arena, MetroStation, Event, Date, ArenaDate } = require("../db/models");
+const { Arena, MetroStation, Favourite, Event, Date, ArenaDate, User } = require("../db/models");
 
 class ArenaServices {
   async getAllArenas() {
@@ -10,6 +10,12 @@ class ArenaServices {
           model: Date,
           through: {
             model: ArenaDate,
+          },
+        },
+        {
+          model: User,
+          through: {
+            model: Favourite,
           },
         },
       ],

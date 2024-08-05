@@ -1,0 +1,26 @@
+.main-page {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sport-list {
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: center; 
+    gap: 16px;
+    overflow-x: auto; 
+    width: 100%;
+  }
+  
+  .sport-list::-webkit-scrollbar {
+    display: none; 
+  }
+  
+  .sport-item-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  

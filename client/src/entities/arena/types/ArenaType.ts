@@ -1,6 +1,8 @@
 import type { Dates } from '../../date/types/dateType';
 import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
+import { User } from '../../user/types/userType';
+
 export type Arena = {
   id: number;
   title: string;
@@ -15,8 +17,7 @@ export type Arena = {
   metroStationId: number;
 };
 
-export type ArenaWithMetroStation = Arena & { MetroStation: MetroStation; Dates: Dates[] };
-export type ArenaWithDates = Arena & { Dates: Dates[] };
+export type ArenaWithMetroStation = Arena & { MetroStation: MetroStation; Dates: Dates[]; Users: User[] };
 
 export type ArenaWithoutId = Omit<Arena, 'id'>;
 

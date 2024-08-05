@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { Event } from "./types/eventType"
+import type { Event } from "./types/eventType"
 import EventApi from "./api/eventApi"
 
 type EventState = {

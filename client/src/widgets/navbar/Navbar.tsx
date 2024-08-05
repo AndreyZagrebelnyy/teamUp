@@ -32,6 +32,7 @@ function Navbar(): JSX.Element {
         <>
         {user.isAdmin && <NavLink to="/admin_panel">Админ панель</NavLink>}
           <div className="user-info">
+            <NavLink to="/profile">Профиль</NavLink>
             <FontAwesomeIcon icon={faUserSecret} size="3x" onClick={onHandleLogout} />
           </div>
           <NavLink onClick={onHandleLogout}>Выход</NavLink>
