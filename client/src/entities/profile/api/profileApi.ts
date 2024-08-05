@@ -88,6 +88,8 @@ class ProfileApi {
   }): Promise<Profile | undefined> => {
     try {
       const response: AxiosResponse<{ message: string; profile: Profile }> = await axiosInstance.put(`/profile/${data.id}`, data);
+      console.log(data.id);
+      
 return response.data.profile;
 
     } catch (error) {
