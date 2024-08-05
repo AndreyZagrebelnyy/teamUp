@@ -8,8 +8,7 @@ import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import AdminPanel from '../../../page/admin/AdminPage';
 import EventsPage from '../../../page/events/EventsPage';
 import ProfilePage from '../../../page/profile/ProfilePage';
-import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
-import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
+
 
 
 
@@ -23,8 +22,9 @@ function AppRoutes(): JSX.Element {
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
         <Route path="/admin_panel" element={<AdminPanel />} />
-        <Route path="/*" element={404} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/*" element={404} />
+        
 
       </Routes>
     </div>

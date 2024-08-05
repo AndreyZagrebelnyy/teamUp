@@ -116,7 +116,7 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
       console.error('User ID is not available');
       return;
     }
-    void dispatch(updateProfile({ ...data, userId }));
+    void dispatch(updateProfile({ ...data, id: profile.id,  userId }));
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -189,98 +189,3 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
 }
 
 export default FormUpdateProfile;
-
-
-
-
-
-
-
-// import React from 'react';
-// import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
-// import axios from 'axios';
-// import { useAppDispatch } from '../../../app/provider/store/store';
-// import { updateProfile } from '../profileSlice';
-// import type { Profile } from '../types/ProfileType';
-// import styled from 'styled-components';
-
-// const schemaProfile = yup.object().shape({
-//   firstName: yup.string().required('Заполните все поля'),
-//   lastName: yup.string().required('Заполните все поля'),
-//   telegram: yup.string().required('Заполните все поля'),
-//   image: yup.mixed().required('Заполните все поля'),
-// }).required();
-
-// type FormUpdateProfileProps = {
-//   profile: Profile;
-// };
-
-// function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
-//   const dispatch = useAppDispatch();
-//   const { register, handleSubmit, reset, formState: { errors } } = useForm({
-//     defaultValues: {
-//       firstName: profile.firstName,
-//       lastName: profile.lastName,
-//       telegram: profile.telegram,
-//       image: null, // Для файла
-//     },
-//     resolver: yupResolver(schemaProfile),
-//   });
-
-//   const onSubmit = async (data: { firstName: string; lastName: string; telegram: string; image: FileList }): Promise<void> => {
-//     try {
-//       // Загрузка изображения на сервер
-//       const formData = new FormData();
-//       formData.append('image', data.image[0]);
-
-//       const uploadResponse = await axios.post('http://localhost:3000/api/upload', formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-
-//       // После загрузки изображения обновляем профиль с использованием пути к изображению
-//       const updatedProfile = {
-//         ...data,
-//         id: profile.id,
-//         userId: profile.userId,
-//         image: uploadResponse.data.filename, // Имя файла, сохраненного на сервере
-//       };
-
-//       await dispatch(updateProfile(updatedProfile));
-//       reset();
-//     } catch (error) {
-//       console.error('Ошибка загрузки файла или обновления профиля', error);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-//       <label htmlFor="firstName">
-//         Имя
-//         <input type="text" {...register('firstName')} />
-//         <span>{errors.firstName?.message}</span>
-//       </label>
-//       <label htmlFor="lastName">
-//         Фамилия
-//         <input type="text" {...register('lastName')} />
-//         <span>{errors.lastName?.message}</span>
-//       </label>
-//       <label htmlFor="telegram">
-//         Telegram
-//         <input type="text" {...register('telegram')} />
-//         <span>{errors.telegram?.message}</span>
-//       </label>
-//       <label htmlFor="image">
-//         Изображение
-//         <input type="file" {...register('image')} />
-//         <span>{errors.image?.message}</span>
-//       </label>
-//       <button type="submit">Обновить профиль</button>
-//     </form>
-//   );
-// }
-
-// export default FormUpdateProfile;
