@@ -5,10 +5,9 @@ import { Favourite, FavouriteId } from '../type/FavouriteType';
 class FavouriteApi {
   static removeFavourite = async (data: { arenaId: number}): Promise<FavouriteId | undefined> => {
     try {
-		console.log(333333, data);
       const response: AxiosResponse<{ message: string }> =
         await axiosInstance.delete(`/favourites`, {data} );
-      return id;
+      return;
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
