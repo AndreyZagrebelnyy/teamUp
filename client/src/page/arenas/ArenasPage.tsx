@@ -18,6 +18,10 @@ function ArenasPage(): JSX.Element {
 
   return (
     <>
+      <div className="ArenasPage"></div>
+      <div>
+        {arenas &&
+          arenas.map((arena: ArenaWithMetroStation) => (
       <div className="ArenasPage">Площадки</div>
       <MetroFilter
         stations={metroStations}

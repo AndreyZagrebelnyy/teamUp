@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ArenaItem.css';
 import type { ArenaWithMetroStation } from '../types/ArenaType';
-import Carousel1 from '../../../components/Carousel1'; // Убедитесь, что путь к Carousel правильный
-import { useAppDispatch } from '../../../app/provider/store/store';
+import Carousel from '../../../components/Carousel';
+import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import { addFavourite, removeFavourite } from '../../favourite/FavouriteSlice';
 
 type ArenaItemProps = {
@@ -16,24 +16,29 @@ const carousels: { [key: number]: string[] } = {
   4: ['/foto/arena4.1.jpg', '/foto/arena4.2.jpg', '/foto/arena4.3.jpg'],
   5: ['/foto/arena5.1.jpg', '/foto/arena5.2.jpg', '/foto/arena5.3.jpg'],
   6: ['/foto/arena6.1.jpg', '/foto/arena6.2.jpg', '/foto/arena6.3.jpg'],
+  7: ['/foto/arena6.1.jpg', '/foto/arena6.2.jpg', '/foto/arena6.3.jpg'],
 };
 
 function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const addToFavourites = () => {
-    try {
-      void dispatch(addFavourite({ arenaId: arena.id }));
-    } catch (error) {
-      console.log(error);
+  const { user } = useAppSelector((store) => store.auth);
+
+  const [isFavourite, setIsFavourite] = useState(
+    arena.Users.some((userFromServer) => userFromServer.id === user.id),
+  );
+
+  useEffect(() => {
+    setIsFavourite(arena.Users.some((userFromObject) => userFromObject.id === user.id));
+  }, [arena.Users, user]);
+
+  const toggleFavourite = () => {
+    if (isFavourite) {
+      dispatch(removeFavourite({ arenaId: arena.id }));
+    } else {
+      dispatch(addFavourite({ arenaId: arena.id }));
     }
-  };
-  const deleteFromFavourites = () => {
-    try {
-      void dispatch(removeFavourite({ arenaId: arena.id }));
-    } catch (error) {
-      console.log(error);
-    }
+    setIsFavourite(!isFavourite); // Переключаем состояние
   };
 
   return (
@@ -41,6 +46,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       <div className="arena-card-header">
         <h2 className="arena-title">{arena.title}</h2>
       </div>
+      <Carousel images={carousels[arena.id]} />
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
@@ -58,13 +64,8 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           <span>{`станция метро: ${arena.MetroStation.title}`}</span>
         </div>
         <div>
-          <button type="button" onClick={addToFavourites}>
-            Добавить в избранное
-          </button>
-        </div>
-        <div>
-          <button type="button" onClick={deleteFromFavourites}>
-            Убрать из избранного
+          <button onClick={toggleFavourite}>
+            {isFavourite ? 'Убрать из избранного' : 'Добавить в избранное'}
           </button>
         </div>
       </div>

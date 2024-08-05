@@ -10,11 +10,13 @@ import metroSlice from '../../../entities/metroStation/MetroSlice';
 import { profileSlice } from '../../../entities/profile/profileSlice';
 import { levelSlice } from '../../../entities/level/levelSlice';
 
+
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     events: eventSlice.reducer,
     arenas: arenasSlice.reducer,
+    favouriteArenas: arenasSlice.reducer,
     sports: sportSlice.reducer,
     dates: dateSlice.reducer,
     metro: metroSlice.reducer,

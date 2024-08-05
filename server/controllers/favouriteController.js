@@ -24,9 +24,7 @@ exports.deleteFavourite = async (req, res) => {
   try {
     const { user } = res.locals;
     const { arenaId } = req.body;
-	 console.log(2222222, req.body);
     const result = await FavouriteServices.deleteFavourite({user, arenaId});
-
     if (result > 0) {
       res.status(200).json({ message: "success" });
       return;

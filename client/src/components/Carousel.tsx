@@ -7,7 +7,7 @@ type CarouselProps = {
   images: string[];
 };
 
-function Carousel1({ images }: CarouselProps): JSX.Element {
+function Carousel({ images }: CarouselProps): JSX.Element {
   const settings = {
     dots: true,
     infinite: true,
@@ -29,4 +29,4 @@ function Carousel1({ images }: CarouselProps): JSX.Element {
   );
 }
 
-export default Carousel1;
+export default Carousel;
