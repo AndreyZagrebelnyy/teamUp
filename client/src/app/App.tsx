@@ -11,6 +11,7 @@ import { getAllSports } from '../entities/sports/sportSlice';
 import { getAllMetro } from '../entities/metroStation/MetroSlice';
 import Footer from '../widgets/footer/Footer';
 import { getAllProfiles } from '../entities/profile/profileSlice';
+import { getAllLevels } from '../entities/level/levelSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ function App(): JSX.Element {
     void dispatch(getAllSports());
     void dispatch(getAllMetro());
     void dispatch(getAllProfiles());
+    void dispatch(getAllLevels());
   }, [dispatch]);
 
   return (

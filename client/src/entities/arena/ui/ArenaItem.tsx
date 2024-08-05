@@ -23,14 +23,14 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
 
   const addToFavourites = () => {
     try {
-      dispatch(addFavourite({ arenaId: arena.id }));
+      void dispatch(addFavourite({ arenaId: arena.id }));
     } catch (error) {
       console.log(error);
     }
   };
   const deleteFromFavourites = () => {
     try {
-      dispatch(removeFavourite({arenaId: arena.id}));
+      void dispatch(removeFavourite({ arenaId: arena.id }));
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         <div className="arena-dates">
           {arena.Dates.map((date) => (
             <span key={date.id} className="arena-date">
-              {new Date(date.startDate).toLocaleTimeString()} - {' '}
+              {new Date(date.startDate).toLocaleTimeString()} -{' '}
               {new Date(date.endDate).toLocaleTimeString()}
             </span>
           ))}
@@ -57,15 +57,18 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         <div className="arena-metro">
           <span>{`станция метро: ${arena.MetroStation.title}`}</span>
         </div>
-        	<div>
-        <button onClick={addToFavourites}>Добавить в избранное</button>
-      </div>
-		<div>
-        <button onClick={deleteFromFavourites}>Убрать из избранного</button>
-      </div>
+        <div>
+          <button type="button" onClick={addToFavourites}>
+            Добавить в избранное
+          </button>
+        </div>
+        <div>
+          <button type="button" onClick={deleteFromFavourites}>
+            Убрать из избранного
+          </button>
+        </div>
       </div>
     </div>
-
   );
 }
 
