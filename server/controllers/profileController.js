@@ -1,4 +1,6 @@
 const ProfileServices = require("../services/profileServices");
+const path = require('path');
+const fs = require('fs');
 
 exports.getAllProfiles = async (req, res) => {
   try {
@@ -28,12 +30,17 @@ exports.createProfile = async (req, res) => {
         telegram,
         image
     } = req.body;
+    const userId = req.body.userId;
+
+  
     const profile = await ProfileServices.createProfile({
         firstName,
         lastName,
         telegram,
         image,
+        userId
     });
+    
     if (profile) {
       res.status(201).json({ message: "success", profile });
       return;
@@ -48,7 +55,7 @@ exports.createProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const { user } = res.locals;
-    const { profileId } = req.params;
+    const { userId } = req.params;
     const {
         firstName,
         lastName,
@@ -56,7 +63,7 @@ exports.updateProfile = async (req, res) => {
         image,
     } = req.body;
 
-    const profile = await ProfileServices.updateProfile(+profileId, user.id, {
+    const profile = await ProfileServices.updateProfile(+userId, user.id, {
         firstName,
         lastName,
         telegram,
@@ -77,8 +84,8 @@ exports.updateProfile = async (req, res) => {
 exports.deleteProfile = async (req, res) => {
   try {
     const { user } = res.locals;
-    const { profileId } = req.params;
-    const result = await ProfileServices.deleteProfile(+profileId);
+    const { userId } = req.params;
+    const result = await ProfileServices.deleteProfile(+userId);
 
     if (result > 0) {
       res.status(200).json({ message: "success" });
@@ -90,3 +97,17 @@ exports.deleteProfile = async (req, res) => {
     res.status(500).json({ error: message });
   }
 };
+
+
+
+
+
+exports.uploadProfilePhoto = (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+
+  res.status(200).json({ filename: req.file.filename });
+};
+
