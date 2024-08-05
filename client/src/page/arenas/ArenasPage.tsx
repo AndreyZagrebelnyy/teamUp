@@ -3,7 +3,6 @@ import './ArenasPage.css';
 import type { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import type { ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
-
 import { useAppSelector } from '../../app/provider/store/store';
 
 function ArenasPage(): JSX.Element {
@@ -11,10 +10,12 @@ function ArenasPage(): JSX.Element {
 
   return (
     <>
-      <div className="ArenasPage">Площадки</div>
+      <div className="ArenasPage"></div>
       <div>
         {arenas &&
-          arenas.map((arena: ArenaWithMetroStation) => <ArenaItem arena={arena} key={arena.id} />)}
+          arenas.map((arena: ArenaWithMetroStation) => (
+            <ArenaItem arena={arena} key={arena.id} />
+          ))}
       </div>
       <span>{errors}</span>
     </>

@@ -25,6 +25,28 @@ class ArenaApi {
     }
   };
 
+  static getAllFavouriteArenas = async (): Promise<Arena[] | undefined> => {
+    try {
+      const response: AxiosResponse<{ message: string; favouriteArenas: Arena[] }> =
+        await axiosInstance.get('/favouriteArenas');
+      return response.data.favouriteArenas;
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        switch (axiosError.response.status) {
+          case 400:
+            throw new Error(`Bad request: ${axiosError.response.data} `);
+          case 401:
+            throw new Error(`Нет прав: ${axiosError.response.data} `);
+          case 403:
+            throw new Error(`Пользователь не авторизирован: ${axiosError.response.data} `);
+          default:
+            break;
+        }
+      }
+    }
+  };
+
   static removeArena = async (id: ArenaId): Promise<ArenaId | undefined> => {
     try {
       const response: AxiosResponse<{ message: string }> = await axiosInstance.delete(

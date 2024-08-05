@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MainPage.css';
-import { useAppSelector, type RootState } from '../../app/provider/store/store';
+import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
+import { getAllFavouriteArenas } from '../../entities/arena/ArenaSlice';
 
 function MainPage(): JSX.Element {
   const sports = useAppSelector((store: RootState) => store.sports.sports);
-  const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
+  const favouriteArenas = useAppSelector((store: RootState) => store.arenas.favouriteArenas);
   const user = useAppSelector((store: RootState) => store.auth.user);
 
-  const favouriteArenas = user
-    ? arenas.filter((arena) => arena.Users.some((userFromArena) => userFromArena.id === user.id))
-    : [];
-  console.log(arenas);
-  console.log(favouriteArenas);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(getAllFavouriteArenas());
+  }, [dispatch]);
 
   return (
     <div className="main-page">
@@ -26,6 +27,7 @@ function MainPage(): JSX.Element {
       </div>
       <div>
         {favouriteArenas &&
+          user &&
           favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
       </div>
     </div>
