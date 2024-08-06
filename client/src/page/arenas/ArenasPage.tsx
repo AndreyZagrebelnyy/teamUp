@@ -17,21 +17,20 @@ function ArenasPage(): JSX.Element {
     : arenas;
 
   return (
-    <>
-      <div className="ArenasPage">Площадки</div>
+    <div className="ArenasPage">
+      <h1>Площадки</h1>
       <MetroFilter
         stations={metroStations}
         selectedStation={selectedStation}
         onSelectStation={setSelectedStation}
       />
       <div className="arena-list">
-        {filteredArenas &&
-          filteredArenas.map((arena: ArenaWithMetroStation) => (
-            <ArenaItem arena={arena} key={arena.id} />
-          ))}
+        {filteredArenas.map((arena: ArenaWithMetroStation) => (
+          <ArenaItem arena={arena} key={arena.id} />
+        ))}
       </div>
-      {errors && <span>{errors}</span>}
-    </>
+      {errors && <span className="error-message">{errors}</span>}
+    </div>
   );
 }
 

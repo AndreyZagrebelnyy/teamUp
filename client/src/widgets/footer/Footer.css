@@ -1,14 +1,30 @@
+/* App.css or index.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Делает контейнер минимум на высоту экрана */
+}
+
+.content {
+  flex: 1; /* Заставляет этот контейнер занимать оставшееся пространство */
+}
+
 .footer {
   background-color: #797272;
   padding: 10px 20px; /* Уменьшено для меньшего размера футера */
   display: flex;
   flex-direction: column;
   align-items: center;
- 
-  bottom: 0;
-  left: 0;
   width: 100%;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Легкая тень для футера */
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* Заставляет футер всегда быть внизу */
 }
 
 .footer-content {
@@ -22,20 +38,20 @@
 .footer-columns {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Уменьшено для меньшего пространства между колонками */
+  gap: 10px;
   width: 100%;
   justify-content: center;
 }
 
 .footer-column {
   flex: 1;
-  min-width: 150px; /* Уменьшенная минимальная ширина колонок */
-  margin: 5px; /* Уменьшенные отступы между колонками */
+  min-width: 150px;
+  margin: 5px;
 }
 
 .footer-column h4 {
-  margin-bottom: 5px; /* Уменьшенный отступ снизу заголовков */
-  font-size: 14px; /* Уменьшенный размер шрифта */
+  margin-bottom: 5px;
+  font-size: 14px;
   color: #333;
 }
 
@@ -46,13 +62,13 @@
 }
 
 .footer-column ul li {
-  margin: 3px 0; /* Уменьшенные отступы для элементов списка */
+  margin: 3px 0;
 }
 
 .footer-column ul li a {
   color: #007bff;
   text-decoration: none;
-  font-size: 14px; /* Уменьшенный размер шрифта для ссылок */
+  font-size: 14px;
 }
 
 .footer-column ul li a:hover {
@@ -60,12 +76,12 @@
 }
 
 .footer-bottom {
-  margin-top: 10px; /* Уменьшенный отступ сверху */
+  margin-top: 10px;
   text-align: center;
 }
 
 .footer-bottom p {
   margin: 0;
-  font-size: 12px; /* Уменьшенный размер шрифта */
+  font-size: 12px;
   color: #6c757d;
 }

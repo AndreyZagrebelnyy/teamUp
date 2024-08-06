@@ -1,9 +1,10 @@
+// App.js or App.tsx
 import React, { useEffect } from 'react';
 import { MantineProvider } from '@mantine/core';
 import Navbar from '../widgets/navbar/Navbar';
 import AppRoutes from './provider/routes/AppRoutes';
 import { useAppDispatch } from './provider/store/store';
-import { getAllArenas } from '../entities/arena/ArenaSlice';
+import { getAllArenas, getAllFavouriteArenas } from '../entities/arena/ArenaSlice';
 import { tokensRefresh } from '../entities/user/authSlice';
 import { getAllEvents } from '../entities/event/eventSlice';
 import { getAllSports } from '../entities/sports/sportSlice';
@@ -21,6 +22,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     void dispatch(getAllArenas());
+    void dispatch(getAllFavouriteArenas());
     void dispatch(getAllEvents());
     void dispatch(tokensRefresh());
     void dispatch(getAllSports());

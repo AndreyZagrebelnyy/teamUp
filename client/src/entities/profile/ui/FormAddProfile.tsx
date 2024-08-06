@@ -71,7 +71,7 @@ const Button = styled.button`
   }
 `;
 
-// Validation Schema
+
 const schemaProfile = yup
   .object()
   .shape({
@@ -130,12 +130,14 @@ function FormAddProfile(): JSX.Element {
       const formData = new FormData();
       formData.append('file', file);
 
-      fetch('/api/upload', {
+      fetch('/api/profile/upload', {
         method: 'POST',
         body: formData,
       }).then((response) => {
         if (!response.ok) {
           console.error('Ошибка загрузки файла');
+        } else {
+          console.log('Файл успешно загружен');
         }
       });
     }
@@ -144,7 +146,7 @@ function FormAddProfile(): JSX.Element {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <FormImage>
-        <ImagePreview src={imagePreview} alt="Profile Preview" />
+        <ImagePreview src={imagePreview} alt="" />
         <UploadButton type="button" onClick={() => document.getElementById('imageUpload').click()}>
           Загрузить фото
         </UploadButton>

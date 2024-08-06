@@ -52,6 +52,7 @@ function EventItem({ event }: EventsItemProps): JSX.Element {
     ? new Date(eventDate.startDate).toLocaleDateString()
     : 'Дата не найдена';
 
+
   return (
     <div className="event-card">
       <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Информация">
@@ -91,6 +92,7 @@ function EventItem({ event }: EventsItemProps): JSX.Element {
               ? 'Создайте профиль'
               : 'Записаться на ивент'}
         </Button>
+
       </div>
     </div>
   );

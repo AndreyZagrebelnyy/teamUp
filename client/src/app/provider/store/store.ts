@@ -12,11 +12,13 @@ import { levelSlice } from '../../../entities/level/levelSlice';
 import {userEventSlice} from '../../../entities/userEvent/userEventSlice';
 
 
+
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     events: eventSlice.reducer,
     arenas: arenasSlice.reducer,
+    favouriteArenas: arenasSlice.reducer,
     sports: sportSlice.reducer,
     dates: dateSlice.reducer,
     metro: metroSlice.reducer,

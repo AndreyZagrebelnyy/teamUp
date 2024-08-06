@@ -1,28 +1,31 @@
 const multer = require('multer');
 const path = require('path');
 
-// Определение директории и имен файлов для загрузки
+
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../client/public/profilePhoto')); // путь к папке, куда сохранять файлы
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../../client/public/profilePhoto')); 
   },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname); // сохраняем файл с оригинальным именем
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); 
   }
 });
 
-// Настройка загрузчика файлов
-const upload = multer({ storage }).single('file');
+const upload = multer({ storage: storage }).single('file');
 
-// Контроллер для обработки загрузки файлов
 exports.uploadPhoto = (req, res) => {
+  console.log('Получен запрос на загрузку файла');
+
   upload(req, res, (err) => {
     if (err) {
+      console.error('Ошибка multer:', err);
       return res.status(500).json({ error: "Ошибка загрузки файла" });
     }
     if (!req.file) {
+      console.error('Файл не был загружен');
       return res.status(400).json({ error: "Файл не был загружен" });
     }
+    console.log('Файл успешно загружен:', req.file);
     return res.status(200).json({ message: "Файл успешно загружен" });
   });
 };
