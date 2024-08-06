@@ -1,68 +1,19 @@
-/* Navbar.css */
 .Navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.navbar-content {
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  padding: 0 10px;
-}
-
-.navbar-logo {
-  margin-right: 20px;
-}
-
-.navbar-logo img {
-  height: 150px;
-  width: 150px;
-}
-
-.navbar-links {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 14px;
-}
-
-.navbar-links a:hover {
-  text-decoration: underline;
-}
-
-.user-info {
-  margin-right: 10px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-ul li {
-  margin-right: 10px;
-}
-
-ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-ul li a:hover {
-  text-decoration: underline;
-}
+    padding: 1rem;
+    background-color: #f8f9fa; /* Например, светлый фон */
+    border-bottom: 1px solid #dee2e6; /* Легкая граница внизу */
+  }
+  
+  .Navbar a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .Navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .Navbar .user-info {
+    display: flex;
+    align-items: center;
+  }

@@ -1,51 +1,108 @@
+/* ArenaItem.css */
+
+/* Основные стили для карточки арены */
 .arena-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 16px;
-    max-width: 400px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .arena-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .arena-card-header {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .arena-title {
-    font-size: 1.5em;
-    margin: 0;
-  }
-  
-  .arena-card-body {
-    font-size: 1em;
-  }
-  
-  .arena-description {
-    margin: 8px 0;
-  }
-  
-  .arena-dates {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 8px 0;
-  }
-  
-  .arena-date {
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    padding: 4px 8px;
-  }
-  
-  .arena-address,
-  .arena-metro {
-    margin: 8px 0;
-  }
-  
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.arena-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.arena-card-header {
+  margin-bottom: 1rem;
+}
+
+.arena-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.arena-description {
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.arena-dates {
+  margin-bottom: 1rem;
+}
+
+.arena-date {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #007bff;
+}
+
+.arena-address,
+.arena-metro {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+/* Стили для модального окна */
+/* .mantine-Modal {
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.mantine-Modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.mantine-Modal-content {
+  padding: 1.5rem;
+}
+
+.mantine-Text {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.mantine-Select,
+.mantine-TextInput {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.mantine-Button {
+  margin-right: 0.5rem;
+}
+
+.mantine-Button:last-of-type {
+  margin-right: 0;
+}
+
+.mantine-Modal-footer {
+  display: flex;
+  justify-content: flex-end;
+} */

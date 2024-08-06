@@ -33,7 +33,7 @@ const ImagePreview = styled.img`
 
 const UploadButton = styled.button`
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -61,7 +61,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -124,12 +124,9 @@ function FormAddProfile(): JSX.Element {
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
         setValue('image', `/profilePhoto/${file.name}`);
-
-
       };
       reader.readAsDataURL(file);
 
-    
       const formData = new FormData();
       formData.append('file', file);
 

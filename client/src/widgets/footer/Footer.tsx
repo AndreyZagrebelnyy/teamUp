@@ -52,6 +52,7 @@ function Footer(): JSX.Element {
                 </li>
               </ul>
             )}
+
           </div>
           <div className="footer-column">
             <h4>Контакт</h4>
@@ -65,6 +66,7 @@ function Footer(): JSX.Element {
                 <a href="tel:+78005553555">8-800-555-35-55</a>
               </li>
               <li>Санкт-Петербург, Лиговский 140</li>
+
             </ul>
           </div>
         </div>

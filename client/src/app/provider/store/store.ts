@@ -9,6 +9,8 @@ import { dateSlice } from '../../../entities/date/DateSlice';
 import metroSlice from '../../../entities/metroStation/MetroSlice';
 import { profileSlice } from '../../../entities/profile/profileSlice';
 import { levelSlice } from '../../../entities/level/levelSlice';
+import {userEventSlice} from '../../../entities/userEvent/userEventSlice';
+
 
 
 const store = configureStore({
@@ -22,6 +24,7 @@ const store = configureStore({
     metro: metroSlice.reducer,
     level: levelSlice.reducer,
     profile: profileSlice.reducer,
+    userEvent: userEventSlice.reducer,
   },
 });
 

@@ -3,12 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
 import AdminPanel from '../../../page/admin/AdminPage';
-import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
-import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import EventsPage from '../../../page/events/EventsPage';
 import ProfilePage from '../../../page/profile/ProfilePage';
-
-
+import RegistrationPage from '../../../page/authPages/RegistrationPage';
+import AuthorizationPage from '../../../page/authPages/AuthorizationPage';
 
 
 function AppRoutes(): JSX.Element {
@@ -23,8 +21,6 @@ function AppRoutes(): JSX.Element {
         <Route path="/admin_panel" element={<AdminPanel />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={404} />
-        
-
       </Routes>
     </div>
   );
