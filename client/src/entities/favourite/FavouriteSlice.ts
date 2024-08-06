@@ -1,29 +1,53 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import FavouriteApi from './api/FavouriteApi';
-import { ArenaId } from '../arena/types/ArenaType';
+import { ArenaId, ArenaWithMetroStation } from '../arena/types/ArenaType';
+import { Favourite } from './type/FavouriteType';
 
-export const removeFavourite = createAsyncThunk('remove/favourite', ({arenaId} : {arenaId: ArenaId}) =>
-  FavouriteApi.removeFavourite({arenaId: arenaId})
+type FavouriteState = {
+  favourites: Favourite[];
+  favouriteArenas: ArenaWithMetroStation[] | undefined;
+  errors: string | undefined;
+};
+
+const initialState: FavouriteState = {
+  favourites: [],
+  favouriteArenas: [],
+  errors: undefined,
+};
+
+export const getFavouriteArenas = createAsyncThunk('load/favouriteArenas', () =>
+  FavouriteApi.getAllFavouriteArenas(),
 );
 
-export const addFavourite = createAsyncThunk(
-  'add/favourite',
-  (data: {
-    arenaId: number
-  }) => FavouriteApi.addFavourite(data),
+export const removeFavourite = createAsyncThunk(
+  'remove/favourite',
+  ({ arenaId }: { arenaId: ArenaId }) => FavouriteApi.removeFavourite({ arenaId: arenaId }),
 );
 
-// export const arenaSlice = createSlice({
-//   name: 'arenas',
-//   initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(getAllArenas.fulfilled, (state, action) => {
-//         state.arenas = action.payload;
-//       })
-//       .addCase(addArena.fulfilled, (state, action) => {
-//         state.arenas.push(action.payload);
-//       });
-//   },
-// });
+export const addFavourite = createAsyncThunk('add/favourite', (data: { arenaId: number }) =>
+  FavouriteApi.addFavourite(data),
+);
+
+const favouriteSlice = createSlice({
+  name: 'favouriteArenas',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getFavouriteArenas.fulfilled, (state, action) => {
+			console.log(111111111111);
+        state.favouriteArenas = action.payload;
+      })
+      .addCase(addFavourite.fulfilled, (state, action) => {
+        state.favourites.push(action.payload);
+      })
+      .addCase(removeFavourite.fulfilled, (state, action) => {
+        console.log(1111111111, action.payload);
+        state.favouriteArenas = state.favouriteArenas.filter(
+          (favArena) => favArena.id !== action.payload,
+        );
+      });
+  },
+});
+
+export default favouriteSlice;

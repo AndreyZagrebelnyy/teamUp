@@ -9,8 +9,8 @@ import { dateSlice } from '../../../entities/date/DateSlice';
 import metroSlice from '../../../entities/metroStation/MetroSlice';
 import { profileSlice } from '../../../entities/profile/profileSlice';
 import { levelSlice } from '../../../entities/level/levelSlice';
+import favouriteSlice from '../../../entities/favourite/FavouriteSlice';
 import {userEventSlice} from '../../../entities/userEvent/userEventSlice';
-
 
 
 const store = configureStore({
@@ -18,7 +18,7 @@ const store = configureStore({
     auth: authSlice.reducer,
     events: eventSlice.reducer,
     arenas: arenasSlice.reducer,
-    favouriteArenas: arenasSlice.reducer,
+    favouriteArenas: favouriteSlice.reducer,
     sports: sportSlice.reducer,
     dates: dateSlice.reducer,
     metro: metroSlice.reducer,
