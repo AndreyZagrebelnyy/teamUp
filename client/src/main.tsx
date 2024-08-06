@@ -5,14 +5,19 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './app/App';
 import { injectStore } from './services/axiosInstance';
 import store from './app/provider/store/store';
-import '@mantine/core/styles.css';
+import '@mantine/core/styles.css'; 
+import { MantineProvider } from '@mantine/core';
+// import '@mantine/date/styles.css';
 
 injectStore(store);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+
+
   <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
   </BrowserRouter>,
+
 );

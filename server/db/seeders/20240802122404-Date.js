@@ -7,16 +7,16 @@ module.exports = {
       "Dates",
       [
         {
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: new Date('2024-08-07'),
+          endDate: new Date("2024-08-08"),
         },
         {
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: new Date('2024-08-010'),
+          endDate: new Date("2024-08-11"),
         },
         {
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: new Date('2024-08-08'),
+          endDate: new Date("2024-08-09"),
         },
       ],
       {}

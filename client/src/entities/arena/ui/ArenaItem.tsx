@@ -28,32 +28,22 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const [availableDates, setAvailableDates] = useState(arena.Dates || []);
 
   const events = useAppSelector((store) => store.events.events || []);
-  console.log(events)
+  
   useEffect(() => {
     if (events && arena.Dates) {
-      console.log('Arena Dates:', arena.Dates);
-      console.log('User Events:', events);
-      
-      // Получаем все даты, занятые событиями
       const busyDates = new Set(
         events
           .filter((event) => event.arenaId === arena.id)
           .map((event) => event.arenaDateId)
       );
       
-      console.log('Busy Dates:', busyDates);
-      
-      // Фильтруем доступные даты для арены
       const filteredDates = arena.Dates.filter(
         (date) => !busyDates.has(date.id)
       );
       
-      console.log('Filtered Dates:', filteredDates);
       setAvailableDates(filteredDates);
     }
   }, [events, arena.Dates, arena.id]);
-  
-
 
   const { user } = useAppSelector((store) => store.auth);
 
@@ -62,16 +52,16 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   );
 
   useEffect(() => {
-    setIsFavourite(arena.Users.some((userFromObject) => userFromObject.id === user.id));
+    setIsFavourite(arena.Users.some((userFromObject) => userFromObject.id === user?.id));
   }, [arena.Users, user]);
 
   const toggleFavourite = () => {
     if (isFavourite) {
-      dispatch(removeFavourite({ arenaId: arena.id }));
+      void dispatch(removeFavourite({ arenaId: arena.id }));
     } else {
-      dispatch(addFavourite({ arenaId: arena.id }));
+      void dispatch(addFavourite({ arenaId: arena.id }));
     }
-    setIsFavourite(!isFavourite); // Переключаем состояние
+    setIsFavourite(!isFavourite);
   };
 
   const handleDateClick = (dateId: number) => {
@@ -88,9 +78,10 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         modalOpen={modalOpen}
       />
       <div className="arena-card-header">
+      <Carousel images={carousels[arena.id]} />
         <h2 className="arena-title">{arena.title}</h2>
       </div>
-      <Carousel images={carousels[arena.id]} />
+      
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
