@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MainPage.css';
 import { useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
@@ -6,14 +6,6 @@ import ArenaItem from '../../entities/arena/ui/ArenaItem';
 
 function MainPage(): JSX.Element {
   const sports = useAppSelector((store: RootState) => store.sports.sports);
-  const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
-  const user = useAppSelector((store: RootState) => store.auth.user);
-
-  const favouriteArenas = user
-    ? arenas.filter((arena) => arena.Users.some((userFromArena) => userFromArena.id === user.id))
-    : [];
-  console.log(arenas);
-  console.log(favouriteArenas);
 
   return (
     <div className="main-page">
@@ -23,10 +15,6 @@ function MainPage(): JSX.Element {
       </div>
       <div>
         <h2>Избранные площадки</h2>
-      </div>
-      <div>
-        {favouriteArenas &&
-          favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
       </div>
     </div>
   );

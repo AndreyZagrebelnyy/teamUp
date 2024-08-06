@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const arenaController = require("../../controllers/arenaController");
+const arenaDateController = require("../../controllers/arenaDateController");
 const verifyAccessToken = require("../../middleware/verifyAccessToken");
+
 
 router
   .post("/:arenaId", arenaDateController.createArenaDate)

@@ -12,7 +12,7 @@ module.exports = {
           sportId: 1,
           price: 3000,
           levelId: 1,
-          teamSize: 10,
+          teamSize: 1,
         },
         {
           arenaId: 2,

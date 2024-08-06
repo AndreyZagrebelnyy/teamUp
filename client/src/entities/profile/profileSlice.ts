@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import ProfileApi from './api/profileApi';
 import type { Profile, ProfileId } from './types/ProfileType';
 
-
 type ProfileState = {
-    profiles: Profile[];
+  profiles: Profile[];
   errors: string | undefined;
   isLoading: boolean;
 };
 
 const initialState: ProfileState = {
-    profiles: [],
+  profiles: [],
   errors: undefined,
   isLoading: false,
 };
@@ -19,14 +18,29 @@ export const getAllProfiles = createAsyncThunk('load/profiles', () => ProfileApi
 
 export const addProfile = createAsyncThunk(
   'add/profile',
-  (data: { firstName: string; lastName: string; telegram: string; image: string; userId: number }) => ProfileApi.addProfile(data),
+  (data: {
+    firstName: string;
+    lastName: string;
+    telegram: string;
+    image: string;
+    userId: number;
+  }) => ProfileApi.addProfile(data),
 );
 
-export const removeProfile = createAsyncThunk('remove/profile', (id: ProfileId) => ProfileApi.removeProfile(id));
+export const removeProfile = createAsyncThunk('remove/profile', (id: ProfileId) =>
+  ProfileApi.removeProfile(id),
+);
 
 export const updateProfile = createAsyncThunk(
   'update/profile',
-  (data: { id: number; firstName: string; lastName: string; telegram: string; image: string; userId: number }) => ProfileApi.updateProfile(data),
+  (data: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    telegram: string;
+    image: string;
+    userId: number;
+  }) => ProfileApi.updateProfile(data),
 );
 
 export const profileSlice = createSlice({
@@ -72,7 +86,7 @@ export const profileSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.profiles = state.profiles.map((profile) =>
-      	profile.id === action.payload.id ? action.payload : profile,
+          profile.id === action.payload.id ? action.payload : profile,
         );
       });
   },

@@ -1,4 +1,4 @@
-.event-card {
+/* .event-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -6,45 +6,50 @@
     margin: 16px;
     max-width: 400px;
     transition: box-shadow 0.3s ease;
-}
-
-.event-card:hover {
+  } */
+  .event-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Дополнительно можно задать фон для карточек */
+  }
+  
+  .event-card:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.event-card-header {
+  }
+  
+  .event-card-header {
     border-bottom: 1px solid #ddd;
     padding-bottom: 8px;
     margin-bottom: 8px;
-}
-
-.event-title {
+  }
+  
+  .event-arena-title {
     font-size: 1.5em;
     margin: 0;
-}
-
-.event-card-body {
+  }
+  
+  .event-card-body {
     font-size: 1em;
-}
-
-.event-price {
+  }
+  
+  .event-title {
     margin: 8px 0;
-    font-weight: bold;
-}
-
-.event-dates {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  }
+  
+  .event-price,
+  .event-sport,
+  .event-level {
     margin: 8px 0;
-}
-
-.event-date {
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    padding: 4px 8px;
-}
-
-.event-arena-date-id {
-    margin: 8px 0;
-}
+  }
+  
+  .event-users {
+    margin: 16px 0;
+  }
+  
+  .event-user {
+    margin: 4px 0;
+  }
+  

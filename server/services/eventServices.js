@@ -1,9 +1,12 @@
-const { Event, Arena, Date, ArenaDate } = require("../db/models");
+const { Event, Arena, Date, ArenaDate, User } = require("../db/models");
 
 class EventServices {
   async getAllEvents() {
-    return Event.findAll({
+    const events = await Event.findAll({
       include: [
+        {
+          model: User,
+        },
         {
           model: Arena,
           include: [
@@ -17,6 +20,11 @@ class EventServices {
         },
       ],
     });
+    return events;
+  }
+
+  async createEvents(data) {
+    return Event.create(data);
   }
 }
 

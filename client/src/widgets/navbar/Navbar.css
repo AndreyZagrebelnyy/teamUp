@@ -1,10 +1,20 @@
-.Navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #d8d222;
-    color: #fff;
+.Navbar {
     padding: 1rem;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 2px 5px rgba(177, 68, 68, 0.1);
-}
+    background-color: #f8f9fa; /* Например, светлый фон */
+    border-bottom: 1px solid #dee2e6; /* Легкая граница внизу */
+  }
+  
+  .Navbar a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .Navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .Navbar .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
