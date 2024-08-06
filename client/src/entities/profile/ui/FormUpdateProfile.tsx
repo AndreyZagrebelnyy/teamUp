@@ -38,7 +38,6 @@ const UploadButton = styled.button`
   color: white;
   border: none;
   cursor: pointer;
-
   &:hover {
     background-color: #45a049;
   }

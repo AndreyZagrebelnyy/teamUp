@@ -1,6 +1,5 @@
 // App.js or App.tsx
 import React, { useEffect } from 'react';
-import './App.css';
 import { MantineProvider } from '@mantine/core';
 import Navbar from '../widgets/navbar/Navbar';
 import AppRoutes from './provider/routes/AppRoutes';
@@ -14,6 +13,10 @@ import Footer from '../widgets/footer/Footer';
 import { getAllProfiles } from '../entities/profile/profileSlice';
 import { getAllLevels } from '../entities/level/levelSlice';
 import { getFavouriteArenas } from '../entities/favourite/FavouriteSlice';
+import ErrorBoundary from './ErrorrBoundary';
+import { getAllUserEvents } from '../entities/userEvent/userEventSlice';
+import './App.css';
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,18 +30,21 @@ function App(): JSX.Element {
     void dispatch(getAllMetro());
     void dispatch(getAllProfiles());
     void dispatch(getAllLevels());
+    void dispatch(getAllUserEvents());
   }, [dispatch]);
 
   return (
-    <div className="app-container">
-      <MantineProvider>
-        <Navbar />
-        <div className="content">
-          <AppRoutes />
+    <MantineProvider>
+      <ErrorBoundary>
+        <div className="app">
+          <Navbar />
+          <div className="app-container">
+            <AppRoutes />
+          </div>
+          <Footer />
         </div>
-      </MantineProvider>
-      <Footer />
-    </div>
+      </ErrorBoundary>
+    </MantineProvider>
   );
 }
 
