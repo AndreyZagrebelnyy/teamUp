@@ -1,87 +1,92 @@
-/* App.css or index.css */
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Делает контейнер минимум на высоту экрана */
-}
-
-.content {
-  flex: 1; /* Заставляет этот контейнер занимать оставшееся пространство */
-}
-
+/* Footer.css */
 .footer {
-  background-color: #797272;
-  padding: 10px 20px; /* Уменьшено для меньшего размера футера */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-  margin-top: auto; /* Заставляет футер всегда быть внизу */
+  background-color: #333;
+  color: #fff;
+  padding: 5px 0;
 }
 
 .footer-content {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   max-width: 1200px;
-  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.footer-logo {
+  margin-right: 20px;
+}
+
+.footer-logo img {
+  height: 100px;
+  width: 100px;
+
 }
 
 .footer-columns {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
   width: 100%;
-  justify-content: center;
 }
 
 .footer-column {
-  flex: 1;
-  min-width: 150px;
-  margin: 5px;
+  margin: 0 10px;
 }
 
 .footer-column h4 {
   margin-bottom: 5px;
   font-size: 14px;
-  color: #333;
 }
 
 .footer-column ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
 }
 
 .footer-column ul li {
-  margin: 3px 0;
+  margin-right: 10px;
+  font-size: 12px;
 }
 
 .footer-column ul li a {
-  color: #007bff;
+  color: #fff;
   text-decoration: none;
-  font-size: 14px;
 }
 
 .footer-column ul li a:hover {
   text-decoration: underline;
 }
 
-.footer-bottom {
-  margin-top: 10px;
-  text-align: center;
+.burger-menu {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.footer-bottom p {
-  margin: 0;
+.social-icons {
+  display: flex;
+  margin-left: 10px;
+}
+
+.social-icons li {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.social-icons li a {
+  display: flex;
+  align-items: center;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 5px;
   font-size: 12px;
-  color: #6c757d;
+  width: 100%;
 }
