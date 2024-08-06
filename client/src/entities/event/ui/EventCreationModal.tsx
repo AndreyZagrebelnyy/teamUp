@@ -33,6 +33,7 @@ function EventCreationModal({
           teamSize: parseInt(teamSize as string),
           arenaDateId: selectedDateId,
           levelId: parseInt(levels),
+
         }),
         
       );

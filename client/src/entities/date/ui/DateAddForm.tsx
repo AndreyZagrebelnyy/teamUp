@@ -1,38 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar, DatePicker, DatePickerInput, DatesProvider, TimeInput } from '@mantine/dates';
-import type { Arena, ArenaId } from '../../arena/types/ArenaType';
+import React, { useState } from 'react';
+import { DateTimePicker } from '@mantine/dates';
 import { useAppDispatch } from '../../../app/provider/store/store';
 import { addDate } from '../DateSlice';
 
+type DateAddFormProps = {
+  arenaId: string;
+};
 
-function DateAddForm({ arenaId }: ArenaId): JSX.Element {
-  const [date, setDate] = useState(new Date().toLocaleDateString());
-  const [form, setForm] = useState({
-    startDate: '',
-    endDate: '',
-    arenaId,
-  });
+function DateAddForm({ arenaId }: DateAddFormProps): JSX.Element {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const dispatch = useAppDispatch();
 
-  const addDates = (e) => {
+  const addDates = (e: React.FormEvent) => {
     e.preventDefault();
-    void dispatch(addDate(form));
-  };
-  const onChangeInput = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: `${date} ${value}`,
-    }));
-  };
+    if (startDate && endDate) {
+      const form = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        arenaId,
+      };
 
-  useEffect(() => {}, [dispatch]);
+      void dispatch(addDate(form));
+    }
+  };
 
   return (
-    <form onSubmit={(e) => addDates(e)}>
-      <TimeInput name="startDate" onChange={onChangeInput} />
-      <TimeInput name="endDate" onChange={onChangeInput} />
-      <input name="" type="date" onChange={(e) => setDate(e.target.value)} />
+    <form onSubmit={addDates}>
+      <DateTimePicker
+        value={startDate}
+        onChange={setStartDate}
+        label="Начало события"
+        placeholder="Выберите дату и время начала"
+        required
+      />
+      <DateTimePicker
+        value={endDate}
+        onChange={setEndDate}
+        label="Окончание события"
+        placeholder="Выберите дату и время окончания"
+        required
+      />
       <button type="submit">ОТПРАВИТЬ</button>
     </form>
   );
