@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MainPage.css';
 import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';

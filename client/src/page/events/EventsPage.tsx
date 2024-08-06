@@ -6,7 +6,7 @@ import type { EventIncludeAll } from '../../entities/event/types/eventType';
 import './EventsPage.css';
 
 function EventsPage(): JSX.Element {
-  const events = useAppSelector((store) => store.events.events);
+  const events = useAppSelector((store) => store.events.events as EventIncludeAll[]);
   const sports = useAppSelector((store) => store.sports.sports);
   const levels = useAppSelector((store) => store.level.levels);
   const location = useLocation();
@@ -34,6 +34,12 @@ function EventsPage(): JSX.Element {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
   };
+  
+    const filteredUserEvents = events.filter(
+    (event) =>
+      // Проверяем, что Users существует и является массивом
+      Array.isArray(event.Users) && event.Users.length < event.teamSize,
+  );
 
   const filteredEvents = events.filter((event: EventIncludeAll) => {
     const eventDate = event.Arena.Dates.find((data) => data.id === event.arenaDateId)?.startDate.split('T')[0];
@@ -66,11 +72,11 @@ function EventsPage(): JSX.Element {
         <input type="date" value={date} onChange={handleDateChange} />
         <button type="button" onClick={() => { setSelectedSport(''); setSelectedLevel(''); setDate(''); }}>Сбросить</button>
       </div>
-      <div className="EventsPage">
-        {filteredEvents && filteredEvents.map((event: EventIncludeAll) => (
-          <EventItem key={event.id} event={event} />
-        ))}
-      </div>
+      <div className="events-page">
+      {filteredUserEvents.map((event) => (
+        <EventItem key={event.id} event={event} />
+      ))}
+    </div>
     </>
   );
 }

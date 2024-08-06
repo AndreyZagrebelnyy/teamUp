@@ -17,8 +17,8 @@ html, body {
 }
 
 .footer {
-  background-color: #da6257;
-  padding: 10px 20px;
+  background-color: #797272;
+  padding: 10px 20px; /* Уменьшено для меньшего размера футера */
   display: flex;
   flex-direction: column;
   align-items: center;

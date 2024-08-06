@@ -15,10 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "levelId",
       });
 
-		this.belongsToMany(models.User, {
-			through: models.UserEvent,
-			foreignKey: 'eventId'
-		})
+      this.belongsToMany(models.User, {
+        through: models.UserEvent,
+        foreignKey: "eventId",
+        // otherKey: "userId",
+      });
     }
   }
   Event.init(
