@@ -3,17 +3,19 @@ import './MainPage.css';
 import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
-import { getAllFavouriteArenas } from '../../entities/arena/ArenaSlice';
+import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
 
 function MainPage(): JSX.Element {
   const sports = useAppSelector((store: RootState) => store.sports.sports);
-  const favouriteArenas = useAppSelector((store: RootState) => store.arenas.favouriteArenas);
+  const favouriteArenas = useAppSelector(
+    (store: RootState) => store.favouriteArenas.favouriteArenas,
+  );
   const user = useAppSelector((store: RootState) => store.auth.user);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    void dispatch(getAllFavouriteArenas());
+    void dispatch(getFavouriteArenas());
   }, [dispatch]);
 
   const handleSportClick = (sportId: number) => {

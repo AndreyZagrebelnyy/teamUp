@@ -25,7 +25,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const { user } = useAppSelector((store) => store.auth);
 
   const [isFavourite, setIsFavourite] = useState(
-    arena.Users.some((userFromServer) => userFromServer.id === user.id),
+    arena.Users.some((userFromServer) => user && userFromServer.id === user.id),
   );
 
   useEffect(() => {
