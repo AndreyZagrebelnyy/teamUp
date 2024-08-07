@@ -8,7 +8,7 @@ import { addDate } from '../DateSlice';
 type DateAddFormProps = {
 	arenaId: ArenaId;
  };
- 
+
 function DateAddForm({ arenaId }: DateAddFormProps): JSX.Element {
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const [form, setForm] = useState({

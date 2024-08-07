@@ -89,7 +89,7 @@ function ArenaAddForm({ closeModal }): JSX.Element {
       </div>
       <div>
         <select>
-          {metro.map((elMetro: MetroStation) => (
+		  {metro.map((elMetro: MetroStation) => (
             <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
               {elMetro.title}
             </option>
