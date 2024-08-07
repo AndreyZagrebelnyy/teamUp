@@ -14,8 +14,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
   // Ensure arena.MetroStation is defined and has a title property
   const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
   const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
-  
-  console.log(arena);
 
   return (
     <div className="arena-card" key={arena.id}>

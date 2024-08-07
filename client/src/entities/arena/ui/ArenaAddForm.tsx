@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
-import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
+import { useAppDispatch } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
 import { MetroStation } from '../../metroStation/types/MetroStationType';
 
@@ -26,10 +26,14 @@ const schema = yup
   })
   .required();
 
-function ArenaAddForm({ closeModal }): JSX.Element {
-  const { metro } = useAppSelector((store) => store.metro.metro);
-  console.log(metro);
+type ArenaAddFormProps = {
+  closeModal: () => void;
+  metro: MetroStation[]
+};
+
+function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -89,11 +93,12 @@ function ArenaAddForm({ closeModal }): JSX.Element {
       </div>
       <div>
         <select>
-		  {metro.map((elMetro: MetroStation) => (
-            <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
-              {elMetro.title}
-            </option>
-          ))}
+          {metro &&
+            metro.map((elMetro: MetroStation) => (
+              <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
+                {elMetro.title}
+              </option>
+            ))}
         </select>
         {errors.metroStationId && <span className="error">{errors.metroStationId.message}</span>}
       </div>

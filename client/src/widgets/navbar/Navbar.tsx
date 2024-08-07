@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Group, Button, Text } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faUserNinja } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret';
 
 import { logout } from '../../entities/user/authSlice';

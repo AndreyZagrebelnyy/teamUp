@@ -35,14 +35,12 @@ const favouriteSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getFavouriteArenas.fulfilled, (state, action) => {
-			console.log(111111111111);
         state.favouriteArenas = action.payload;
       })
       .addCase(addFavourite.fulfilled, (state, action) => {
         state.favourites.push(action.payload);
       })
       .addCase(removeFavourite.fulfilled, (state, action) => {
-        console.log(1111111111, action.payload);
         state.favouriteArenas = state.favouriteArenas.filter(
           (favArena) => favArena.id !== action.payload,
         );

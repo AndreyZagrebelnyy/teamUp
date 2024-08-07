@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getAllProfiles } from '../../entities/profile/profileSlice';
 import ProfileItem from '../../entities/profile/ui/ProfileItem';
 import { useAppSelector, type RootState } from '../../app/provider/store/store';
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';

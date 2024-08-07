@@ -6,8 +6,6 @@ import App from './app/App';
 import { injectStore } from './services/axiosInstance';
 import store from './app/provider/store/store';
 import '@mantine/core/styles.css'; 
-import { MantineProvider } from '@mantine/core';
-// import '@mantine/date/styles.css';
 
 injectStore(store);
 
