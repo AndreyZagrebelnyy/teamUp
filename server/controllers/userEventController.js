@@ -1,25 +1,45 @@
+const arenaServices = require("../services/arenaServices");
+const eventServices = require("../services/eventServices");
 const userEventServices = require("../services/userEventServices");
+const sendEmailToUser = require("../utils/mailer");
 
 exports.addToUserEvent = async (req, res) => {
   try {
     const { user } = res.locals;
     const { userId, eventId } = req.body;
-
     const newUserEvent = await userEventServices.addToUserEvent({
       eventId,
       userId,
     });
+    console.log(user)
+    const event = await eventServices.getOneEvent(eventId);
+
+    if (!event) {
+      res.status(404).json({ message: "Event not found" });
+      return;
+    }
+
+    const arena = event.Arena;
+
+    const emailData = {
+      arenaTitle: arena.title,
+      arenaAddress: `${arena.street}, ${arena.building}`,
+      arenaDates: arena.Dates.map((d) => d.date).join(", "), // Преобразуем даты в строку
+    };
 
     if (newUserEvent) {
+      await sendEmailToUser(`${user.email}`, 'event_registration', { data: emailData });
       res.status(201).json({ message: "success", newUserEvent });
       return;
     }
 
-    res.status(400).json({ message: "Нет доступа" });
+    res.status(400).json({ message: "Не удалось добавить пользователя на ивент" });
   } catch ({ message }) {
-    res.json({ error: message });
+    res.status(500).json({ error: message });
   }
 };
+
+
 
 exports.getAllUserEvents = async (req, res) => {
   try {

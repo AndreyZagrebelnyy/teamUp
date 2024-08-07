@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const UserEventController = require('../../controllers/userEventController')
-
-router.post('/',UserEventController.addToUserEvent)
-router.get('/',UserEventController.getAllUserEvents)
+const verifyAccessToken = require('../../middleware/verifyAccessToken')
+router.post('/',verifyAccessToken,UserEventController.addToUserEvent)
+router.get('/',verifyAccessToken,UserEventController.getAllUserEvents)
 
 module.exports = router

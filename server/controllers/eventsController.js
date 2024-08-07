@@ -10,6 +10,17 @@ exports.getAllEvents = async (req, res) => {
     return;
   }
 };
+exports.getOneEvent = async (req, res) => {
+  try {
+    const {eventId} = req.params
+    const event = await EventServices.getOneEvent(eventId);
+    res.status(200).json({ message: "success", event });
+    return;
+  } catch ({ message }) {
+    res.status(500).json({ error: message });
+    return;
+  }
+};
 
 exports.createEvents = async (req, res) => {
   try {
