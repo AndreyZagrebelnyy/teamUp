@@ -41,3 +41,52 @@
   padding: 16px; /* Добавим отступы */
 }
 
+
+
+.mantine-DatePicker {
+  width: 100%;
+  max-width: 300px; /* Можно изменить в зависимости от дизайна */
+}
+
+.mantine-DatePicker-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mantine-DatePicker-calendar {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mantine-DatePicker-day {
+  border-radius: 4px;
+  background-color: #ccc;
+}
+
+.mantine-DatePicker-day-active {
+  background-color: #ff6a00;
+  color: white;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-picker-container button {
+  background-color: #66a5e8;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.date-picker-container button:hover {
+  background-color: #0056b3;
+}

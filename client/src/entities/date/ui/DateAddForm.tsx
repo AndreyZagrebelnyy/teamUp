@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TimeInput } from '@mantine/dates';
 import type { ArenaId } from '../../arena/types/ArenaType';
+import { DateTimePicker } from '@mantine/dates';
 import { useAppDispatch } from '../../../app/provider/store/store';
 import { addDate } from '../DateSlice';
 
@@ -15,27 +16,38 @@ function DateAddForm({ arenaId }: DateAddFormProps): JSX.Element {
     endDate: '',
     arenaId,
   });
+
   const dispatch = useAppDispatch();
 
-  const addDates = (e) => {
+  const addDates = (e: React.FormEvent) => {
     e.preventDefault();
-    void dispatch(addDate(form));
-  };
-  const onChangeInput = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: `${date} ${value}`,
-    }));
-  };
+    if (startDate && endDate) {
+      const form = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        arenaId,
+      };
 
-  useEffect(() => {}, [dispatch]);
+      void dispatch(addDate(form));
+    }
+  };
 
   return (
-    <form onSubmit={(e) => addDates(e)}>
-      <TimeInput name="startDate" onChange={onChangeInput} />
-      <TimeInput name="endDate" onChange={onChangeInput} />
-      <input name="" type="date" onChange={(e) => setDate(e.target.value)} />
+    <form onSubmit={addDates}>
+      <DateTimePicker
+        value={startDate}
+        onChange={setStartDate}
+        label="Начало события"
+        placeholder="Выберите дату и время начала"
+        required
+      />
+      <DateTimePicker
+        value={endDate}
+        onChange={setEndDate}
+        label="Окончание события"
+        placeholder="Выберите дату и время окончания"
+        required
+      />
       <button type="submit">ОТПРАВИТЬ</button>
     </form>
   );

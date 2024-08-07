@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const generateTokens = require("../utils/authUtils");
 const UserService = require("../services/userServices");
+const sendRegistrationConfirmationEmail = require("../utils/mailer");
 
 exports.registration = async (req, res) => {
   try {
@@ -28,6 +29,7 @@ exports.registration = async (req, res) => {
 
     const { accessToken, refreshToken } = generateTokens({ user });
     if (user) {
+      sendRegistrationConfirmationEmail(user.email)
       res
         .status(201)
         .cookie("refresh", refreshToken, { httpOnly: true })
