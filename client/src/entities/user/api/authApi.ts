@@ -14,9 +14,8 @@ class AuthApi {
         '/auth/registration',
         data,
       );
-
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Error: ${error.message}`);
     }
   };
@@ -27,9 +26,8 @@ class AuthApi {
         '/auth/authorization',
         data,
       );
-
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Error: ${error.message}`);
     }
   };

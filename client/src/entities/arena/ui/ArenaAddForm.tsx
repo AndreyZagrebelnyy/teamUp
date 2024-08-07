@@ -2,26 +2,44 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
+import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
+import { useAppDispatch } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
+import { MetroStation } from '../../metroStation/types/MetroStationType';
 
-const schema = yup.object().shape({
-  title: yup.string().required('Название арены обязательно для заполнения'),
-  description: yup.string().required('Описание арены обязательно для заполнения'),
-  country: yup.string().required('Страна обязательна для заполнения'),
-  city: yup.string().required('Город обязателен для заполнения'),
-  street: yup.string().required('Улица/проспект/переулок обязательна для заполнения'),
-  building: yup.string().required('Здание/строение/корпус обязательно для заполнения'),
-  coordX: yup.number().required('Координата X обязательна для заполнения'),
-  coordY: yup.number().required('Координата Y обязательна для заполнения'),
-  metroStationId: yup.number().required('Станция метро обязательна для заполнения'),
-}).required();
+type Inputs = ArenaWithoutIdAndCreatorId;
 
-function ArenaAddForm({ closeModal }) {
-  const { metro } = useAppSelector((store) => store.metro.metro);
+const schema = yup
+  .object()
+  .shape({
+    title: yup.string().required('Название арены обязательно для заполнения'),
+    description: yup.string().required('Описание арены обязательно для заполнения'),
+    country: yup.string().required('Страна обязательна для заполнения'),
+    city: yup.string().required('Город обязателен для заполнения'),
+    street: yup.string().required('Улица/проспект/переулок обязательна для заполнения'),
+    building: yup.string().required('Здание/строение/корпус обязательно для заполнения'),
+    coordX: yup.number().required('Координата X обязательна для заполнения'),
+    coordY: yup.number().required('Координата Y обязательна для заполнения'),
+    metroStationId: yup.number().required('Станция метро обязательна для заполнения'),
+  })
+  .required();
+
+type ArenaAddFormProps = {
+  closeModal: () => void;
+  metro: MetroStation[]
+};
+
+function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({
+
     resolver: yupResolver(schema),
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -119,13 +137,14 @@ function ArenaAddForm({ closeModal }) {
       </div>
 
       <div>
-        <label>Станция метро:</label>
-        <select {...register('metroStationId')}>
-          {metro.map((elMetro) => (
-            <option key={elMetro.id} value={elMetro.id}>
-              {elMetro.title}
-            </option>
-          ))}
+        <select>
+          {metro &&
+            metro.map((elMetro: MetroStation) => (
+              <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
+                {elMetro.title}
+              </option>
+            ))}
+
         </select>
         {errors.metroStationId && <span className="error">{errors.metroStationId.message}</span>}
       </div>

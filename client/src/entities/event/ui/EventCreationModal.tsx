@@ -30,10 +30,9 @@ function EventCreationModal({
         createEvent({
           arenaId: arena.id,
           sportId: parseInt(sport),
-          teamSize: parseInt(teamSize as string),
+          teamSize: parseInt(teamSize as unknown as string),
           arenaDateId: selectedDateId,
           levelId: parseInt(levels),
-
         }),
         
       );

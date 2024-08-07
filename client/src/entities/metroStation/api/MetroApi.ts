@@ -1,17 +1,11 @@
-import axiosInstance from "../../../services/axiosInstance";
-import { MetroStation } from "../types/MetroStationType";
+import axiosInstance from '../../../services/axiosInstance';
+import { MetroStation } from '../types/MetroStationType';
 
 class MetroApi {
   static getAllMetro = async (): Promise<MetroStation[]> => {
-    try {
-        const response = await axiosInstance.get('/metro')
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
+    const response = await axiosInstance.get('/metro');
+    return response.data.metro;
   };
 }
 
-
-
-export default MetroApi
+export default MetroApi;

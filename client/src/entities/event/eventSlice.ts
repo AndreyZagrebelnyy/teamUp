@@ -17,7 +17,6 @@ export const getAllEvents = createAsyncThunk('get/events', () => EventApi.getAll
 export const createEvent = createAsyncThunk(
   'add/events',
   (data: {
-    eventId: number;
     sportId: number;
     teamSize: number;
     arenaId: number;

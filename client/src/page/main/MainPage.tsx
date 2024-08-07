@@ -3,9 +3,11 @@ import './MainPage.css';
 import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
+import { useNavigate } from 'react-router-dom';
 import EventItem from '../../entities/event/ui/EventItem';
 
 function MainPage(): JSX.Element {
+	const navigate = useNavigate()
   const sports = useAppSelector((store: RootState) => store.sports.sports);
   const events = useAppSelector((store: RootState) => store.events.events);
   const dispatch = useAppDispatch();
@@ -15,7 +17,7 @@ function MainPage(): JSX.Element {
   }, [dispatch]);
 
   const handleSportClick = (sportId: number) => {
-    history.push(`/events?sport=${sportId}`);
+    navigate(`/events?sport=${sportId}`);
   };
 
   // Фильтрация и сортировка ближайших событий
