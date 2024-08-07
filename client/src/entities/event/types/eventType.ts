@@ -22,6 +22,5 @@ export type EventIncludeAll ={
     title: string;
     Dates: { id: number; startDate: string; endDate: string }[];
   };
-  Users: User[]; // Убедитесь, что Users объявлено как массив User объектов
-  // Другие свойства события при необходимости
+  Users: User[];
 }

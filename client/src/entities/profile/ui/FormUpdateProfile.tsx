@@ -78,6 +78,7 @@ const schemaProfile = yup
     firstName: yup.string().required('Заполните все поля'),
     lastName: yup.string().required('Заполните все поля'),
     telegram: yup.string().required('Заполните все поля'),
+    image: yup.string(),
   })
   .required();
 
@@ -152,7 +153,7 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <FormImage>
         <ImagePreview src={imagePreview} alt="Profile Preview" />
-        <UploadButton type="button" onClick={() => document.getElementById('imageUpload').click()}>
+        <UploadButton type="button" onClick={(): void => document.getElementById('imageUpload').click()}>
           Загрузить фото
         </UploadButton>
         <input

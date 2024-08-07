@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+
+
 import { Modal, Button } from '@mantine/core';
+import React, { useEffect, useRef, useState } from 'react';
+import { RootState, useAppSelector } from '../../../../../app/provider/store/store';
 import ArenaAddForm from '../../../../../entities/arena/ui/ArenaAddForm';
 import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
 import AdminArenasItem from './AdminArenasItem';
 import { RootState } from '@reduxjs/toolkit/query';
 import { useAppSelector } from '../../../../../app/provider/store/store';
 import './AdminPage.css';
+import { LogoutSquare01Icon } from 'hugeicons-react';
+
 
 function AdminArenas(): JSX.Element {
   const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
+  const metro = useAppSelector((store: RootState) => store.metro.metro);
+  console.log(111111111111, metro);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -28,6 +37,7 @@ function AdminArenas(): JSX.Element {
       </div>
       <span>{errors}</span>
 
+
       <Modal
         opened={isModalOpen}
         onClose={closeModal}
@@ -36,6 +46,7 @@ function AdminArenas(): JSX.Element {
       >
         <ArenaAddForm closeModal={closeModal} />
       </Modal>
+
     </div>
   );
 }

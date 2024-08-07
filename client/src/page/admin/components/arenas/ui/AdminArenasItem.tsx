@@ -42,7 +42,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
   const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
   const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
 
-
   return (
     <div className="arena-card">
       <div className="arena-card-header">

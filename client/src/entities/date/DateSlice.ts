@@ -14,8 +14,8 @@ const initialState: DateState = {
 
 export const addDate = createAsyncThunk(
   'add/date',
-  (data: { startDate: string; endDate: string; arenaId: number }, arenaId) =>
-    DateApi.addDate(data, arenaId),
+  (data: { startDate: string; endDate: string; arenaId: number }) =>
+    DateApi.addDate(data),
 );
 
 export const dateSlice = createSlice({

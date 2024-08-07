@@ -4,8 +4,8 @@ const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
 router
   .get("/", arenaController.getAllArenas)
-  .get("/:eventId", arenaController.getArenaById)
-  .post("/", arenaController.createArena)
+  .get("/:arenaId", arenaController.getArenaById)
+  .post("/", verifyAccessToken, arenaController.createArena)  // Добавлено использование verifyAccessToken для защиты
   .put("/:arenaId", verifyAccessToken, arenaController.updateArena)
   .delete("/:arenaId", verifyAccessToken, arenaController.deleteArena);
 

@@ -19,7 +19,6 @@ class EventApi {
   };
 
   static createEvents = async (data: {
-    eventId: number;
     sportId: number;
     teamSize: number;
     arenaId: number;

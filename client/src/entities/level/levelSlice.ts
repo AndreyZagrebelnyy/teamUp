@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Level } from './types/levelTypes';
 import LevelApi from './api/LevelApi';
+import { Level } from './types/levelTypes';
 
 type LevelState = {
   levels: Level[];
