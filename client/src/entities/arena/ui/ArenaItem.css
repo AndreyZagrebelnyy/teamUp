@@ -11,7 +11,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 400px; /* Фиксированная высота карточки */
+  height: 600px; /* Фиксированная высота карточки */
   width: 300px; /* Фиксированная ширина карточки */
   overflow: hidden; /* Скрываем часть содержимого, если оно выходит за границы */
 }
@@ -22,16 +22,19 @@
 }
 
 .arena-card-header {
-  margin-bottom: 1rem;
+
+  margin-bottom: 4rem;
   position: relative;
   overflow: hidden; /* Скрываем выходящее за пределы изображение */
+  display: flex;
+  flex-direction: column;
 }
 
 .arena-card-header img {
-  width: 100%;
-  height: 200px; /* Фиксированная высота для изображений */
+
+height: 400px;
   object-fit: cover; /* Изображение будет обрезано и заполнит область */
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .arena-title {

@@ -50,7 +50,6 @@ function Navbar(): JSX.Element {
               </Group>
             </NavLink>
             <Button variant="outline" onClick={onHandleLogout}>
-              <FontAwesomeIcon icon={faUserSecret} size="2x" />
               <Text weight={500}>Выход</Text>
             </Button>
           </Group>

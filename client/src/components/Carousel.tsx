@@ -19,11 +19,11 @@ function Carousel({ images }: CarouselProps): JSX.Element {
   };
 
   return (
-    <Slider {...settings} style={{ width: '800px', height: '500px' }}>
+    <Slider {...settings} style={{ width: '500px', height: '500px' }}>
       {images &&
         images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Slide ${index}`} style={{ width: '800px', height: '500px' }} />
+            <img src={image} alt={`Slide ${index}`} className='arena-card-header img' />
           </div>
         ))}
     </Slider>

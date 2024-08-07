@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AddCircleHalfDotIcon } from 'hugeicons-react';
+import { useModals } from '@mantine/modals';
 import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
 import DateAddForm from '../../../../../entities/date/ui/DateAddForm';
 import './AdminsArenasItem.css';
@@ -9,13 +10,23 @@ type ArenaItemProps = {
 };
 
 function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
-  const [calendar, setCalendar] = useState(false);
-  
+  const modals = useModals();
+
   // Ensure arena.MetroStation is defined and has a title property
   const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
   const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
-  
-  console.log(arena);
+
+  const openDateAddFormModal = () => {
+    modals.openModal({
+      title: 'Добавить дату события',
+      children: (
+        <DateAddForm
+          arenaId={arena.id}
+          onClose={() => modals.closeAll()} // Закрытие модального окна после добавления
+        />
+      ),
+    });
+  };
 
   return (
     <div className="arena-card" key={arena.id}>
@@ -32,7 +43,7 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
                 {new Date(date.endDate).toLocaleTimeString()}
               </span>
             ))}
-          <AddCircleHalfDotIcon onClick={() => setCalendar((prev) => !prev)} />
+          <AddCircleHalfDotIcon onClick={openDateAddFormModal} />
         </div>
         <div className="arena-address">
           <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
@@ -41,7 +52,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
           <span>{`станция метро: ${metro}`}</span>
         </div>
       </div>
-      {calendar && <DateAddForm arenaId={arena.id} />}
     </div>
   );
 }

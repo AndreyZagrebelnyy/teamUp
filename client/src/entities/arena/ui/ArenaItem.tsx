@@ -28,19 +28,15 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const [availableDates, setAvailableDates] = useState(arena.Dates || []);
 
   const events = useAppSelector((store) => store.events.events || []);
-  
+
   useEffect(() => {
     if (events && arena.Dates) {
       const busyDates = new Set(
-        events
-          .filter((event) => event.arenaId === arena.id)
-          .map((event) => event.arenaDateId)
+        events.filter((event) => event.arenaId === arena.id).map((event) => event.arenaDateId),
       );
-      
-      const filteredDates = arena.Dates.filter(
-        (date) => !busyDates.has(date.id)
-      );
-      
+
+      const filteredDates = arena.Dates.filter((date) => !busyDates.has(date.id));
+
       setAvailableDates(filteredDates);
     }
   }, [events, arena.Dates, arena.id]);
@@ -78,10 +74,10 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         modalOpen={modalOpen}
       />
       <div className="arena-card-header">
-      <Carousel images={carousels[arena.id]} />
         <h2 className="arena-title">{arena.title}</h2>
+        <Carousel  images={carousels[arena.id]} />
       </div>
-      
+
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
