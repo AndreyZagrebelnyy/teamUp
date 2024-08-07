@@ -28,7 +28,7 @@ function ProfilePage(): JSX.Element {
   const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
 
   const favouriteArenas = user
-    ? arenas.filter((arena) => arena.Users.some((userFromArena) => userFromArena.id === user.id))
+    ? arenas.filter((arena) => arena.Users?.some((userFromArena) => userFromArena.id === user.id))
     : [];
   const [favArenas, setFavArenas] = useState(favouriteArenas);
 
