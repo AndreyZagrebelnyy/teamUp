@@ -51,3 +51,38 @@
 .arena-metro {
   margin: 5px 0;
 }
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 2rem;
+  transition: color 0.3s ease;
+}
+
+.icon:disabled {
+  cursor: not-allowed;
+}
+
+.icon.active {
+  color: #e85a4f; /* Активный цвет */
+}
+
+.arena-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
