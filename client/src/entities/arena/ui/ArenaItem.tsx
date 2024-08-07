@@ -28,6 +28,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       const filteredDates = arena.Dates.filter(
         (date) => !busyDates.has(date.id)
       );
+
       setAvailableDates(filteredDates);
     }
   }, [events, arena.Dates, arena.id]);
@@ -71,8 +72,9 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       <div className="arena-card-header">
         <Carousel images={carouselImages} />
         <h2 className="arena-title">{arena.title}</h2>
+        <Carousel  images={carousels[arena.id]} />
       </div>
-      
+
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
