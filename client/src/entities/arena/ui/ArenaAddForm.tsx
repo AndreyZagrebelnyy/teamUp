@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../../app/provider/store/stor
 import './ArenaAddForm.css';
 import { MetroStation } from '../../metroStation/types/MetroStationType';
 
-
 type Inputs = ArenaWithoutIdAndCreatorId;
 
 const schema = yup
@@ -27,7 +26,7 @@ const schema = yup
   })
   .required();
 
-function ArenaAddForm({closeModal}): JSX.Element {
+function ArenaAddForm({ closeModal }): JSX.Element {
   const { metro } = useAppSelector((store) => store.metro.metro);
   console.log(metro);
   const dispatch = useAppDispatch();
@@ -36,7 +35,6 @@ function ArenaAddForm({closeModal}): JSX.Element {
     handleSubmit,
     reset,
     formState: { errors },
-    
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
@@ -48,7 +46,7 @@ function ArenaAddForm({closeModal}): JSX.Element {
       await dispatch(addArena(data));
       setIsSubmitting(false);
       reset();
-      closeModal()
+      closeModal();
     } catch (error) {
       console.error('Ошибка добавления арены:', error);
       setIsSubmitting(false);

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './ArenasPage.css';
+import type { RootState } from '@reduxjs/toolkit/query';
+import { YMaps, Map, Placemark, RouteButton } from '@pbe/react-yandex-maps';
+
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import type { ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
 import { RootState, useAppSelector } from '../../app/provider/store/store';
 import MetroFilter from '../../components/MetroFilter';
-import { YMaps, Map, Placemark, RouteButton } from '@pbe/react-yandex-maps';
 
 function ArenasPage(): JSX.Element {
   const { arenas, errors } = useAppSelector((store: RootState) => store.arenas);
@@ -27,7 +29,7 @@ function ArenasPage(): JSX.Element {
         },
         (error) => {
           console.error('Error obtaining geolocation:', error);
-        }
+        },
       );
     }
   }, []);
@@ -49,11 +51,7 @@ function ArenasPage(): JSX.Element {
       </button>
       {showMap && (
         <YMaps query={{ apikey: 'b6f643cd-22f8-498c-813a-69562572f092' }}>
-          <Map
-            defaultState={{ center: [59.9311, 30.3609], zoom: 10 }}
-            width="100%"
-            height="500px"
-          >
+          <Map defaultState={{ center: [59.9311, 30.3609], zoom: 10 }} width="100%" height="500px">
             {userLocation && (
               <Placemark
                 geometry={userLocation}
@@ -98,6 +96,7 @@ function ArenasPage(): JSX.Element {
             onClick={() => handlePlacemarkClick([arena.coordX, arena.coordY])}
           />
         ))}
+
       </div>
       {errors && <span className="error-message">{errors}</span>}
     </div>

@@ -65,7 +65,6 @@ function EventItem({ event }: EventsItemProps): JSX.Element {
       </div>
       <div className="event-card-body">
         <h1 className="event-title">{formattedDate}</h1>
-        <p className="event-price">Цена: {event.price}</p>
         <p className="event-sport">Спорт: {sport?.title || 'Неизвестно'}</p>
         <p className="event-level">Уровень: {level?.title || 'Неизвестно'}</p>
         <div className="event-users">
