@@ -1,48 +1,53 @@
 .ArenasPage {
-    padding: 16px;
-  }
-  
-  .metro-filter {
-    margin-bottom: 16px;
-  }
-  
-  .arena-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  
-  .arena-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    width: 300px;
-  }
-  
-  .arena-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .arena-title {
-    font-size: 1.5em;
-  }
-  
-  .arena-description {
-    margin: 10px 0;
-  }
-  
-  .arena-dates {
-    margin: 10px 0;
-  }
-  
-  .arena-date {
-    display: block;
-  }
-  
-  .arena-address,
-  .arena-metro {
-    margin: 5px 0;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.metro-filter {
+  margin-bottom: 16px;
+}
+
+.arena-list {
+  padding: 50px 50px 0px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 60px;
+}
+
+.arena-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;
+}
+
+.arena-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arena-title {
+  font-size: 1.5em;
+}
+
+.arena-description {
+  margin: 10px 0;
+}
+
+.arena-dates {
+  margin: 10px 0;
+}
+
+.arena-date {
+  display: block;
+}
+
+.arena-address,
+.arena-metro {
+  margin: 5px 0;
+}

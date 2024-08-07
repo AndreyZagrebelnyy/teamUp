@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { DatePicker } from '@mantine/dates'; // Импортируем DatePicker
 import { useAppSelector } from '../../app/provider/store/store';
 import EventItem from '../../entities/event/ui/EventItem';
-import { DatePicker } from '@mantine/dates'; // Импортируем DatePicker
 import './EventsPage.css';
 import '@mantine/dates/styles.css'; // Стили для DatePicker
 
@@ -52,7 +52,7 @@ function EventsPage(): JSX.Element {
     if (Array.isArray(event.Users) && event.Users.length < event.teamSize) {
       // Получаем дату события в формате ISO
       const eventDateStr = event.Arena.Dates.find(
-        (data) => data.id === event.arenaDateId
+        (data) => data.id === event.arenaDateId,
       )?.startDate;
 
       if (!eventDateStr) return false;
@@ -101,14 +101,18 @@ function EventsPage(): JSX.Element {
           ))}
         </select>
         <div className="date-picker-container">
-          <button type="button" onClick={decrementDate}>←</button>
-          <DatePicker 
+          <button type="button" onClick={decrementDate}>
+            ←
+          </button>
+          <DatePicker
             value={date}
-            onChange={handleDateChange} 
-            placeholder="Выберите дату" 
+            onChange={handleDateChange}
+            defaultValue={new Date()}
             className="mantine-DatePicker" // Применение кастомного класса
           />
-          <button type="button" onClick={incrementDate}>→</button>
+          <button type="button" onClick={incrementDate}>
+            →
+          </button>
         </div>
         <button
           type="button"
@@ -122,9 +126,8 @@ function EventsPage(): JSX.Element {
         </button>
       </div>
       <div className="events-page">
-        {filteredUserEvents && filteredUserEvents.map((event) => (
-          <EventItem key={event.id} event={event} />
-        ))}
+        {filteredUserEvents &&
+          filteredUserEvents.map((event) => <EventItem key={event.id} event={event} />)}
       </div>
     </div>
   );

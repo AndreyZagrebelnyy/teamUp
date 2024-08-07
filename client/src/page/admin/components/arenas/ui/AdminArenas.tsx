@@ -36,7 +36,7 @@ function AdminArenas(): JSX.Element {
   return (
     <div className="arenas-container">
       <div className="button-container">
-        <button onClick={openModal}>Добавить площадку</button>
+        <button onClick={openModal} >Добавить площадку</button>
       </div>
       <h1 className="ArenasPage">Площадки</h1>
       <div className="arenas-card-container">
