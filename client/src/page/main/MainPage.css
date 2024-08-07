@@ -4,6 +4,12 @@
     flex-direction: column;
     align-items: center;
   }
+  .main-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
   
   .sport-list {
     display: flex;
@@ -24,3 +30,25 @@
     width: 100%;
   }
   
+  .all-games-img{
+    width: 1000px;
+  }
+  
+  .event-container{
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .event-item-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    justify-content: center;
+    align-items: start; /* Лучше align-items: start, чтобы все блоки начинались сверху */
+    margin: 0 auto;
+    width: 100%; /* Убедитесь, что контейнер занимает всю ширину */
+    max-width: 1200px; /* Можно задать максимальную ширину для ограничения */
+    padding: 16px; /* Добавим отступы */
+    
+  }

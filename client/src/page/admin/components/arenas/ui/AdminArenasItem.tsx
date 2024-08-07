@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { AddCircleHalfDotIcon } from 'hugeicons-react'; // Добавьте иконку удаления
+import React from 'react';
+import { AddCircleHalfDotIcon } from 'hugeicons-react';
+import { useModals } from '@mantine/modals';
+
 import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
 import DateAddForm from '../../../../../entities/date/ui/DateAddForm';
 import { useAppDispatch } from '../../../../../app/provider/store/store';
@@ -11,18 +13,35 @@ type ArenaItemProps = {
 };
 
 function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
+  const modals = useModals();
+
+  // Ensure arena.MetroStation is defined and has a title property
+  const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
+  const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
   const [calendarVisible, setCalendarVisible] = useState(false);
   const dispatch = useAppDispatch();
+
+        
+  const openDateAddFormModal = () => {
+    modals.openModal({
+      title: 'Добавить дату события',
+      children: (
+        <DateAddForm
+          arenaId={arena.id}
+          onClose={() => modals.closeAll()} // Закрытие модального окна после добавления
+        />
+      ),
+    });
+  };
+
 
   const handleDelete = (): void => {
     void dispatch(removeArena(arena.id));
   };
 
-  // Ensure metro information is properly handled
   const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
-
-  // Ensure dates are an array
   const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
+
 
   return (
     <div className="arena-card">
@@ -41,6 +60,8 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
                 {new Date(date.startDate).toLocaleTimeString()} -{' '}
                 {new Date(date.endDate).toLocaleTimeString()}
               </span>
+            ))}
+          <AddCircleHalfDotIcon onClick={openDateAddFormModal} />
             ))
           ) : (
             <span className="no-dates">Нет доступных дат</span>
@@ -58,6 +79,7 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
         </div>
       </div>
       {calendarVisible && <DateAddForm arenaId={arena.id} />}
+
     </div>
   );
 }
