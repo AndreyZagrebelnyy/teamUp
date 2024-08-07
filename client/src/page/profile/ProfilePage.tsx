@@ -6,6 +6,7 @@ import ProfileItem from '../../entities/profile/ui/ProfileItem';
 import { useAppSelector, type RootState } from '../../app/provider/store/store';
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
+import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
 
 const Button = styled.button`
   padding: 10px 15px;
@@ -23,18 +24,16 @@ const Button = styled.button`
 function ProfilePage(): JSX.Element {
   const dispatch = useDispatch();
   const profiles = useSelector((state: RootState) => state.profile.profiles);
-  const user = useSelector((state: RootState) => state.auth.user);
-  const [isAdding, setIsAdding] = useState(false);
-  const arenas = useAppSelector((store: RootState) => store.arenas.arenas);
-
-  const favouriteArenas = user
-    ? arenas.filter((arena) => arena.Users?.some((userFromArena) => userFromArena.id === user.id))
-    : [];
-  const [favArenas, setFavArenas] = useState(favouriteArenas);
 
   useEffect(() => {
-
-  }, [dispatch, favArenas]);
+	void dispatch(getFavouriteArenas());
+ }, [dispatch]);
+ 
+  const favouriteArenas = useAppSelector(
+	(store: RootState) => store.favouriteArenas.favouriteArenas,
+ );
+  const user = useSelector((state: RootState) => state.auth.user);
+  const [isAdding, setIsAdding] = useState(false);
 
   if (!profiles || !user) {
     return <div>Loading...</div>;

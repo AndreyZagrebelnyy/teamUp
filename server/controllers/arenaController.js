@@ -45,6 +45,7 @@ exports.createArena = async (req, res) => {
       metroStationId,
     });
     if (arena) {
+		
       res.status(201).json({ message: "success", arena });
       return;
     }
