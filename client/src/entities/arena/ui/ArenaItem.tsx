@@ -7,16 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../../app/provider/store/stor
 import { addFavourite, removeFavourite } from '../../favourite/FavouriteSlice';
 import EventCreationModal from '../../event/ui/EventCreationModal';
 
-const carousels: { [key: number]: string[] } = {
-  1: ['/foto/arena1.1.jpg', '/foto/arena1.2.jpg', '/foto/arena1.3.jpg'],
-  2: ['/foto/arena2.1.jpg', '/foto/arena2.2.jpg', '/foto/arena2.3.jpg'],
-  3: ['/foto/arena3.1.jpg', '/foto/arena3.2.jpg', '/foto/arena3.3.jpg'],
-  4: ['/foto/arena4.1.jpg', '/foto/arena4.2.jpg', '/foto/arena4.3.jpg'],
-  5: ['/foto/arena5.1.jpg', '/foto/arena5.2.jpg', '/foto/arena5.3.jpg'],
-  6: ['/foto/arena6.1.jpg', '/foto/arena6.2.jpg', '/foto/arena6.3.jpg'],
-  7: ['/foto/arena6.1.jpg', '/foto/arena6.2.jpg', '/foto/arena6.3.jpg'],
-};
-
 type ArenaItemProps = {
   arena: ArenaWithMetroStation;
 };
@@ -26,16 +16,18 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDateId, setSelectedDateId] = useState<number | null>(null);
   const [availableDates, setAvailableDates] = useState(arena.Dates || []);
-
   const events = useAppSelector((store) => store.events.events || []);
 
   useEffect(() => {
     if (events && arena.Dates) {
       const busyDates = new Set(
-        events.filter((event) => event.arenaId === arena.id).map((event) => event.arenaDateId),
+        events
+          .filter((event) => event.arenaId === arena.id)
+          .map((event) => event.arenaDateId)
       );
-
-      const filteredDates = arena.Dates.filter((date) => !busyDates.has(date.id));
+      const filteredDates = arena.Dates.filter(
+        (date) => !busyDates.has(date.id)
+      );
 
       setAvailableDates(filteredDates);
     }
@@ -65,6 +57,10 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     setModalOpen(true);
   };
 
+  const carouselImages = arena.title ? 
+    [`/foto/${arena.title}/arena1.jpg`, `/foto/${arena.title}/arena2.jpg`, `/foto/${arena.title}/arena3.jpg`] :
+    [];
+
   return (
     <div className="arena-card">
       <EventCreationModal
@@ -74,6 +70,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         modalOpen={modalOpen}
       />
       <div className="arena-card-header">
+        <Carousel images={carouselImages} />
         <h2 className="arena-title">{arena.title}</h2>
         <Carousel  images={carousels[arena.id]} />
       </div>

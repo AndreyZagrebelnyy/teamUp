@@ -1,4 +1,5 @@
 const ArenaServices = require("../services/arenaServices");
+const upload = require('../middleware/multerConfig');
 
 exports.getAllArenas = async (req, res) => {
   try {
@@ -19,38 +20,48 @@ exports.getArenaById = async (req, res) => {
   }
 };
 
+// Логика для загрузки фотографий и создания арены
 exports.createArena = async (req, res) => {
   try {
-    const { user } = res.locals;
-    const {
-      title,
-      description,
-      country,
-      city,
-      street,
-      building,
-      coordX,
-      coordY,
-      metroStationId,
-    } = req.body;
-    const arena = await ArenaServices.createArena({
-      title,
-      description,
-      country,
-      city,
-      street,
-      building,
-      coordX,
-      coordY,
-      metroStationId,
-    });
-    if (arena) {
-		
-      res.status(201).json({ message: "success", arena });
-      return;
-    }
+    upload(req, res, async (err) => {
+      if (err) {
+        console.error('Ошибка multer:', err);
+        return res.status(500).json({ error: "Ошибка загрузки файлов" });
+      }
 
-    res.status(400).json({ message: "Нет доступа" });
+      const { user } = res.locals;
+      const {
+        title,
+        description,
+        country,
+        city,
+        street,
+        building,
+        coordX,
+        coordY,
+        metroStationId,
+      } = req.body;
+
+      // Создание арены
+      const arena = await ArenaServices.createArena({
+        title,
+        description,
+        country,
+        city,
+        street,
+        building,
+        coordX,
+        coordY,
+        metroStationId,
+      });
+
+      if (arena) {
+        res.status(201).json({ message: "success", arena, files: req.files });
+        return;
+      }
+
+      res.status(400).json({ message: "Нет доступа" });
+    });
   } catch ({ message }) {
     res.json({ error: message });
   }
