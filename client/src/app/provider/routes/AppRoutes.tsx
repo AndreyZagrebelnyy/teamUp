@@ -5,8 +5,8 @@ import MainPage from '../../../page/main/MainPage';
 import AdminPanel from '../../../page/admin/AdminPage';
 import EventsPage from '../../../page/events/EventsPage';
 import ProfilePage from '../../../page/profile/ProfilePage';
-import RegistrationPage from '../../../page/authPages/RegistrationPage';
-import AuthorizationPage from '../../../page/authPages/AuthorizationPage';
+import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
+import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 
 
 function AppRoutes(): JSX.Element {

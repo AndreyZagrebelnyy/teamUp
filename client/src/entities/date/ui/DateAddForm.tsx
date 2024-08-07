@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, DatePicker, DatePickerInput, DatesProvider, TimeInput } from '@mantine/dates';
-import type { Arena, ArenaId } from '../../arena/types/ArenaType';
+import { TimeInput } from '@mantine/dates';
+import type { ArenaId } from '../../arena/types/ArenaType';
 import { useAppDispatch } from '../../../app/provider/store/store';
 import { addDate } from '../DateSlice';
 
+type DateAddFormProps = {
+	arenaId: ArenaId;
+ };
 
-function DateAddForm({ arenaId }: ArenaId): JSX.Element {
+function DateAddForm({ arenaId }: DateAddFormProps): JSX.Element {
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const [form, setForm] = useState({
     startDate: '',

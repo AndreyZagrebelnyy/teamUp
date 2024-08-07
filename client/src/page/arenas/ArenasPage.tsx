@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ArenasPage.css';
-import type { RootState } from '@reduxjs/toolkit/query';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import type { ArenaWithMetroStation } from '../../entities/arena/types/ArenaType';
-import { useAppSelector } from '../../app/provider/store/store';
+import { RootState, useAppSelector } from '../../app/provider/store/store';
 import MetroFilter from '../../components/MetroFilter';
 import { YMaps, Map, Placemark, RouteButton } from '@pbe/react-yandex-maps';
 
@@ -14,7 +13,7 @@ function ArenasPage(): JSX.Element {
   const [routeEnd, setRouteEnd] = useState<[number, number] | null>(null);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
 
-  const metroStations = Array.from(new Set(arenas.map((arena) => arena.MetroStation.title)));
+  const metroStations = Array.from(new Set(arenas.map((arena: ArenaWithMetroStation) => arena?.MetroStation?.title)));
 
   const filteredArenas = selectedStation
     ? arenas.filter((arena: ArenaWithMetroStation) => arena.MetroStation.title === selectedStation)
@@ -92,7 +91,7 @@ function ArenasPage(): JSX.Element {
         </YMaps>
       )}
       <div className="arena-list">
-        {filteredArenas.map((arena: ArenaWithMetroStation) => (
+        {filteredArenas?.map((arena: ArenaWithMetroStation) => (
           <ArenaItem
             arena={arena}
             key={arena.id}

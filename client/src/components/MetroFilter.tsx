@@ -20,8 +20,8 @@ function MetroFilter({
         onChange={(e) => onSelectStation(e.target.value)}
       >
         <option value="">Все станции</option>
-        {stations.map((station) => (
-          <option key={station} value={station}>
+        {stations.map((station, id) => (
+          <option key={id} value={station}>
             {station}
           </option>
         ))}
