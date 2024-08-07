@@ -20,6 +20,10 @@ export const addArena = createAsyncThunk('add/arena', async (data: ArenaWithoutI
   ArenaApi.addArena(data),
 );
 
+export const removeArena = createAsyncThunk('delete/arena', async (id: number) =>
+  ArenaApi.removeArena(id),
+);
+
 const arenasSlice = createSlice({
   name: 'arenas',
   initialState,
@@ -32,7 +36,13 @@ const arenasSlice = createSlice({
       .addCase(addArena.fulfilled, (state, action) => {
         state.arenas.push(action.payload);
       })
+      .addCase(removeArena.fulfilled, (state, action) => {
+        state.arenas = state.arenas.filter(arena => arena.id !== action.payload);
+      })
       .addCase(addArena.rejected, (state, action) => {
+        state.errors = action.error.message;
+      })
+      .addCase(removeArena.rejected, (state, action) => {
         state.errors = action.error.message;
       });
   },

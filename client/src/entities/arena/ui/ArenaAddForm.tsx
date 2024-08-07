@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
-import { addArena } from '../ArenaSlice';
+import { addArena } from '../ArenaSlice';  // Убедитесь, что путь правильный
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
-import { MetroStation } from '../../metroStation/types/MetroStationType';
+import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
 type Inputs = ArenaWithoutIdAndCreatorId;
 
@@ -76,7 +76,7 @@ function ArenaAddForm({ closeModal }): JSX.Element {
         {errors.street && <span className="error">{errors.street.message}</span>}
       </div>
       <div>
-        <input type="number" placeholder="Здание/строение/корпус" {...register('building')} />
+        <input type="text" placeholder="Здание/строение/корпус" {...register('building')} />
         {errors.building && <span className="error">{errors.building.message}</span>}
       </div>
       <div>
@@ -88,9 +88,9 @@ function ArenaAddForm({ closeModal }): JSX.Element {
         {errors.coordY && <span className="error">{errors.coordY.message}</span>}
       </div>
       <div>
-        <select>
-		  {metro.map((elMetro: MetroStation) => (
-            <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
+        <select {...register('metroStationId')}>
+          {metro.map((elMetro: MetroStation) => (
+            <option key={elMetro.id} value={elMetro.id}>
               {elMetro.title}
             </option>
           ))}
