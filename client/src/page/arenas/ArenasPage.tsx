@@ -14,7 +14,10 @@ function ArenasPage(): JSX.Element {
   const [routeEnd, setRouteEnd] = useState<[number, number] | null>(null);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
 
-  const metroStations = Array.from(new Set(arenas.map((arena) => arena.MetroStation.title)));
+  const metroStations = Array.from(new Set(arenas.map((arena: ArenaWithMetroStation) => arena?.MetroStation?.title)));
+
+  console.log(arenas);
+  
 
   const filteredArenas = selectedStation
     ? arenas.filter((arena: ArenaWithMetroStation) => arena.MetroStation.title === selectedStation)
@@ -88,14 +91,14 @@ function ArenasPage(): JSX.Element {
         </YMaps>
       )}
       <div className="arena-list">
-        {filteredArenas &&
-          filteredArenas.map((arena: ArenaWithMetroStation) => (
-            <ArenaItem
-              arena={arena}
-              key={arena.id}
-              onClick={() => handlePlacemarkClick([arena.coordX, arena.coordY])}
-            />
-          ))}
+        {filteredArenas?.map((arena: ArenaWithMetroStation) => (
+          <ArenaItem
+            arena={arena}
+            key={arena.id}
+            onClick={() => handlePlacemarkClick([arena.coordX, arena.coordY])}
+          />
+        ))}
+
       </div>
       {errors && <span className="error-message">{errors}</span>}
     </div>

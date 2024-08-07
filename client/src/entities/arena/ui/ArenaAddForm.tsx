@@ -7,6 +7,7 @@ import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
+import { MetroStation } from '../../metroStation/types/MetroStationType';
 
 type Inputs = ArenaWithoutIdAndCreatorId;
 
@@ -25,7 +26,7 @@ const schema = yup
   })
   .required();
 
-function ArenaAddForm({closeModal}): JSX.Element {
+function ArenaAddForm({ closeModal }): JSX.Element {
   const { metro } = useAppSelector((store) => store.metro.metro);
   console.log(metro);
   const dispatch = useAppDispatch();
@@ -34,7 +35,6 @@ function ArenaAddForm({closeModal}): JSX.Element {
     handleSubmit,
     reset,
     formState: { errors },
-    
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
@@ -46,7 +46,7 @@ function ArenaAddForm({closeModal}): JSX.Element {
       await dispatch(addArena(data));
       setIsSubmitting(false);
       reset();
-      closeModal()
+      closeModal();
     } catch (error) {
       console.error('Ошибка добавления арены:', error);
       setIsSubmitting(false);
@@ -89,8 +89,8 @@ function ArenaAddForm({closeModal}): JSX.Element {
       </div>
       <div>
         <select>
-          {metro.map((elMetro) => (
-            <option value={elMetro.id} {...register('metroStationId')}>
+          {metro.map((elMetro: MetroStation) => (
+            <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
               {elMetro.title}
             </option>
           ))}

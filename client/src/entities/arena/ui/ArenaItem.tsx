@@ -48,11 +48,11 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const { user } = useAppSelector((store) => store.auth);
 
   const [isFavourite, setIsFavourite] = useState(
-    arena.Users.some((userFromServer) => user && userFromServer.id === user.id),
+    arena.Users?.some((userFromServer) => user && userFromServer.id === user.id),
   );
 
   useEffect(() => {
-    setIsFavourite(arena.Users.some((userFromObject) => userFromObject.id === user?.id));
+    setIsFavourite(arena.Users?.some((userFromObject) => user && userFromObject.id === user.id));
   }, [arena.Users, user]);
 
   const toggleFavourite = () => {
@@ -102,7 +102,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
         </div>
         <div className="arena-metro">
-          <span>{`станция метро: ${arena.MetroStation.title}`}</span>
+          <span>{`станция метро: ${arena.MetroStation?.title}`}</span>
         </div>
         <div>
           <button onClick={toggleFavourite}>
