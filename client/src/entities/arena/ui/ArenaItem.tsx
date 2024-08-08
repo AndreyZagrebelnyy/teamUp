@@ -111,6 +111,23 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           </p>
           {arena.MetroStation && (
             <p className="arena-metro">Metro Station: {arena.MetroStation.title}</p>
+        <h2 className="arena-title">{arena.title}</h2>
+            
+      </div>
+      <div className="arena-card-body">
+        <p className="arena-description">{arena.description}</p>
+        <div className="arena-dates">
+          {availableDates.length > 0 ? (
+            availableDates.map((date) => (
+              <span key={date.id} className="arena-date">
+                <Button onClick={() => handleDateClick(date.id)}>
+                  {new Date(date.startDate).toLocaleTimeString()} -{' '}
+                  {new Date(date.endDate).toLocaleTimeString()}
+                </Button>
+              </span>
+            ))
+          ) : (
+            <p>Нет доступных дат</p>
           )}
         </div>
       </div>

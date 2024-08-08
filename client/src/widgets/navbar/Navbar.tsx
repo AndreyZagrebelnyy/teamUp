@@ -4,17 +4,22 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Group, Button, Text } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret';
 
 import { logout } from '../../entities/user/authSlice';
 import type { RootState } from '../../app/provider/store/store';
-import { useAppDispatch } from '../../app/provider/store/store';
-import './Navbar.css'
+import { useAppDispatch, useAppSelector } from '../../app/provider/store/store';
+import './Navbar.css';
 
 function Navbar(): JSX.Element {
   const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
+
+  const profiles = useAppSelector((store) =>
+    store.profile.profiles.find((us) => us.userId === user?.id),
+  );
+
+  console.log(profiles);
 
   const onHandleLogout = (): void => {
     void dispatch(logout());
@@ -45,8 +50,18 @@ function Navbar(): JSX.Element {
             )}
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
               <Group align="center">
-                <FontAwesomeIcon icon={faUserCircle} size="2x" />
-                <Text weight={500}>Профиль</Text>
+                {user && profiles ? (
+                  <div className="navbar-avatar-container">
+                    <img className="user_avatar" src={profiles.image} alt="" />
+                    <p>{profiles.firstName}</p>
+                    <p>{profiles.telegram}</p>
+                  </div>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon={faUserCircle} size="2x" />
+                    <Text weight={500}>Профиль</Text>
+                  </>
+                )}
               </Group>
             </NavLink>
             <Button variant="outline" onClick={onHandleLogout}>

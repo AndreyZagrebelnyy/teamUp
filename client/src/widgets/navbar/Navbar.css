@@ -1,5 +1,5 @@
 .Navbar {
-    padding: 1rem;
+    padding: 2rem;
     background-color: #f8f9fa; /* Например, светлый фон */
     border-bottom: 1px solid #dee2e6; /* Легкая граница внизу */
   }
@@ -17,3 +17,19 @@
     display: flex;
     align-items: center;
   }
+
+  .user_avatar {
+    width: 60px; /* Ширина аватара */
+    height: 60px; /* Высота аватара */
+    border-radius: 50%; /* Округлые края для аватара */
+    object-fit: cover; /* Обрезать изображение, чтобы оно соответствовало контейнеру */
+    border: 2px solid #eae7dc; /* Тонкая рамка вокруг аватара */
+    margin-right: 10px; /* Отступ справа от аватара */
+  }
+  
+  .navbar-avatar-container {
+    display: flex;
+    align-items: center; /* Выравнивание аватара по вертикали */
+    color: black;
+  }
+  

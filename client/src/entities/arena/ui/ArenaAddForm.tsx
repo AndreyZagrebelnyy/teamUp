@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
 import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
+type Inputs = ArenaWithoutIdAndCreatorId;
+
 const schema = yup.object().shape({
   title: yup.string().required('Название арены обязательно для заполнения'),
   description: yup.string().required('Описание арены обязательно для заполнения'),
