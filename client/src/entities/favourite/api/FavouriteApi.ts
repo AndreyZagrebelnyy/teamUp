@@ -1,7 +1,7 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
+import type { Favourite, FavouriteId } from '../type/FavouriteType';
+import type { Arena } from '../../arena/types/ArenaType';
 import axiosInstance from '../../../services/axiosInstance';
-import { Favourite, FavouriteId } from '../type/FavouriteType';
-import { Arena } from '../../arena/types/ArenaType';
 
 class FavouriteApi {
   static getAllFavouriteArenas = async (): Promise<Arena[] | undefined> => {

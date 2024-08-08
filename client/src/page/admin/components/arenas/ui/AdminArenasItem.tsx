@@ -1,5 +1,5 @@
-import React from 'react';
-import { AddCircleHalfDotIcon } from 'hugeicons-react';
+import React, { useState } from 'react';
+import { AddCircleHalfDotIcon } from 'hugeicons-react'; // Обновите иконку для удаления
 import { useModals } from '@mantine/modals';
 
 import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
@@ -14,14 +14,9 @@ type ArenaItemProps = {
 
 function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
   const modals = useModals();
-
-  // Ensure arena.MetroStation is defined and has a title property
-  const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
-  const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
-  const [calendarVisible, setCalendarVisible] = useState(false);
   const dispatch = useAppDispatch();
+  const [calendarVisible, setCalendarVisible] = useState(false);
 
-        
   const openDateAddFormModal = () => {
     modals.openModal({
       title: 'Добавить дату события',
@@ -34,9 +29,16 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
     });
   };
 
-
-  const handleDelete = (): void => {
-    void dispatch(removeArena(arena.id));
+  const handleDelete = async (): void => {
+    if (window.confirm('Вы уверены, что хотите удалить эту арену?')) {
+      try {
+        await dispatch(removeArena(arena.id));
+        alert('Арена успешно удалена');
+      } catch (error) {
+        alert('Ошибка удаления арены');
+        console.error('Ошибка удаления арены:', error);
+      }
+    }
   };
 
   const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
@@ -59,16 +61,11 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
                 {new Date(date.startDate).toLocaleTimeString()} -{' '}
                 {new Date(date.endDate).toLocaleTimeString()}
               </span>
-            ))}
-          <AddCircleHalfDotIcon onClick={openDateAddFormModal} />
             ))
           ) : (
             <span className="no-dates">Нет доступных дат</span>
           )}
-          <AddCircleHalfDotIcon
-            onClick={() => setCalendarVisible((prev) => !prev)}
-            className="add-date-icon"
-          />
+          <AddCircleHalfDotIcon onClick={openDateAddFormModal} className="add-date-icon" />
         </div>
         <div className="arena-address">
           <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
@@ -78,7 +75,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
         </div>
       </div>
       {calendarVisible && <DateAddForm arenaId={arena.id} />}
-
     </div>
   );
 }
