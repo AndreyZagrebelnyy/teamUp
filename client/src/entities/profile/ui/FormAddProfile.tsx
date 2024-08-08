@@ -78,6 +78,7 @@ const schemaProfile = yup
     firstName: yup.string().required('Заполните все поля'),
     lastName: yup.string().required('Заполните все поля'),
     telegram: yup.string().required('Заполните все поля'),
+    image: yup.string().required('Заполните все поля'),
   })
   .required();
 
@@ -97,7 +98,7 @@ function FormAddProfile(): JSX.Element {
       firstName: '',
       lastName: '',
       telegram: '',
-      image: '',
+      image: '/profilePhoto/default-prodile-photo.avif',
     },
     resolver: yupResolver(schemaProfile),
   });
@@ -114,7 +115,7 @@ function FormAddProfile(): JSX.Element {
     }
     void dispatch(addProfile({ ...data, userId }));
     reset();
-    setImagePreview('');
+    setImagePreview('default-prodile-photo.png');
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {

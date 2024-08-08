@@ -3,6 +3,7 @@ import { Modal, Text, Select, TextInput, Button } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import { createEvent } from '../eventSlice';
 import type { ArenaWithMetroStation } from '../../arena/types/ArenaType';
+import { showNotification } from '@mantine/notifications';
 
 type EventCreationModalProps = {
   arena: ArenaWithMetroStation;
@@ -34,7 +35,6 @@ function EventCreationModal({
           arenaDateId: selectedDateId,
           levelId: parseInt(levels),
         }),
-        
       );
       setModalOpen(false); // Close the modal after creating the event
     } else {
@@ -66,7 +66,19 @@ function EventCreationModal({
         value={teamSize}
         onChange={(e) => setTeamSize(e.target.value)}
       />
-      <Button onClick={handleCreateEvent}>Создать событие</Button>
+      <Button
+        onClick={() => {
+          handleCreateEvent();
+          showNotification({
+            title: 'Успех!',
+            message: 'Вы успешно создали событие',
+            color: 'green',
+            className: 'notifications-container', // Добавляем класс для позиционирования
+          });
+        }}
+      >
+        Создать событие
+      </Button>
       <Button onClick={() => setModalOpen(false)} color="gray">
         Отмена
       </Button>

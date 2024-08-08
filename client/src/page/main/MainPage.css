@@ -34,12 +34,15 @@
   }
   
   .all-games-img{
-    /* width: 1000px; */
+    display: flex;
+    width: 1400px;
     top: 10%;
     left: 50%;
     position: absolute;
-    opacity: 0.3;
+    opacity: 0.2;
     z-index: -1;
+    overflow: hidden;
+    flex-wrap: nowrap;
   }
   
   .event-container{

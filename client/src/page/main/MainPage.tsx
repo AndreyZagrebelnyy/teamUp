@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import './MainPage.css';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import SportItem from '../../entities/sports/ui/SportItem';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
-import { useNavigate } from 'react-router-dom';
 import EventItem from '../../entities/event/ui/EventItem';
+import './MainPage.css';
 
 function MainPage(): JSX.Element {
-	const navigate = useNavigate()
+  const navigate = useNavigate();
   const sports = useAppSelector((store: RootState) => store.sports.sports);
   const events = useAppSelector((store: RootState) => store.events.events);
   const dispatch = useAppDispatch();
@@ -35,10 +35,10 @@ function MainPage(): JSX.Element {
     })
     .slice(0, 3); // Ограничение до 5 ближайших событий
 
-    console.log(upcomingEvents)
+  console.log(upcomingEvents);
   return (
     <div className="main-page">
-      <img src="all-games.png" className="all-games-img" alt="" />
+      {/* <img src="all-games.png" className="all-games-img" alt="" /> */}
       <div className="main-page-container">
         <h1>Выберите вид спорта</h1>
         <div className="sport-list">

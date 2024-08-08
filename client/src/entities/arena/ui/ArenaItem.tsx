@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ArenaItem.css';
 import { Button } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import type { ArenaWithMetroStation } from '../types/ArenaType';
 import Carousel from '../../../components/Carousel';
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
@@ -88,9 +89,19 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           <span>{`станция метро: ${arena.MetroStation?.title}`}</span>
         </div>
         <div>
-          <button onClick={toggleFavourite}>
+          <Button
+            onClick={() => {
+              toggleFavourite();
+              showNotification({
+                title: 'Успех!',
+                message: `Вы успешно ${isFavourite ? 'удалили' : 'добавили'} арену из избранного`,
+                color: 'green',
+                className: 'notifications-container',
+              });
+            }}
+          >
             {isFavourite ? 'Убрать из избранного' : 'Добавить в избранное'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

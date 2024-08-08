@@ -11,7 +11,7 @@ exports.addToUserEvent = async (req, res) => {
       eventId,
       userId,
     });
-    console.log(user)
+
     const event = await eventServices.getOneEvent(eventId);
 
     if (!event) {
@@ -28,18 +28,21 @@ exports.addToUserEvent = async (req, res) => {
     };
 
     if (newUserEvent) {
-      await sendEmailToUser(`${user.email}`, 'event_registration', { data: emailData });
       res.status(201).json({ message: "success", newUserEvent });
+      sendEmailToUser(`${user.email}`, "event_registration", {
+        data: emailData,
+      });
+
       return;
     }
 
-    res.status(400).json({ message: "Не удалось добавить пользователя на ивент" });
+    res
+      .status(400)
+      .json({ message: "Не удалось добавить пользователя на ивент" });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
 };
-
-
 
 exports.getAllUserEvents = async (req, res) => {
   try {

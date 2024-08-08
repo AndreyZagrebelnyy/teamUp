@@ -1,35 +1,49 @@
 .Navbar {
-    padding: 2rem;
-    background-color: #f8f9fa; /* Например, светлый фон */
-    border-bottom: 1px solid #dee2e6; /* Легкая граница внизу */
-  }
-  
-  .Navbar a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .Navbar a:hover {
-    text-decoration: underline;
-  }
-  
-  .Navbar .user-info {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .user_avatar {
-    width: 60px; /* Ширина аватара */
-    height: 60px; /* Высота аватара */
-    border-radius: 50%; /* Округлые края для аватара */
-    object-fit: cover; /* Обрезать изображение, чтобы оно соответствовало контейнеру */
-    border: 2px solid #eae7dc; /* Тонкая рамка вокруг аватара */
-    margin-right: 10px; /* Отступ справа от аватара */
-  }
-  
-  .navbar-avatar-container {
-    display: flex;
-    align-items: center; /* Выравнивание аватара по вертикали */
-    color: black;
-  }
-  
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column; /* Имя и Telegram будут друг под другом */
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 2px; /* Отступ между именем и телеграмом */
+}
+
+.profile-telegram {
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.telegram-icon {
+  margin-right: 5px;
+}
+
+.navbar-avatar-container {
+  display: flex;
+  align-items: center;
+
+}
