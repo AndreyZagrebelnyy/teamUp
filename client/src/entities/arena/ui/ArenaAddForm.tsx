@@ -6,7 +6,7 @@ import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
 import { useAppDispatch } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
-import { MetroStation } from '../../metroStation/types/MetroStationType';
+import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
 type Inputs = ArenaWithoutIdAndCreatorId;
 
@@ -27,7 +27,7 @@ const schema = yup
 
 type ArenaAddFormProps = {
   closeModal: () => void;
-  metro: MetroStation[]
+  metro: MetroStation[];
 };
 
 function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
@@ -39,7 +39,6 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
     reset,
     formState: { errors },
   } = useForm<Inputs>({
-
     resolver: yupResolver(schema),
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -144,7 +143,6 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
                 {elMetro.title}
               </option>
             ))}
-
         </select>
         {errors.metroStationId && <span className="error">{errors.metroStationId.message}</span>}
       </div>
@@ -162,4 +160,3 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
 }
 
 export default ArenaAddForm;
-
