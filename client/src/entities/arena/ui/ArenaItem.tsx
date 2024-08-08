@@ -21,13 +21,9 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   useEffect(() => {
     if (events && arena.Dates) {
       const busyDates = new Set(
-        events
-          .filter((event) => event.arenaId === arena.id)
-          .map((event) => event.arenaDateId)
+        events.filter((event) => event.arenaId === arena.id).map((event) => event.arenaDateId),
       );
-      const filteredDates = arena.Dates.filter(
-        (date) => !busyDates.has(date.id)
-      );
+      const filteredDates = arena.Dates.filter((date) => !busyDates.has(date.id));
 
       setAvailableDates(filteredDates);
     }
@@ -57,10 +53,6 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     setModalOpen(true);
   };
 
-  const carouselImages = arena.title ? 
-    [`/foto/${arena.title}/arena1.jpg`, `/foto/${arena.title}/arena2.jpg`, `/foto/${arena.title}/arena3.jpg`] :
-    [];
-
   return (
     <div className="arena-card">
       <EventCreationModal
@@ -70,9 +62,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
         modalOpen={modalOpen}
       />
       <div className="arena-card-header">
-        <Carousel images={carouselImages} />
         <h2 className="arena-title">{arena.title}</h2>
-        <Carousel  images={carousels[arena.id]} />
       </div>
 
       <div className="arena-card-body">
