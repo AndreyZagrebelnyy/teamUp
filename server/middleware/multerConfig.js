@@ -1,21 +1,17 @@
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 
+// Настройка хранения файлов
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const arenaPhotosPath = path.join(__dirname, '../../client/public/foto', req.body.title);
-    
-    if (!fs.existsSync(arenaPhotosPath)) {
-      fs.mkdirSync(arenaPhotosPath, { recursive: true });
-    }
-    cb(null, arenaPhotosPath);
+    const arenaPhotosPath = path.join(__dirname, '../public/img');
+    cb(null, arenaPhotosPath); // Путь для сохранения файлов
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
+    cb(null, Date.now() + '-' + file.originalname); // Уникальное имя файла
+  },
 });
 
-const upload = multer({ storage: storage }).array('images', 10);
+const upload = multer({ storage });
 
-module.exports = upload;
+module.exports = upload.array('images'); // Используем .array для множественной загрузки
