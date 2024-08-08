@@ -82,3 +82,29 @@ button:disabled {
   cursor: not-allowed;
   color: #000;
 }
+
+.event-users-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.event-user {
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  margin-left: -30px; /* Установите отрицательный отступ для перекрытия аватарок */
+}
+.event-user:hover {
+  cursor: pointer;
+  position: relative;
+  transform: translateY(-10px);
+  z-index: 1;
+}
+
+.user_avatar {
+  width: 40px; /* Установите ширину аватарок */
+  height: 40px; /* Установите высоту аватарок */
+  border-radius: 50%; /* Сделайте аватарки круглыми */
+  border: 2px solid #fff; /* Добавьте белую рамку вокруг аватарок */
+  box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Добавьте тень для улучшения визуального эффекта */
+}

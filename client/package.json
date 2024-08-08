@@ -23,6 +23,7 @@
     "@mantine/dates": "^7.12.0",
     "@mantine/hooks": "^7.12.0",
     "@mantine/modals": "^7.12.0",
+    "@mantine/notifications": "^7.12.0",
     "@mobiscroll/react": "npm:@mobiscroll/react-next-trial@^5.31.2",
     "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.2.7",

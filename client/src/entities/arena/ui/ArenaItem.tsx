@@ -3,6 +3,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './ArenaItem.css';
+
+import { Button } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import type { ArenaWithMetroStation } from '../types/ArenaType';
+import Carousel from '../../../components/Carousel';
 import { useAppDispatch, useAppSelector } from '../../../app/provider/store/store';
 import { addFavourite, removeFavourite } from '../../favourite/FavouriteSlice';
 import EventCreationModal from '../../event/ui/EventCreationModal';
@@ -136,9 +141,22 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           <span>Dates available: {availableDates.length}</span>
         </div>
         <div>
-          <button onClick={toggleFavourite}>
-            {isFavourite ? 'Remove from favourites' : 'Add to favourites'}
-          </button>
+
+          <Button
+            onClick={() => {
+              toggleFavourite();
+              showNotification({
+                title: 'Успех!',
+                message: `Вы успешно ${isFavourite ? 'удалили' : 'добавили'} арену из избранного`,
+                color: 'green',
+                className: 'notifications-container',
+              });
+            }}
+          >
+            {isFavourite ? 'Убрать из избранного' : 'Добавить в избранное'}
+          </Button>
+
+
         </div>
       </div>
     </div>

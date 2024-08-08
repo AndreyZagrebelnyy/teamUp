@@ -1,4 +1,4 @@
-import type { User } from '../../user/types/userType';
+import type { User, UserWithoutId } from '../../user/types/userType';
 
 export type Event = {
   id: number;

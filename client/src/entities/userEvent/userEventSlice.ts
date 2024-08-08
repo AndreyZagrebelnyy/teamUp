@@ -24,7 +24,7 @@ export const addUserEvent = createAsyncThunk(
   async (data: { eventId: number; userId: number }) => {
     const response = await UserEventApi.addToUserEvent(data);
     return response;
-  }
+  },
 );
 
 export const userEventSlice = createSlice({
@@ -49,6 +49,8 @@ export const userEventSlice = createSlice({
       })
       .addCase(addUserEvent.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload);
+
         state.userEvent.push(action.payload);
       })
       .addCase(addUserEvent.rejected, (state, action) => {
