@@ -1,5 +1,5 @@
 const ArenaServices = require("../services/arenaServices");
-const upload = require('../middleware/multerConfig');
+const upload = require("../middleware/multerConfig");
 
 exports.getAllArenas = async (req, res) => {
   try {
@@ -14,22 +14,24 @@ exports.getArenaById = async (req, res) => {
   try {
     const { arenaId } = req.params;
     const arena = await ArenaServices.getArenaById(+arenaId);
-    res.status(200).json({ message: "success", arena });
+    if (arena) {
+      res.status(200).json({ message: "success", arena });
+    } else {
+      res.status(404).json({ message: "Arena not found" });
+    }
   } catch ({ message }) {
-    res.json({ error: message });
+    res.status(500).json({ error: message });
   }
 };
 
-// Логика для загрузки фотографий и создания арены
 exports.createArena = async (req, res) => {
-  try {
-    upload(req, res, async (err) => {
-      if (err) {
-        console.error('Ошибка multer:', err);
-        return res.status(500).json({ error: "Ошибка загрузки файлов" });
-      }
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error("Ошибка multer:", err);
+      return res.status(500).json({ error: "Ошибка загрузки файлов" });
+    }
 
-      const { user } = res.locals;
+    try {
       const {
         title,
         description,
@@ -42,8 +44,44 @@ exports.createArena = async (req, res) => {
         metroStationId,
       } = req.body;
 
-      // Создание арены
-      const arena = await ArenaServices.createArena({
+      const imagePaths = req.files
+        ? req.files.map((file) => `/img/${file.filename}`)
+        : [];
+
+      const arena = await ArenaServices.createArena(
+        {
+          title,
+          description,
+          country,
+          city,
+          street,
+          building,
+          coordX,
+          coordY,
+          metroStationId,
+          creatorId: res.locals.user.id,
+        },
+        imagePaths
+      );
+
+      res.status(201).json({ message: "success", arena, files: req.files });
+    } catch ({ message }) {
+      res.status(500).json({ error: message });
+    }
+  });
+};
+
+exports.updateArena = async (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error("Ошибка multer:", err);
+      return res.status(500).json({ error: "Ошибка загрузки файлов" });
+    }
+
+    try {
+      const { user } = res.locals;
+      const { arenaId } = req.params;
+      const {
         title,
         description,
         country,
@@ -53,71 +91,50 @@ exports.createArena = async (req, res) => {
         coordX,
         coordY,
         metroStationId,
-      });
+      } = req.body;
+
+      const imagePaths = req.files
+        ? req.files.map((file) => `/img/${file.filename}`)
+        : [];
+
+      const arena = await ArenaServices.updateArena(
+        +arenaId,
+        user.id,
+        {
+          title,
+          description,
+          country,
+          city,
+          street,
+          building,
+          coordX,
+          coordY,
+          metroStationId,
+        },
+        imagePaths
+      );
 
       if (arena) {
-        res.status(201).json({ message: "success", arena, files: req.files });
-        return;
+        res.status(200).json({ message: "success", arena });
+      } else {
+        res.status(400).json({ message: "Нет доступа" });
       }
-
-      res.status(400).json({ message: "Нет доступа" });
-    });
-  } catch ({ message }) {
-    res.json({ error: message });
-  }
-};
-
-exports.updateArena = async (req, res) => {
-  try {
-    const { user } = res.locals;
-    const { arenaId } = req.params;
-    const {
-      title,
-      description,
-      country,
-      city,
-      street,
-      building,
-      coordX,
-      coordY,
-      metroStationId,
-    } = req.body;
-
-    const arena = await ArenaServices.updateArena(+arenaId, user.id, {
-      title,
-      description,
-      country,
-      city,
-      street,
-      building,
-      coordX,
-      coordY,
-      metroStationId,
-    });
-
-    if (arena) {
-      res.status(200).json({ message: "success", arena });
-      return;
+    } catch ({ message }) {
+      res.status(500).json({ error: message });
     }
-
-    res.status(400).json({ message: "Нет доступа" });
-  } catch ({ message }) {
-    res.status(500).json({ error: message });
-  }
+  });
 };
 
 exports.deleteArena = async (req, res) => {
   try {
-    const { user } = res.locals;
     const { arenaId } = req.params;
     const result = await ArenaServices.deleteArena(+arenaId);
 
-    if (result > 0) {
+    if (result) {
       res.status(200).json({ message: "success" });
-      return;
+    } else {
+      res.status(400).json({ message: "Нет доступа" });
     }
-
-    res.status(400).json({ message: "Нет доступа" });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }

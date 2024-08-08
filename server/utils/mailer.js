@@ -12,8 +12,7 @@ let transporter = nodemailer.createTransport({
 });
 
 async function sendEmailToUser(email, action, templateData) {
-  const { data } = templateData;
-
+  const { data } = templateData || {};
 
   // Настройка писем
   const templates = {

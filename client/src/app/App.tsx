@@ -22,6 +22,8 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log(777);
+    
     void dispatch(getAllArenas());
     void dispatch(getFavouriteArenas());
     void dispatch(getAllEvents());
