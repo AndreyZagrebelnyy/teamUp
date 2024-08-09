@@ -70,12 +70,6 @@ function EventsPage(): JSX.Element {
       const levelMatch = selectedLevel ? event.levelId === parseInt(selectedLevel) : true;
       const dateMatch = selectedDate ? eventDateFormatted === selectedDateFormatted : true;
 
-      console.log(`Event Date: ${eventDateFormatted}`);
-      console.log(`Selected Date: ${selectedDateFormatted}`);
-      console.log(`Sport Match: ${sportMatch}`);
-      console.log(`Level Match: ${levelMatch}`);
-      console.log(`Date Match: ${dateMatch}`);
-
       return sportMatch && levelMatch && dateMatch;
     }
     return false;

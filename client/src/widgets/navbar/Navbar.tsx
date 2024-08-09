@@ -4,8 +4,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Group, Button, Text } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret';
-
 import { logout } from '../../entities/user/authSlice';
 import type { RootState } from '../../app/provider/store/store';
 import { useAppDispatch } from '../../app/provider/store/store';

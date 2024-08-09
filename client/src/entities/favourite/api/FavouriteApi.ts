@@ -1,16 +1,16 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import axiosInstance from '../../../services/axiosInstance';
 import { Favourite, FavouriteId } from '../type/FavouriteType';
-import { Arena } from '../../arena/types/ArenaType';
+import { ArenaWithMetroStation } from '../../arena/types/ArenaType';
 
 class FavouriteApi {
-  static getAllFavouriteArenas = async (): Promise<Arena[] | undefined> => {
-    const response: AxiosResponse<{ message: string; favouriteArenas: Arena[] }> =
+  static getAllFavouriteArenas = async (): Promise<ArenaWithMetroStation[]> => {
+    const response: AxiosResponse<{ message: string; favouriteArenas: ArenaWithMetroStation[] }> =
       await axiosInstance.get('/favouriteArenas');
     return response.data.favouriteArenas;
   };
 
-  static addFavourite = async (data: { arenaId: number }): Promise<Favourite | undefined> => {
+  static addFavourite = async (data: { arenaId: number }): Promise<Favourite> => {
     const response: AxiosResponse<{ message: string; favourite: Favourite }> =
       await axiosInstance.post('/favourites', data);
     return response.data.favourite;

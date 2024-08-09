@@ -1,84 +1,61 @@
 import React from 'react';
 import { AddCircleHalfDotIcon } from 'hugeicons-react';
 import { useModals } from '@mantine/modals';
-
 import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
 import DateAddForm from '../../../../../entities/date/ui/DateAddForm';
-import { useAppDispatch } from '../../../../../app/provider/store/store';
-import { removeArena } from '../../../../../entities/arena/ArenaSlice';
 import './AdminsArenasItem.css';
+import { DateId, DateWithArenas } from '../../../../../entities/date/types/dateType';
+import { useAppDispatch, useAppSelector } from '../../../../../app/provider/store/store';
+import { deleteDate } from '../../../../../entities/date/DateSlice';
 
 type ArenaItemProps = {
   arena: ArenaWithMetroStation;
+  dates: DateWithArenas[];
 };
 
 function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
-  const modals = useModals();
-
-  // Ensure arena.MetroStation is defined and has a title property
-  const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
-  const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
-  const [calendarVisible, setCalendarVisible] = useState(false);
   const dispatch = useAppDispatch();
-
-        
+  const modals = useModals();
+  const metro = arena.MetroStation ? arena.MetroStation.title : 'Нет информации о метро';
   const openDateAddFormModal = () => {
     modals.openModal({
       title: 'Добавить дату события',
-      children: (
-        <DateAddForm
-          arenaId={arena.id}
-          onClose={() => modals.closeAll()} // Закрытие модального окна после добавления
-        />
-      ),
+      children: <DateAddForm arenaId={arena.id} onClose={() => modals.closeAll()} />,
     });
   };
-
-
-  const handleDelete = (): void => {
-    void dispatch(removeArena(arena.id));
+  const dates = useAppSelector((store) => store.date.date);
+  const arenaDates = dates.filter((date) => date.Arenas.map((ar) => ar.id).includes(arena.id));
+  const handleDelete = (dateId: DateId): void => {
+    dispatch(deleteDate(dateId));
   };
-
-  const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
-  const dates = Array.isArray(arena.Dates) ? arena.Dates : [];
 
   return (
     <div className="arena-card">
       <div className="arena-card-header">
         <h2 className="arena-title">{arena.title}</h2>
-        <button className="delete-button" onClick={handleDelete}>
-          Удалить
-        </button>
       </div>
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
-          {dates.length > 0 ? (
-            dates.map((date) => (
-              <span key={date.id} className="arena-date">
-                {new Date(date.startDate).toLocaleTimeString()} -{' '}
-                {new Date(date.endDate).toLocaleTimeString()}
-              </span>
+          {arenaDates.length > 0 &&
+            arenaDates.map((date) => (
+              <div key={date.id}>
+                <span className="arena-date">
+                  {new Date(date.startDate).toLocaleString()} -{' '}
+                  {new Date(date.endDate).toLocaleString()}
+                </span>
+                <button onClick={() => handleDelete(date?.id)}>x</button>
+              </div>
             ))}
           <AddCircleHalfDotIcon onClick={openDateAddFormModal} />
-            ))
-          ) : (
-            <span className="no-dates">Нет доступных дат</span>
-          )}
-          <AddCircleHalfDotIcon
-            onClick={() => setCalendarVisible((prev) => !prev)}
-            className="add-date-icon"
-          />
         </div>
         <div className="arena-address">
           <span>{`адрес: г. ${arena.city}, ул. ${arena.street}, ${arena.building}`}</span>
         </div>
         <div className="arena-metro">
-          <span>{`станция метро: ${metroTitle}`}</span>
+          <span>{`станция метро: ${metro}`}</span>
         </div>
       </div>
-      {calendarVisible && <DateAddForm arenaId={arena.id} />}
-
     </div>
   );
 }

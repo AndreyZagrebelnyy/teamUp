@@ -33,7 +33,7 @@ function ArenasPage(): JSX.Element {
     }
   }, []);
 
-  const handlePlacemarkClick = (coords: [number, number]) => {
+  const handlePlacemarkClick = (coords: [number, number]): void => {
     setRouteEnd(coords);
   };
 
@@ -92,7 +92,7 @@ function ArenasPage(): JSX.Element {
           <ArenaItem
             arena={arena}
             key={arena.id}
-            onClick={() => handlePlacemarkClick([arena.coordX, arena.coordY])}
+            onClick = {() => handlePlacemarkClick([arena.coordX, arena.coordY])}
           />
         ))}
 
