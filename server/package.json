@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	 "dbr": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-	 "dev": "nodemon app.js"
+    "dbr": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
+    "createDB": "npx sequelize db:create",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,8 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",

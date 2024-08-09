@@ -1,0 +1,85 @@
+/* ArenaItem.css */
+
+.arena-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 500px;
+  max-width: 700px; /* Установите фиксированную максимальную ширину карточки */
+  box-sizing: border-box; /* Чтобы padding и border не увеличивали ширину карточки */
+  overflow: hidden; /* Для предотвращения переполнения содержимого */
+  text-align: center; /* Выравнивание текста по центру */
+  color: black;
+}
+
+.mySwiper {
+  width: 100%;
+  height: 300px; /* Установите фиксированную высоту для Swiper */
+  overflow: hidden;
+}
+
+.mySwiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Для сохранения пропорций изображения */
+  display: block; /* Удаляет отступы вокруг изображения */
+  border-radius: 10px;
+}
+
+.arena-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.arena-title {
+  font-size: 1.5em;
+  margin-top: 16px;
+}
+
+.arena-description,
+.arena-address,
+.arena-coordinates,
+.arena-metro,
+.arena-dates {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.arena-date {
+  margin-top: 8px; /* Добавить небольшой отступ сверху */
+}
+
+.arena-card-footer {
+  display: flex;
+  justify-content: center; /* Выравнивание по центру */
+  align-items: center;
+  margin-top: 16px;
+}
+
+.arena-favourite-btn {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.arena-favourite-btn:hover {
+  background-color: #0056b3;
+}
+
+.arena-favourite-btn:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}

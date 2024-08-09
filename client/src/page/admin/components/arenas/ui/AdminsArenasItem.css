@@ -1,0 +1,69 @@
+.arena-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.arena-card-header {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arena-title {
+  padding: 10px;
+  font-size: 18px;
+  margin: 0;
+}
+
+.delete-btn {
+  background-color: #e85a4f;
+  color: white;
+}
+
+.arena-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.arena-description {
+  margin-bottom: 16px;
+}
+
+.arena-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delete-date-icon {
+  cursor: pointer;
+  color: #e85a4f;
+}
+
+.add-date-icon {
+  cursor: pointer;
+  color: #4a90e2;
+  margin-top: 16px;
+}
+
+.arena-address,
+.arena-metro {
+  margin-top: 8px;
+}
+
+.no-dates {
+  font-style: italic;
+  color: #8e8d8a;
+}
