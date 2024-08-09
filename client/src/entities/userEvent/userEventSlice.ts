@@ -50,7 +50,6 @@ export const userEventSlice = createSlice({
       .addCase(addUserEvent.fulfilled, (state, action) => {
         state.isLoading = false;
         console.log(action.payload);
-
         state.userEvent.push(action.payload);
       })
       .addCase(addUserEvent.rejected, (state, action) => {

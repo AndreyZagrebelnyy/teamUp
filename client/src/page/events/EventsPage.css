@@ -1,12 +1,42 @@
-.filter-form {
+/* EventsPage.css */
+
+.filter-sidebar {
   display: flex;
-  justify-content: center;
   gap: 20px;
-  margin: 20px 0;
-  padding: 10px;
+  padding: 20px;
+
+}
+
+.sidebar {
+  flex: 1;
+  max-width: 400px;
   background-color: #f8f9fa;
   border-radius: 8px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 30px;
+  background-color: #e9e6e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .filter-form select,
@@ -29,24 +59,28 @@
   background-color: #0056b3;
 }
 
-.events-page {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
+.date-picker-container {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: start; /* Лучше align-items: start, чтобы все блоки начинались сверху */
-  margin: 0 auto;
-  width: 100%; /* Убедитесь, что контейнер занимает всю ширину */
-  max-width: 1200px; /* Можно задать максимальную ширину для ограничения */
-  padding: 16px; /* Добавим отступы */
+  gap: 10px;
+}
+
+.date-picker-container button {
+  background-color: #66a5e8;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.date-picker-container button:hover {
+  background-color: #0056b3;
 }
 
 
-
-.mantine-DatePicker {
-  width: 100%;
-  max-width: 300px; /* Можно изменить в зависимости от дизайна */
-}
 
 .mantine-DatePicker-input {
   width: 100%;
@@ -67,27 +101,6 @@
 }
 
 .mantine-DatePicker-day-active {
-  background-color: #ff6a00;
-  color: white;
+  background-color: #dd630b;
+  color: #f20c0c;
 }
-
-.date-picker-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.date-picker-container button {
-  background-color: #66a5e8;
-  border: none;
-  color: white;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.date-picker-container button:hover {
-  background-color: #0056b3;
-}
-

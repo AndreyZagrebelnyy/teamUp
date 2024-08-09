@@ -35,7 +35,14 @@ function MainPage(): JSX.Element {
     })
     .slice(0, 3); // Ограничение до 5 ближайших событий
 
-  console.log(upcomingEvents);
+    const handleAddToEvent = async () => {
+      try {
+        await dispatch(addUserEvent(event.id));
+        onHandleAddToEvent(event.id); // Обновление состояния в родительском компоненте
+      } catch (error) {
+        console.error('Ошибка добавления пользователя на событие:', error);
+      }
+    };
   return (
     <div className="main-page">
       {/* <img src="all-games.png" className="all-games-img" alt="" /> */}
@@ -53,7 +60,7 @@ function MainPage(): JSX.Element {
           <h1>Ближайшие события</h1>
           <div className="event-item-container">
             {upcomingEvents.map((event) => (
-              <EventItem key={event.id} event={event} />
+              <EventItem key={event.id} event={event} handleAddToEvent={handleAddToEvent} />
             ))}
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { DatePicker } from '@mantine/dates'; // Импортируем DatePicker
-import { Button, Modal, Text } from '@mantine/core';
+import { Button, Modal, Text, Select } from '@mantine/core'; // Импортируем Select из Mantine
 import { showNotification } from '@mantine/notifications';
 import { useAppDispatch, useAppSelector } from '../../app/provider/store/store';
 import EventItem from '../../entities/event/ui/EventItem';
@@ -20,16 +20,16 @@ function EventsPage(): JSX.Element {
   const profiles = useAppSelector((store) => store.profile.profiles);
   const user = useAppSelector((store) => store.auth.user);
 
-  const [selectedSport, setSelectedSport] = useState<string>('');
-  const [selectedLevel, setSelectedLevel] = useState<string>('');
+  const [selectedSport, setSelectedSport] = useState<string | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [date, setDate] = useState<Date | null>(null);
 
-  const handleSportChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSport(e.target.value);
+  const handleSportChange = (value: string | null) => {
+    setSelectedSport(value);
   };
 
-  const handleLevelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLevel(e.target.value);
+  const handleLevelChange = (value: string | null) => {
+    setSelectedLevel(value);
   };
 
   const handleDateChange = (newDate: Date | null) => {
@@ -77,8 +77,9 @@ function EventsPage(): JSX.Element {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [currentEventId, setCurrentEventId] = useState<number | null>(null);
+  const [modalMessage, setModalMessage] = useState('');
 
-  const onHandleAddToEvent = (eventId) => {
+  const onHandleAddToEvent = (eventId: number) => {
     if (!user) return;
     const event = events.find((el) => el.id === eventId);
     const userProfile = profiles.find((profile) => profile.userId === user.id);
@@ -117,55 +118,56 @@ function EventsPage(): JSX.Element {
   }, [location.search, usersEvents]);
 
   return (
-    <div>
+    <div className='filter-sidebar'>
       <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Информация">
-        <Text>Вы уверены, что хотите записаться на это событие?</Text>
+        <Text>{modalMessage || 'Вы уверены, что хотите записаться на это событие?'}</Text>
         <Button onClick={add}>Да</Button>
         <Button onClick={() => setModalOpen(false)}>Нет</Button>
       </Modal>
-      <div className="filter-form">
-        <select value={selectedSport} onChange={handleSportChange}>
-          <option value="">Все виды спорта</option>
-          {sports.map((sport) => (
-            <option key={sport.id} value={sport.id}>
-              {sport.title}
-            </option>
-          ))}
-        </select>
-        <select value={selectedLevel} onChange={handleLevelChange}>
-          <option value="">Все уровни</option>
-          {levels.map((level) => (
-            <option key={level.id} value={level.id}>
-              {level.title}
-            </option>
-          ))}
-        </select>
-        <div className="date-picker-container">
-          <button type="button" onClick={decrementDate}>
-            ←
-          </button>
-          <DatePicker
-            value={date}
-            onChange={handleDateChange}
-            defaultValue={new Date()}
-            className="mantine-DatePicker" // Применение кастомного класса
+      <div className="sidebar">
+        <div className="filter-form">
+          <Select
+            label="Вид спорта"
+            placeholder="Выберите вид спорта"
+            value={selectedSport}
+            onChange={handleSportChange}
+            data={sports.map((sport) => ({ value: sport.id.toString(), label: sport.title }))}
+
           />
-          <button type="button" onClick={incrementDate}>
-            →
-          </button>
+          <Select
+            label="Уровень"
+            placeholder="Выберите уровень"
+            value={selectedLevel}
+            onChange={handleLevelChange}
+            data={levels.map((level) => ({ value: level.id.toString(), label: level.title }))}
+
+          />
+          <div className="date-picker-container">
+            <button type="button" onClick={decrementDate}>
+              ←
+            </button>
+            <DatePicker
+              value={date}
+              onChange={handleDateChange}
+              defaultValue={new Date()}
+              className="mantine-DatePicker" // Применение кастомного класса
+            />
+            <button type="button" onClick={incrementDate}>
+              →
+            </button>
+          </div>
+          <Button
+            onClick={() => {
+              setSelectedSport(null);
+              setSelectedLevel(null);
+              setDate(null);
+            }}
+          >
+            Сбросить
+          </Button>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            setSelectedSport('');
-            setSelectedLevel('');
-            setDate(null);
-          }}
-        >
-          Сбросить
-        </button>
       </div>
-      <div className="events-page">
+      <div className="main-content">
         {filteredUserEvents &&
           filteredUserEvents.map((event) => (
             <EventItem key={event.id} event={event} onHandleAddToEvent={onHandleAddToEvent} />

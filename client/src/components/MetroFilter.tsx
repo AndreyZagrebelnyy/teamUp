@@ -13,10 +13,14 @@ function MetroFilter({
   onSelectStation,
 }: MetroFilterProps): JSX.Element {
   // Создаем массив опций для Select
-  const options = stations.map((station) => ({
-    value: station,
-    label: station,
-  }));
+  const options = stations
+    .filter((el) => el !== undefined)
+    .map((station) => ({
+      value: station,
+      label: station,
+    }));
+
+  console.log(stations, selectedStation, onSelectStation, options);
 
   return (
     <div className="metro-filter">
@@ -32,12 +36,12 @@ function MetroFilter({
           const { value, label, ...rest } = props;
           // Возвращаем элемент списка с цветной точкой
           return (
-            <div {...rest} style={{ display: 'flex', alignItems: 'center' }}>
+            <div {...rest} style={{ display: 'flex', alignItems: 'center'}}>
               <span
                 style={{
                   display: 'inline-block',
-                  width: '12px',
-                  height: '12px',
+                  width: '15px',
+                  height: '15px',
                   backgroundColor: '#00A0E3', // Пример цвета линии метро
                   borderRadius: '50%',
                   marginRight: '8px',
