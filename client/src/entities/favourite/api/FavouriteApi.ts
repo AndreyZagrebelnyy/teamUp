@@ -4,7 +4,6 @@ import type { Arena } from '../../arena/types/ArenaType';
 import axiosInstance from '../../../services/axiosInstance';
 import { Favourite, FavouriteId } from '../type/FavouriteType';
 import { ArenaWithMetroStation } from '../../arena/types/ArenaType';
-=======
 
 
 class FavouriteApi {

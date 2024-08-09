@@ -10,17 +10,7 @@ import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
 import EventItem from '../../entities/event/ui/EventItem';
 
-const Button = styled.button`
-  padding: 10px 15px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
 
-  &:hover {
-    background-color: #45a049;
-  }
-`;
 import { logout } from '../../entities/user/authSlice';
 function ProfilePage(): JSX.Element {
   const dispatch = useDispatch();
