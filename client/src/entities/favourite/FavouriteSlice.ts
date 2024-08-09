@@ -5,7 +5,7 @@ import { Favourite } from './type/FavouriteType';
 
 type FavouriteState = {
   favourites: Favourite[];
-  favouriteArenas: ArenaWithMetroStation[] | undefined;
+  favouriteArenas: ArenaWithMetroStation[];
   errors: string | undefined;
 };
 

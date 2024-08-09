@@ -41,7 +41,7 @@ function ArenasPage(): JSX.Element {
     void dispatch(getAllArenas());
   }, []);
 
-  const handlePlacemarkClick = (coords: [number, number]) => {
+  const handlePlacemarkClick = (coords: [number, number]): void => {
     setRouteEnd(coords);
   };
 
@@ -140,8 +140,13 @@ function ArenasPage(): JSX.Element {
         </YMaps>
       )}
       <div className="arena-list">
-        {filteredArenas.map((arena) => (
-          <ArenaItem key={arena.id} arena={arena} />
+        {filteredArenas?.map((arena: ArenaWithMetroStation) => (
+          <ArenaItem
+            arena={arena}
+            key={arena.id}
+            onClick = {() => handlePlacemarkClick([arena.coordX, arena.coordY])}
+          />
+
         ))}
       </div>
       {errors && <span className="error-message">{errors}</span>}

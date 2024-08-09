@@ -20,7 +20,7 @@ const store = configureStore({
     arenas: arenasSlice.reducer,
     favouriteArenas: favouriteSlice.reducer,
     sports: sportSlice.reducer,
-    dates: dateSlice.reducer,
+    date: dateSlice.reducer,
     metro: metroSlice.reducer,
     level: levelSlice.reducer,
     profile: profileSlice.reducer,

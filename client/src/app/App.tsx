@@ -16,7 +16,7 @@ import { getFavouriteArenas } from '../entities/favourite/FavouriteSlice';
 import ErrorBoundary from './ErrorrBoundary';
 import { getAllUserEvents } from '../entities/userEvent/userEventSlice';
 import './App.css';
-
+import { getAllDates } from '../entities/date/DateSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,6 +25,7 @@ function App(): JSX.Element {
     console.log(777);
     
     void dispatch(getAllArenas());
+    void dispatch(getAllDates());
     void dispatch(getFavouriteArenas());
     void dispatch(getAllEvents());
     void dispatch(tokensRefresh());

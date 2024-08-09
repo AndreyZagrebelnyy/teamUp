@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Group, Button, Text, Avatar } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-
 import { IconBrandTelegram } from '@tabler/icons-react';
 import { logout } from '../../entities/user/authSlice';
 import type { RootState } from '../../app/provider/store/store';

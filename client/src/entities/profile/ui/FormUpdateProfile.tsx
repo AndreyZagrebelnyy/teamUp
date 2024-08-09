@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../../app/provider/store/stor
 import { updateProfile } from '../profileSlice';
 import type { Profile } from '../types/ProfileType';
 
-
 const FormContainer = styled.form`
   display: flex;
   justify-content: center;
@@ -34,7 +33,7 @@ const ImagePreview = styled.img`
 
 const UploadButton = styled.button`
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -61,7 +60,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -70,7 +69,6 @@ const Button = styled.button`
     background-color: #45a049;
   }
 `;
-
 
 const schemaProfile = yup
   .object()
@@ -110,13 +108,20 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
     firstName: string;
     lastName: string;
     telegram: string;
-    image: string;
+    image?: string;
   }): void => {
     if (!userId) {
       console.error('User ID is not available');
       return;
     }
-    void dispatch(updateProfile({ ...data, id: profile.id,  userId }));
+
+    const updatedData = {
+      ...data,
+      id: profile.id,
+      userId,
+      image: data.image || '',
+    };
+    void dispatch(updateProfile(updatedData));
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -126,7 +131,6 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
         setValue('image', `/profilePhoto/${file.name}`);
-       
       };
       reader.readAsDataURL(file);
 
@@ -153,7 +157,10 @@ function FormUpdateProfile({ profile }: FormUpdateProfileProps): JSX.Element {
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <FormImage>
         <ImagePreview src={imagePreview} alt="Profile Preview" />
-        <UploadButton type="button" onClick={(): void => document.getElementById('imageUpload').click()}>
+        <UploadButton
+          type="button"
+          onClick={(): void => document.getElementById('imageUpload')?.click()}
+        >
           Загрузить фото
         </UploadButton>
         <input

@@ -26,8 +26,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const [images, setImages] = useState<string[]>([]);
   const events = useAppSelector((store) => store.events.events || []);
   const { user } = useAppSelector((store) => store.auth);
-
-  // Обновление доступных дат при изменении событий
+  
   useEffect(() => {
     if (events && arena.Dates) {
       const busyDates = new Set(
@@ -77,6 +76,14 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     setModalOpen(true);
   };
 
+  const carouselImages = arena.title
+    ? [
+        `/foto/${arena.title}/arena1.jpg`,
+        `/foto/${arena.title}/arena2.jpg`,
+        `/foto/${arena.title}/arena3.jpg`,
+      ]
+    : [];
+
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -117,7 +124,6 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           {arena.MetroStation && (
             <p className="arena-metro">Metro Station: {arena.MetroStation.title}</p>
         <h2 className="arena-title">{arena.title}</h2>
-            
       </div>
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>

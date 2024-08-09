@@ -30,7 +30,7 @@ const arenasSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllArenas.fulfilled, (state, action) => {
+      .addCase(getAllArenas.fulfilled, (state, action) => {			
         state.arenas = action.payload;
       })
       .addCase(addArena.fulfilled, (state, action) => {
