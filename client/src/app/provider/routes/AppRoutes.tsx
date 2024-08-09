@@ -9,8 +9,6 @@ import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 
 
-
-
 function AppRoutes(): JSX.Element {
   return (
     <div className="AppRoutes">

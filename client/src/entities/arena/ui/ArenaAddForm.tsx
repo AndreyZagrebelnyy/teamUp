@@ -2,32 +2,28 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import type { ArenaWithoutIdAndCreatorId } from '../types/ArenaType';
 import { addArena } from '../ArenaSlice';
 import { useAppDispatch } from '../../../app/provider/store/store';
 import './ArenaAddForm.css';
-import { MetroStation } from '../../metroStation/types/MetroStationType';
+import type { MetroStation } from '../../metroStation/types/MetroStationType';
 
 type Inputs = ArenaWithoutIdAndCreatorId;
 
-const schema = yup
-  .object()
-  .shape({
-    title: yup.string().required('Название арены обязательно для заполнения'),
-    description: yup.string().required('Описание арены обязательно для заполнения'),
-    country: yup.string().required('Страна обязательна для заполнения'),
-    city: yup.string().required('Город обязателен для заполнения'),
-    street: yup.string().required('Улица/проспект/переулок обязательна для заполнения'),
-    building: yup.string().required('Здание/строение/корпус обязательно для заполнения'),
-    coordX: yup.number().required('Координата X обязательна для заполнения'),
-    coordY: yup.number().required('Координата Y обязательна для заполнения'),
-    metroStationId: yup.number().required('Станция метро обязательна для заполнения'),
-  })
-  .required();
+const schema = yup.object().shape({
+  title: yup.string().required('Название арены обязательно для заполнения'),
+  description: yup.string().required('Описание арены обязательно для заполнения'),
+  country: yup.string().required('Страна обязательна для заполнения'),
+  city: yup.string().required('Город обязателен для заполнения'),
+  street: yup.string().required('Улица/проспект/переулок обязательна для заполнения'),
+  building: yup.string().required('Здание/строение/корпус обязательно для заполнения'),
+  coordX: yup.number().required('Координата X обязательна для заполнения'),
+  coordY: yup.number().required('Координата Y обязательна для заполнения'),
+  metroStationId: yup.number().required('Станция метро обязательна для заполнения'),
+}).required();
 
 type ArenaAddFormProps = {
   closeModal: () => void;
-  metro: MetroStation[]
+  metro: MetroStation[];
 };
 
 function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
@@ -38,10 +34,10 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Inputs>({
-
+  } = useForm({
     resolver: yupResolver(schema),
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
@@ -61,7 +57,7 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
 
     if (selectedFiles) {
       Array.from(selectedFiles).forEach((file) => {
-        formData.append('images', file); // Используем имя поля 'images' для загрузки нескольких файлов
+        formData.append('images', file);
       });
     }
 
@@ -137,14 +133,14 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
       </div>
 
       <div>
-        <select>
+        <label>Станция метро:</label>
+        <select {...register('metroStationId')}>
           {metro &&
-            metro.map((elMetro: MetroStation) => (
-              <option key={elMetro.id} value={elMetro.id} {...register('metroStationId')}>
+            metro.map((elMetro) => (
+              <option key={elMetro.id} value={elMetro.id}>
                 {elMetro.title}
               </option>
             ))}
-
         </select>
         {errors.metroStationId && <span className="error">{errors.metroStationId.message}</span>}
       </div>
@@ -162,4 +158,3 @@ function ArenaAddForm({ closeModal, metro }: ArenaAddFormProps): JSX.Element {
 }
 
 export default ArenaAddForm;
-

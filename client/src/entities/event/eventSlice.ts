@@ -35,9 +35,8 @@ export const eventSlice = createSlice({
         state.events = action.payload.events;
       })
       .addCase(createEvent.fulfilled, (state, action) => {
-        console.log('12312321312312312312')
+        console.log('12312321312312312312');
         state.events.push(action.payload);
-        
       });
   },
 });

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@mantine/core';
 import ProfileItem from '../../entities/profile/ui/ProfileItem';
-import { useAppSelector, type RootState } from '../../app/provider/store/store';
+import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
@@ -19,12 +21,15 @@ const Button = styled.button`
     background-color: #45a049;
   }
 `;
-
-
+import { logout } from '../../entities/user/authSlice';
 function ProfilePage(): JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onHandleLogout = (): void => {
+    void dispatch(logout());
+    navigate('/'); // Навигация после выхода
+  };
   const profiles = useSelector((state: RootState) => state.profile.profiles);
-
   useEffect(() => void dispatch(getFavouriteArenas()), [dispatch]);
  
   const favouriteArenas = useAppSelector(
@@ -34,6 +39,7 @@ function ProfilePage(): JSX.Element {
 	(store: RootState) => store.events.events,
  );
 const userEvents = events.filter((event) => event.Users.map((user) => user.id).includes(user.id))
+
 
   const user = useSelector((state: RootState) => state.auth.user);
   const [isAdding, setIsAdding] = useState(false);

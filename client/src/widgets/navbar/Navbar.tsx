@@ -1,18 +1,23 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Container, Group, Button, Text } from '@mantine/core';
+import { Container, Group, Button, Text, Avatar } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { IconBrandTelegram } from '@tabler/icons-react';
 import { logout } from '../../entities/user/authSlice';
 import type { RootState } from '../../app/provider/store/store';
-import { useAppDispatch } from '../../app/provider/store/store';
-import './Navbar.css'
+import { useAppDispatch, useAppSelector } from '../../app/provider/store/store';
+import './Navbar.css';
 
 function Navbar(): JSX.Element {
   const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
+
+  const profiles = useAppSelector((store) =>
+    store.profile.profiles.find((us) => us.userId === user?.id),
+  );
 
   const onHandleLogout = (): void => {
     void dispatch(logout());
@@ -42,14 +47,29 @@ function Navbar(): JSX.Element {
               </NavLink>
             )}
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
-              <Group align="center">
-                <FontAwesomeIcon icon={faUserCircle} size="2x" />
-                <Text weight={500}>Профиль</Text>
+              <Group align="center" className="navbar-avatar-container">
+                <Avatar src={profiles.image} alt={profiles.firstName} radius='xl' size='xl' />
+                {user && profiles ? (
+                  <div className="profile-info">
+                    <div style={{ marginLeft: 10 }}>
+                      <Text className="profile-name">{profiles.firstName}</Text>
+                      <div className="profile-telegram">
+                        <IconBrandTelegram className="telegram-icon" />
+                        <Text>{profiles.telegram}</Text>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon={faUserCircle} size="2x" />
+                    <Text weight={500}>Профиль</Text>
+                    <Button variant="outline" onClick={onHandleLogout}>
+                      <Text weight={500}>Выход</Text>
+                    </Button>
+                  </>
+                )}
               </Group>
             </NavLink>
-            <Button variant="outline" onClick={onHandleLogout}>
-              <Text weight={500}>Выход</Text>
-            </Button>
           </Group>
         ) : (
           <Group spacing="md">

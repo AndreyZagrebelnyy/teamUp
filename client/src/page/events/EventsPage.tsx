@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { DatePicker } from '@mantine/dates'; // Импортируем DatePicker
-import { useAppSelector } from '../../app/provider/store/store';
+import { Button, Modal, Text } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import { useAppDispatch, useAppSelector } from '../../app/provider/store/store';
 import EventItem from '../../entities/event/ui/EventItem';
+import { addUserEvent } from '../../entities/userEvent/userEventSlice';
+import { getAllEvents } from '../../entities/event/eventSlice';
 import './EventsPage.css';
-import '@mantine/dates/styles.css'; // Стили для DatePicker
 
 function EventsPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const usersEvents = useAppSelector((store) => store.userEvent.userEvent);
   const events = useAppSelector((store) => store.events.events);
   const sports = useAppSelector((store) => store.sports.sports);
   const levels = useAppSelector((store) => store.level.levels);
   const location = useLocation();
+  const profiles = useAppSelector((store) => store.profile.profiles);
+  const user = useAppSelector((store) => store.auth.user);
 
   const [selectedSport, setSelectedSport] = useState<string>('');
   const [selectedLevel, setSelectedLevel] = useState<string>('');
   const [date, setDate] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const sportParam = params.get('sport');
-    if (sportParam) {
-      setSelectedSport(sportParam);
-    }
-  }, [location.search]);
 
   const handleSportChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedSport(e.target.value);
@@ -75,8 +75,54 @@ function EventsPage(): JSX.Element {
     return false;
   });
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentEventId, setCurrentEventId] = useState<number | null>(null);
+
+  const onHandleAddToEvent = (eventId) => {
+    if (!user) return;
+    const event = events.find((el) => el.id === eventId);
+    const userProfile = profiles.find((profile) => profile.userId === user.id);
+
+    if (!userProfile) {
+      setModalMessage('У вас должен быть профиль для записи на событие!');
+      setModalOpen(true);
+      return;
+    }
+
+    setCurrentEventId(eventId);
+    setModalOpen(true);
+  };
+
+  const add = () => {
+    if (currentEventId !== null) {
+      void dispatch(addUserEvent({ eventId: currentEventId, userId: user.id })).then(() => {
+        showNotification({
+          title: 'Успех!',
+          message: 'Вы успешно зарегистрированы на событие',
+          color: 'green',
+          className: 'notifications-container', // Добавляем класс для позиционирования
+        });
+      });
+      setModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const sportParam = params.get('sport');
+    if (sportParam) {
+      setSelectedSport(sportParam);
+    }
+    void dispatch(getAllEvents());
+  }, [location.search, usersEvents]);
+
   return (
     <div>
+      <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Информация">
+        <Text>Вы уверены, что хотите записаться на это событие?</Text>
+        <Button onClick={add}>Да</Button>
+        <Button onClick={() => setModalOpen(false)}>Нет</Button>
+      </Modal>
       <div className="filter-form">
         <select value={selectedSport} onChange={handleSportChange}>
           <option value="">Все виды спорта</option>
@@ -121,7 +167,9 @@ function EventsPage(): JSX.Element {
       </div>
       <div className="events-page">
         {filteredUserEvents &&
-          filteredUserEvents.map((event) => <EventItem key={event.id} event={event} />)}
+          filteredUserEvents.map((event) => (
+            <EventItem key={event.id} event={event} onHandleAddToEvent={onHandleAddToEvent} />
+          ))}
       </div>
     </div>
   );

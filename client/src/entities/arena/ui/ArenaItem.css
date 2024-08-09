@@ -1,74 +1,70 @@
-/* ArenaItem.css */
-
-/* Основные стили для карточки арены */
-.arena-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.5rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  position: relative;
+/* Основные стили для страницы и фильтра */
+.ArenasPage {
   display: flex;
   flex-direction: column;
-  height: 600px; /* Фиксированная высота карточки */
-  width: 300px; /* Фиксированная ширина карточки */
-  overflow: hidden; /* Скрываем часть содержимого, если оно выходит за границы */
+  margin: 0 auto;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
 }
 
-.arena-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transform: translateY(-5px);
+.metro-filter {
+  margin-bottom: 16px;
+}
+
+/* Список арен и карточка */
+.arena-list {
+  padding: 50px 50px 0px 50px;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(700px, 1fr)
+  ); /* Минимальная ширина увеличена до 700px */
+  gap: 60px;
+}
+
+.arena-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%; /* Полная ширина в пределах элемента сетки */
+  max-width: 900px; /* Максимальная ширина для контроля размера изображения */
+  max-height: 1600px;
+  display: flex;
 }
 
 .arena-card-header {
-
-  margin-bottom: 4rem;
-  position: relative;
-  overflow: hidden; /* Скрываем выходящее за пределы изображение */
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.arena-card-header img {
-
-height: 400px;
-  object-fit: cover; /* Изображение будет обрезано и заполнит область */
-  border-radius: 10px;
-}
+/* .arena-card-header img {
+  width: 100%; 
+  height: 600px; 
+  object-fit: cover;
+  border-radius: 8px;
+} */
 
 .arena-title {
-  font-size: 1.5rem; /* Уменьшил размер шрифта для лучшего вписывания в карточку */
-  font-weight: bold;
-  color: #333;
-  margin: 0;
+  font-size: 1.5em;
+  margin-top: 16px; /* Добавлен отступ для отделения от изображения */
 }
 
-.arena-description {
-  margin-bottom: 1rem;
-  color: #666;
-  font-size: 0.875rem; /* Уменьшил размер шрифта для лучшего вписывания в карточку */
-}
-
-.arena-dates {
-  margin-bottom: 1rem;
-  flex-grow: 1; /* Позволяет занять свободное пространство */
-  font-size: 0.875rem; /* Уменьшил размер шрифта для лучшего вписывания в карточку */
+.arena-description,
+.arena-dates,
+.arena-address,
+.arena-metro {
+  margin: 10px 0;
+  font-size: 1rem;
 }
 
 .arena-date {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #007bff;
 }
 
-.arena-address,
-.arena-metro {
-  margin-bottom: 1rem;
-  color: #555;
-  font-size: 0.875rem; /* Уменьшил размер шрифта для лучшего вписывания в карточку */
-}
-
+/* Стили кнопки */
 button {
   background-color: #007bff;
   border: none;
@@ -76,7 +72,7 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
@@ -84,7 +80,26 @@ button:hover {
   background-color: #0056b3;
 }
 
-button:disabled {
-  background-color: #b0b0b0;
-  cursor: not-allowed;
+.swiper {
+  width: 100%;
+  height: 100%;
+  height: 2000px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  height: 600px;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  /* display: block; */
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
 }
