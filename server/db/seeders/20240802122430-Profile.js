@@ -16,51 +16,83 @@ module.exports = {
         },
         {
           userId: 2,
-          firstName: "Jane",
-          lastName: "Doe",
-          telegram: "@janedoe",
+          firstName: "Андрей",
+          lastName: "Капралов",
+          telegram: "@andreevTelegram",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/andr2.png",
         },
         {
           userId: 3,
-          firstName: "Alice",
-          lastName: "Smith",
-          telegram: "@alicesmith",
+          firstName: "Владислав",
+          lastName: "Пономаренко",
+          telegram: "@telegaVlada",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/vlad.png",
         },
         {
           userId: 4,
-          firstName: "Bob",
-          lastName: "Johnson",
-          telegram: "@bobjohnson",
+          firstName: "Вячеслав",
+          lastName: "Гончар",
+          telegram: "@telegaSlavi",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/slava.png",
         },
         {
           userId: 5,
-          firstName: "Charlie",
-          lastName: "Brown",
-          telegram: "@charliebrown",
+          firstName: "Евстафий",
+          lastName: "Лефтеряди",
+          telegram: "@stashikaTelega",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/stashik.png",
         },
         {
           userId: 6,
-          firstName: "David",
-          lastName: "Wilson",
-          telegram: "@davidwilson",
+          firstName: "Евгений",
+          lastName: "Пигорев",
+          telegram: "@geninaTelega",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/genya.jpeg",
         },
         {
           userId: 7,
-          firstName: "Eve",
-          lastName: "Davis",
-          telegram: "@evedavis",
+          firstName: "Андрей",
+          lastName: "Бережков",
+          telegram: "@simpsonsTelega",
           image:
-            "../../../../client/public/profilePhoto/default-prodile-photo.avif",
+            "../../../../client/public/profilePhoto/andreypr.jpeg",
+        },
+        {
+          userId: 8,
+          firstName: "Андрей",
+          lastName: "Загребельный",
+          telegram: "@andreinTelegram",
+          image:
+            "../../../../client/public/adnr1.jpeg",
+        },
+        {
+          userId: 9,
+          firstName: "Пага",
+          lastName: "Аверин",
+          telegram: "@paginTelegram",
+          image:
+            "../../../../client/public/profilePhoto/paga.jpeg",
+        },
+        {
+          userId: 10,
+          firstName: "Олег",
+          lastName: "Дьяконов",
+          telegram: "@olegonaTelegram",
+          image:
+            "../../../../client/public/profilePhoto/oleg.jpeg",
+        },
+        {
+          userId: 11,
+          firstName: "Никита",
+          lastName: "Щитов",
+          telegram: "@nikitinTelegram",
+          image:
+            "../../../../client/public/profilePhoto/nik.jpeg",
         },
       ],
       {}
