@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Avatar, Button, Group, Text, Card, Paper } from '@mantine/core';
-import { Settings02Icon } from 'hugeicons-react'; // Импортируем нужную иконку
+import { Avatar, Button, Group, Text, Card, Box, Stack, Paper } from '@mantine/core';
+import { Settings02Icon } from 'hugeicons-react';
 import { useNavigate } from 'react-router-dom';
 import type { User } from '../../user/types/userType';
 import { removeProfile } from '../profileSlice';
@@ -19,9 +19,14 @@ function ProfileItem({ profile, user }: ProfileItemProps): JSX.Element {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleClose = () => {
+    setIsEditing(false); // Закрытие формы
+  };
+
   const onHandleLogout = (): void => {
     void dispatch(logout());
-    navigate('/'); // Навигация после выхода
+    navigate('/');
   };
 
   const onHandleDelete = (): void => {
@@ -31,69 +36,53 @@ function ProfileItem({ profile, user }: ProfileItemProps): JSX.Element {
   return (
     <div>
       <Card
-        padding="lg"
-        shadow="sm"
+        padding="xl"
+        shadow="md"
+        radius="md"
         style={{
-          display: 'flex',
-          flexDirection: 'column',
           position: 'relative',
-          minHeight: '200px',
+          backgroundColor: '#fff',
         }}
       >
-        <Avatar src={profile.image} alt="Profile" radius='xl' size="lg" />
-        <div style={{ marginTop: 16 }}>
+        <Box style={{ position: 'absolute', top: 16, right: 16 }}>
+          <Settings02Icon
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            size={24}
+            style={{ cursor: 'pointer' }}
+          />
+        </Box>
+        <Stack align="center">
+          <Avatar src={profile.image} alt="Profile" radius="xl" size="xl" />
           <Text weight={500} size="xl">
             {profile.firstName} {profile.lastName}
           </Text>
-          <Text color="gray" size="sm">
+          <Text color="dimmed" size="sm">
             Telegram: {profile.telegram}
           </Text>
-          <Text color="gray" size="sm">
-            Email: {profile.telegram}
+          <Text color="dimmed" size="sm">
+            Email: {user.email}
           </Text>
-        </div>
-
-        {user && user.id === profile.userId && (
-          <>
-            <div
-              style={{
-                position: 'absolute',
-                top: 8,
-                right: 8,
-                cursor: 'pointer',
-              }}
-            >
-              <Settings02Icon onClick={() => setIsMenuOpen(!isMenuOpen)} size={24} />
-            </div>
-            {isMenuOpen && (
-              <Group
-                spacing="xs"
-                style={{
-                  marginTop: 'auto',
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  marginTop: 16,
-                }}
-              >
-                <Button onClick={onHandleDelete} color="red">
-                  Удалить
-                </Button>
-                <Button onClick={() => setIsEditing(!isEditing)}>
-                  {isEditing ? 'Отмена' : 'Редактировать'}
-                </Button>
-                <Button onClick={() => onHandleLogout()}>Выход</Button>
-              </Group>
-            )}
-          </>
-        )}
+          {user && user.id === profile.userId && (
+            <Box mt="md" style={{ width: '100%' }}>
+              {isMenuOpen && (
+                <Group position="right" mt="sm">
+                  <Button onClick={onHandleDelete} color="red">
+                    Удалить
+                  </Button>
+                  <Button onClick={() => setIsEditing(!isEditing)}>
+                    {isEditing ? 'Отмена' : 'Редактировать'}
+                  </Button>
+                  <Button onClick={onHandleLogout}>Выход</Button>
+                </Group>
+              )}
+            </Box>
+          )}
+        </Stack>
       </Card>
 
       {isEditing && (
-        <Paper padding="lg" shadow="sm" style={{ marginTop: 16 }}>
-          <FormUpdateProfile profile={profile} />
-          <Button onClick={() => setIsEditing(false)} style={{ marginTop: '1rem' }}>
-            Закрыть
-          </Button>
+        <Paper padding="lg" shadow="sm" radius="md" mt="md">
+          <FormUpdateProfile profile={profile} handleClose={handleClose} />
         </Paper>
       )}
     </div>

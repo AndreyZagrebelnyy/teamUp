@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Button } from '@mantine/core';
+import { useModals } from '@mantine/modals';
+import { notifications } from '@mantine/notifications';
 import { AddCircleHalfDotIcon, Delete01Icon } from 'hugeicons-react'; // Обновите иконку для удаления
+import { useAppDispatch, useAppSelector } from '../../../../../app/provider/store/store';
+import React, { useState } from 'react';
 import { useModals } from '@mantine/modals';
 import { removeArena } from '../../../../../entities/arena/ArenaSlice';
-import type { ArenaWithMetroStation } from '../../../../../entities/arena/types/ArenaType';
 import DateAddForm from '../../../../../entities/date/ui/DateAddForm';
-import './AdminsArenasItem.css';
-import { DateId, DateWithArenas } from '../../../../../entities/date/types/dateType';
-import { useAppDispatch, useAppSelector } from '../../../../../app/provider/store/store';
+import type { DateId, DateWithArenas } from '../../../../../entities/date/types/dateType';
 import { deleteDate } from '../../../../../entities/date/DateSlice';
+import './AdminsArenasItem.css'; // Обновите стили в этом файле
 
 type ArenaItemProps = {
   arena: ArenaWithMetroStation;
@@ -18,8 +21,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
 	const dispatch = useAppDispatch();
   const dates = useAppSelector((store) => store.date.date);
   const modals = useModals();
-
-  const [calendarVisible, setCalendarVisible] = useState(false);
   const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
   const openDateAddFormModal = () => {
     modals.openModal({
@@ -27,41 +28,78 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
       children: <DateAddForm arenaId={arena.id} onClose={() => modals.closeAll()} />,
     });
   };
+  const dates = useAppSelector((store) => store.date.date);
   const arenaDates = dates.filter((date) => date.Arenas.map((ar) => ar.id).includes(arena.id));
-  const handleDateDelete = (dateId: DateId): void => {
-    dispatch(deleteDate(dateId));
-  };
-  const handleArenaDelete = async (): void => {
-    if (window.confirm('Вы уверены, что хотите удалить эту арену?')) {
-      try {
-        await dispatch(removeArena(arena.id));
-        alert('Арена успешно удалена');
-      } catch (error) {
-        alert('Ошибка удаления арены');
-        console.error('Ошибка удаления арены:', error);
-      }
+
+  const handleDateDelete = async (dateId: DateId): Promise<void> => {
+    try {
+      await dispatch(deleteDate(dateId));
+      notifications.show({
+        title: 'Дата удалена',
+        message: 'Дата была успешно удалена.',
+        color: 'green',
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Ошибка',
+        message: 'Не удалось удалить дату.',
+        color: 'red',
+      });
+      console.error('Ошибка удаления даты:', error);
+
     }
+  };
+
+  const handleArenaDelete = (): void => {
+    modals.openConfirmModal({
+      title: 'Подтверждение удаления',
+      centered: true,
+      children: (
+        <p>Вы уверены, что хотите удалить эту арену? Это действие невозможно отменить.</p>
+      ),
+      labels: { confirm: 'Удалить', cancel: 'Отмена' },
+      confirmProps: { color: 'red' },
+      onConfirm: async () => {
+        try {
+          await dispatch(removeArena(arena.id));
+          notifications.show({
+            title: 'Арена удалена',
+            message: 'Арена была успешно удалена.',
+            color: 'green',
+          });
+        } catch (error) {
+          notifications.show({
+            title: 'Ошибка',
+            message: 'Не удалось удалить арену.',
+            color: 'red',
+          });
+          console.error('Ошибка удаления арены:', error);
+        }
+      },
+    });
   };
 
   return (
     <div className="arena-card" key={arena.id}>
       <div className="arena-card-header">
         <h2 className="arena-title">{arena.title}</h2>
-        <button onClick={handleArenaDelete} className="delete-btn">
+        <Button onClick={handleArenaDelete} className="delete-btn">
+
           Удалить арену
-        </button>
+        </Button>
       </div>
       <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <div className="arena-dates">
           {arenaDates.length > 0 ? (
             arenaDates.map((date) => (
-              <div>
-                <span key={date.id} className="arena-date">
+              <div key={date.id} className="date-item">
+                <Delete01Icon onClick={() => handleDateDelete(date.id)} className="delete-date-icon" />
+                <span className="arena-date">
                   {new Date(date.startDate).toLocaleTimeString()} -{' '}
                   {new Date(date.endDate).toLocaleTimeString()}
                 </span>
-                <Delete01Icon onClick={handleDateDelete} />
+
               </div>
             ))
           ) : (
@@ -76,7 +114,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
           <span>{`станция метро: ${metroTitle}`}</span>
         </div>
       </div>
-      {calendarVisible && <DateAddForm arenaId={arena.id} />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import type { Favourite, FavouriteId } from '../type/FavouriteType';
-import type { Arena } from '../../arena/types/ArenaType';
+import type { Arena, ArenaWithMetroStation } from '../../arena/types/ArenaType';
 import axiosInstance from '../../../services/axiosInstance';
 import { Favourite, FavouriteId } from '../type/FavouriteType';
 import { ArenaWithMetroStation } from '../../arena/types/ArenaType';

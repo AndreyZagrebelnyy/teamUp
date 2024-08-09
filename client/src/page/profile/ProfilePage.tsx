@@ -1,66 +1,76 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@mantine/core';
+import { useSelector } from 'react-redux';
+import { Button, Container, Grid } from '@mantine/core';
 import ProfileItem from '../../entities/profile/ui/ProfileItem';
-import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
+import { useAppDispatch, useAppSelector, type RootState } from '../../app/provider/store/store';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
 import EventItem from '../../entities/event/ui/EventItem';
+import './ProfileStyle.css';
 
-
-import { logout } from '../../entities/user/authSlice';
 function ProfilePage(): JSX.Element {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const onHandleLogout = (): void => {
-    void dispatch(logout());
-    navigate('/'); // Навигация после выхода
-  };
-  const profiles = useSelector((state: RootState) => state.profile.profiles);
-  useEffect(() => void dispatch(getFavouriteArenas()), [dispatch]);
- 
-  const favouriteArenas = useAppSelector(
-	(store: RootState) => store.favouriteArenas.favouriteArenas,
- );
-  const events = useAppSelector(
-	(store: RootState) => store.events.events,
- );
-const userEvents = events.filter((event) => event.Users.map((user) => user.id).includes(user.id))
-
-
   const user = useSelector((state: RootState) => state.auth.user);
+  const events = useAppSelector((store: RootState) => store.events.events);
+  const profiles = useSelector((state: RootState) => state.profile.profiles);
+  const favouriteArenas = useAppSelector(
+    (store: RootState) => store.favouriteArenas.favouriteArenas,
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => void dispatch(getFavouriteArenas()), [dispatch]);
+
   const [isAdding, setIsAdding] = useState(false);
 
   if (!profiles || !user) {
     return <div>Loading...</div>;
   }
 
+  const userEvents = events.filter((event) => event.Users.map((el) => el.id).includes(user.id));
   const userProfile = profiles.find((profile) => profile.userId === user.id);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      {userProfile ? (
-        <ProfileItem key={userProfile.id} profile={userProfile} user={user} />
-      ) : (
-        <>
-          {isAdding && <FormAddProfile />}
-          <Button onClick={() => setIsAdding(!isAdding)} type="button">
-            {isAdding ? 'Отмена' : 'Открыть профиль'}
-          </Button>
-        </>
-      )}
-      <div>
-        {favouriteArenas &&
-          favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
-      </div>
-		<div>
-        {userEvents &&
-          userEvents.map((event) => <EventItem event={event} key={event.id} />)}
-      </div>
-    </div>
+    <Container style={{ minWidth: '1500px', width: '100%', padding: '20px' }}>
+      <Grid gutter="xl" className="div-arena">
+        <Grid.Col span={4}>
+          <div style={{ padding: '10px', maxWidth: '100%' }}>
+            <h1>Избранные арены:</h1>
+            {favouriteArenas && favouriteArenas.length > 0 ? (
+              favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)
+            ) : (
+              <h2>У вас пока нет избранных арен</h2>
+            )}
+          </div>
+        </Grid.Col>
+
+        <Grid.Col
+          span={4}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
+          {userProfile ? (
+            <ProfileItem key={userProfile.id} profile={userProfile} user={user} />
+          ) : (
+            <>
+              {isAdding && <FormAddProfile />}
+              <Button onClick={() => setIsAdding(!isAdding)} type="button">
+                {isAdding ? 'Отмена' : 'Открыть профиль'}
+              </Button>
+            </>
+          )}
+        </Grid.Col>
+
+        <Grid.Col span={4} className="div-event">
+          <div style={{ padding: '10px', maxWidth: '100%' }}>
+            <h1>Вы записаны:</h1>
+            {userEvents && userEvents.length > 0 ? (
+              userEvents.map((event) => <EventItem event={event} key={event.id} />)
+            ) : (
+              <h2>У вас пока нет записанных ивентов</h2>
+            )}
+          </div>
+        </Grid.Col>
+      </Grid>
+    </Container>
   );
 }
 

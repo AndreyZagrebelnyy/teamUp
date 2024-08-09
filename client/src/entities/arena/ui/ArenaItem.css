@@ -13,6 +13,7 @@
   box-sizing: border-box; /* Чтобы padding и border не увеличивали ширину карточки */
   overflow: hidden; /* Для предотвращения переполнения содержимого */
   text-align: center; /* Выравнивание текста по центру */
+  color: black;
 }
 
 .mySwiper {
