@@ -10,7 +10,7 @@ import { injectStore } from './services/axiosInstance';
 import store from './app/provider/store/store';
 import '@mantine/core/styles.css'; // Подключение стилей Mantine Core
 import '@mantine/dates/styles.css'; // Подключение стилей для DatePicker
-import '@mantine/notifications/styles.css'; 
+import '@mantine/notifications/styles.css';
 
 // Инъекция хранилища
 injectStore(store);

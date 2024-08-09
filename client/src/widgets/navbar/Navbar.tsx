@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Container, Group, Button, Text, Avatar } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-
 import { IconBrandTelegram } from '@tabler/icons-react';
 import { logout } from '../../entities/user/authSlice';
 import type { RootState } from '../../app/provider/store/store';
@@ -30,7 +29,9 @@ function Navbar(): JSX.Element {
       <Group position="apart" className="Navbar">
         <Group spacing="md">
           <NavLink to="/" style={{ textDecoration: 'none' }}>
-            <Text weight={500}>Главная</Text>
+            <Text weight={500} className="logo">
+              Team Up
+            </Text>
           </NavLink>
           <NavLink to="/arenas" style={{ textDecoration: 'none' }}>
             <Text weight={500}>Площадки</Text>
@@ -49,17 +50,25 @@ function Navbar(): JSX.Element {
             )}
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
               <Group align="center" className="navbar-avatar-container">
-                <Avatar src={profiles.image} alt={profiles.firstName} radius='xl' size='xl' />
                 {user && profiles ? (
-                  <div className="profile-info">
-                    <div style={{ marginLeft: 10 }}>
-                      <Text className="profile-name">{profiles.firstName}</Text>
+                  <>
+                    <Avatar
+                      src={profiles.image}
+                      alt={profiles.firstName}
+                      radius="xl"
+                      size="lg"
+                      className="avatar"
+                    />
+                    <div className="profile-info">
+                      <Text className="profile-name">
+                        {profiles.firstName} {profiles.lastName}
+                      </Text>
                       <div className="profile-telegram">
                         <IconBrandTelegram className="telegram-icon" />
-                        <Text>{profiles.telegram}</Text>
+                        <Text>@{profiles.telegram}</Text>
                       </div>
                     </div>
-                  </div>
+                  </>
                 ) : (
                   <>
                     <FontAwesomeIcon icon={faUserCircle} size="2x" />

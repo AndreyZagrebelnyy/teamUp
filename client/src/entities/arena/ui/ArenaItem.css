@@ -1,71 +1,69 @@
-/* Основные стили для страницы и фильтра */
-.ArenasPage {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 16px;
-  align-items: center;
-  justify-content: center;
-}
-
-.metro-filter {
-  margin-bottom: 16px;
-}
-
-/* Список арен и карточка */
-.arena-list {
-  padding: 50px 50px 0px 50px;
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(700px, 1fr)
-  ); /* Минимальная ширина увеличена до 700px */
-  gap: 60px;
-}
+/* ArenaItem.css */
 
 .arena-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  width: 100%; /* Полная ширина в пределах элемента сетки */
-  max-width: 900px; /* Максимальная ширина для контроля размера изображения */
-  max-height: 1600px;
-  display: flex;
-}
-
-.arena-card-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 500px;
+  max-width: 700px; /* Установите фиксированную максимальную ширину карточки */
+  box-sizing: border-box; /* Чтобы padding и border не увеличивали ширину карточки */
+  overflow: hidden; /* Для предотвращения переполнения содержимого */
+  text-align: center; /* Выравнивание текста по центру */
 }
 
-/* .arena-card-header img {
-  width: 100%; 
-  height: 600px; 
-  object-fit: cover;
-  border-radius: 8px;
-} */
+.mySwiper {
+  width: 100%;
+  height: 300px; /* Установите фиксированную высоту для Swiper */
+  overflow: hidden;
+}
+
+.mySwiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Для сохранения пропорций изображения */
+  display: block; /* Удаляет отступы вокруг изображения */
+  border-radius: 10px;
+}
+
+.arena-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 16px;
+}
 
 .arena-title {
   font-size: 1.5em;
-  margin-top: 16px; /* Добавлен отступ для отделения от изображения */
+  margin-top: 16px;
 }
 
 .arena-description,
-.arena-dates,
 .arena-address,
-.arena-metro {
+.arena-coordinates,
+.arena-metro,
+.arena-dates {
   margin: 10px 0;
   font-size: 1rem;
 }
 
 .arena-date {
-  display: block;
+  margin-top: 8px; /* Добавить небольшой отступ сверху */
 }
 
-/* Стили кнопки */
-button {
+.arena-card-footer {
+  display: flex;
+  justify-content: center; /* Выравнивание по центру */
+  align-items: center;
+  margin-top: 16px;
+}
+
+.arena-favourite-btn {
   background-color: #007bff;
   border: none;
   color: #fff;
@@ -76,30 +74,11 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.arena-favourite-btn:hover {
   background-color: #0056b3;
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-  height: 2000px;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  height: 600px;
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  /* display: block; */
-  width: 600px;
-  height: 400px;
-  object-fit: cover;
+.arena-favourite-btn:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
 }

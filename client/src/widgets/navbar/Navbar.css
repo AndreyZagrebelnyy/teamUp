@@ -1,18 +1,37 @@
+/* Navbar.css */
+
 .Navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
-  background-color: #f8f9fa;
+  padding: 15px 30px;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #eae7dc;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.Navbar a {
+  color: #333333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.Navbar a:hover {
+  color: #e85a4f;
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
-  color: #007bff;
+  color: #333333;
   cursor: pointer;
   user-select: none;
+  margin-right: 20px;
 }
 
 .profile {
@@ -23,12 +42,13 @@
 .profile-info {
   display: flex;
   flex-direction: column; /* Имя и Telegram будут друг под другом */
+  margin-left: 10px;
 }
 
 .profile-name {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
-  margin-bottom: 2px; /* Отступ между именем и телеграмом */
+  color: #333333;
 }
 
 .profile-telegram {
@@ -40,10 +60,39 @@
 
 .telegram-icon {
   margin-right: 5px;
+  color: #0088cc;
+}
+
+.avatar {
+  margin-right: -10px;
+  border: 3px solid #baC6bf;
+  border-radius: 50%;
 }
 
 .navbar-avatar-container {
   display: flex;
   align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 30px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
 
+.navbar-avatar-container:hover {
+  background-color: #eae7dc;
+}
+
+.navbar-btn {
+  background-color: #e85a4f;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-btn:hover {
+  background-color: #d9534f;
 }
