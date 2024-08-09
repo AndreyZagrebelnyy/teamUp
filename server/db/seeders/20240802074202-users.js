@@ -39,6 +39,26 @@ module.exports = {
         password: "admin",
         isAdmin: false,
       },
+      {
+        email: "andrey_ne@andrey",
+        password: "admin",
+        isAdmin: false,
+      },
+      {
+        email: "paga_ne@paga",
+        password: "admin",
+        isAdmin: false,
+      },
+      {
+        email: "oleg_ne@oleg",
+        password: "admin",
+        isAdmin: false,
+      },
+      {
+        email: "nikita_ne@nikita",
+        password: "admin",
+        isAdmin: false,
+      },
     ]);
   },
 

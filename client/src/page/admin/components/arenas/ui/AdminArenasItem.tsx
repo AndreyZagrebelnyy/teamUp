@@ -4,6 +4,8 @@ import { useModals } from '@mantine/modals';
 import { notifications } from '@mantine/notifications';
 import { AddCircleHalfDotIcon, Delete01Icon } from 'hugeicons-react'; // Обновите иконку для удаления
 import { useAppDispatch, useAppSelector } from '../../../../../app/provider/store/store';
+import React, { useState } from 'react';
+import { useModals } from '@mantine/modals';
 import { removeArena } from '../../../../../entities/arena/ArenaSlice';
 import DateAddForm from '../../../../../entities/date/ui/DateAddForm';
 import type { DateId, DateWithArenas } from '../../../../../entities/date/types/dateType';
@@ -16,9 +18,9 @@ type ArenaItemProps = {
 };
 
 function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
+  const dates = useAppSelector((store) => store.date.date);
   const modals = useModals();
-
   const metroTitle = arena.MetroStation?.title || 'Нет информации о метро';
   const openDateAddFormModal = () => {
     modals.openModal({
@@ -26,7 +28,6 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
       children: <DateAddForm arenaId={arena.id} onClose={() => modals.closeAll()} />,
     });
   };
-
   const dates = useAppSelector((store) => store.date.date);
   const arenaDates = dates.filter((date) => date.Arenas.map((ar) => ar.id).includes(arena.id));
 
@@ -45,6 +46,7 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
         color: 'red',
       });
       console.error('Ошибка удаления даты:', error);
+
     }
   };
 
@@ -82,6 +84,7 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
       <div className="arena-card-header">
         <h2 className="arena-title">{arena.title}</h2>
         <Button onClick={handleArenaDelete} className="delete-btn">
+
           Удалить арену
         </Button>
       </div>
@@ -96,6 +99,7 @@ function AdminArenasItem({ arena }: ArenaItemProps): JSX.Element {
                   {new Date(date.startDate).toLocaleTimeString()} -{' '}
                   {new Date(date.endDate).toLocaleTimeString()}
                 </span>
+
               </div>
             ))
           ) : (
