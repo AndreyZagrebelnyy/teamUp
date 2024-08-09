@@ -74,8 +74,8 @@ function EventItem({ event, onHandleAddToEvent }: EventsItemProps): JSX.Element 
           {isUserRegistered
             ? 'Вы уже записаны'
             : !hasUserProfile
-            ? 'Создайте профиль'
-            : 'Записаться на ивент'}
+              ? 'Создайте профиль'
+              : 'Записаться на ивент'}
         </Button>
       </div>
     </div>

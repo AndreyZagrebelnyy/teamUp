@@ -14,11 +14,11 @@ function SportItem({ sport }: SportItemProps): JSX.Element {
   const getSportIcon = (title: string) => {
     switch (title.toLowerCase()) {
       case 'баскетбол':
-        return <FaBasketballBall className="icon" />;
+        return <img src='basketball.png' className="icon" />;
       case 'волейбол':
-        return <FaVolleyballBall className="icon" />;
+        return <img src='valleybal.png' className="icon" />;
       case 'футбол':
-        return <FaFutbol className="icon" />;
+        return <img src='football.png' className="icon" />;
       default:
         return null;
     }

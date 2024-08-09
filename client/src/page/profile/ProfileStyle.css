@@ -1,0 +1,28 @@
+.carousel-container {
+    width: 100%; /* или укажите конкретную ширину */
+    overflow: hidden; /* Убирает скроллы */
+  }
+  
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .div-arena {
+    background-color: #797575; /* Темный фон */
+    color: #fff; /* Светлый текст для контраста */
+    padding: 20px;
+    border-radius: 8px; /* Скругленные углы для более приятного вида */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для выделения блока */
+  }
+  
+  .div-event {
+    background-color: #333; /* Темный фон */
+    color: #fff; /* Светлый текст для контраста */
+    padding: 20px;
+    border-radius: 8px; /* Скругленные углы для более приятного вида */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для выделения блока */
+    gap: 10px;
+  }
+  

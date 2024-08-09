@@ -7,23 +7,26 @@ import { useForm } from 'react-hook-form';
 import { object, ref, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { registration } from '../../entities/user/authSlice';
-import './styles/auth.css';
 import { useAppDispatch } from '../../app/provider/store/store';
+import { Container, TextInput, PasswordInput, Button, Paper, Title, Center } from '@mantine/core';
 import type { UserRegistrationForm } from '../../entities/user/types/userType';
+import './styles/auth.css';
 
 const schema = object().shape({
-
-  email: string().email().nullable().trim().required('Не email'),
+  email: string()
+    .email('Введите действительный email')
+    .required('Необходимо указать email')
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Введите действительный email'),
   password: string()
     .trim()
     .required('Необходимо указать пароль')
-    .min(5, 'пароль жолжен быть не менее 5 символов ')
-    .max(20, 'пароль должен быть не более 20 символов'),
+    .min(5, 'Пароль должен быть не менее 5 символов')
+    .max(20, 'Пароль должен быть не более 20 символов'),
   cpassword: string()
     .trim()
     .required('Необходимо повторить пароль')
-    .min(5, 'пароль жолжен быть не менее 5 символов ')
-    .max(20, 'пароль должен быть не более 20 символов')
+    .min(5, 'Пароль должен быть не менее 5 символов')
+    .max(20, 'Пароль должен быть не более 20 символов')
     .oneOf([ref('password')], 'Пароли не совпадают'),
 });
 
@@ -37,35 +40,46 @@ function RegistrationPage(): JSX.Element {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onHadleSubmit = async (user: UserRegistrationForm): Promise<void> => {
-    console.log('asdasdasd');
     void dispatch(registration({ email: user.email, password: user.password }));
     navigate('/');
   };
 
   return (
-    <form onSubmit={handleSubmit(onHadleSubmit)}>
-      <label htmlFor="email">
-        Email:
-        <input type="email" {...register('email')} />
-        <span>{errors.email?.message}</span>
-      </label>
-      <br />
-      <label htmlFor="password">
-        Password:
-        <input type="password" {...register('password')} />
-        <span>{errors.password?.message}</span>
-      </label>
-      <br />
-      <label htmlFor="cpassword">
-        Check password:
-        <input type="password" {...register('cpassword')} />
-        <span>{errors.cpassword?.message}</span>
-      </label>
-      <br />
-      <div className="button-container">
-        <button type="submit">sign-up</button>
-      </div>
-    </form>
+    <Container size={420} my={40}>
+      <Paper radius="md" p="xl" withBorder>
+        <Title order={2} align="center" mb="lg">
+          Регистрация
+        </Title>
+        <form onSubmit={handleSubmit(onHadleSubmit)}>
+          <TextInput
+            label="Email"
+            placeholder="Введите ваш email"
+            {...register('email')}
+            error={errors.email?.message}
+            required
+          />
+          <PasswordInput
+            label="Пароль"
+            placeholder="Введите ваш пароль"
+            {...register('password')}
+            error={errors.password?.message}
+            required
+            mt="md"
+          />
+          <PasswordInput
+            label="Повторите пароль"
+            placeholder="Повторите ваш пароль"
+            {...register('cpassword')}
+            error={errors.cpassword?.message}
+            required
+            mt="md"
+          />
+          <Center mt="xl">
+            <Button type="submit">Зарегистрироваться</Button>
+          </Center>
+        </form>
+      </Paper>
+    </Container>
   );
 }
 

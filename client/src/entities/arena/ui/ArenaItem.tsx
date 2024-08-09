@@ -60,7 +60,7 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     showNotification({
       title: 'Успех!',
       message: `Вы успешно ${isFavourite ? 'удалили' : 'добавили'} арену из избранного`,
-      color: 'green',
+      color: `${isFavourite ? 'red' : 'green'}`,
       className: 'notifications-container',
     });
   };
@@ -69,11 +69,11 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     setSelectedDateId(dateId);
     setModalOpen(true);
   };
-  
+
   const pagination = {
     clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    renderBullet(index, className) {
+      return `<span class="${className}">${index + 1}</span>`;
     },
   };
 
@@ -111,7 +111,8 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
           {availableDates.length > 0 ? (
             availableDates.map((date) => (
               <Button key={date.id} onClick={() => handleDateClick(date.id)} className="arena-date">
-                {new Date(date.startDate).toLocaleTimeString()} - {new Date(date.endDate).toLocaleTimeString()}
+                {new Date(date.startDate).toLocaleTimeString().split(':').slice(0, -1).join(':')} -{' '}
+                {new Date(date.endDate).toLocaleTimeString().split(':').slice(0, -1).join(':')}
               </Button>
             ))
           ) : (

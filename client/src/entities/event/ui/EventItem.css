@@ -57,6 +57,7 @@
 
 .event-users {
   margin-bottom: 1rem;
+  color: #0000006f;
 }
 
 .event-users-container {
@@ -77,8 +78,7 @@
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
+  width: 60px;
   border-radius: 50%;
   border: 2px solid #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
