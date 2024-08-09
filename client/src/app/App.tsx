@@ -1,53 +1,36 @@
-// App.js or App.tsx
-import React, { useEffect } from 'react';
-import { MantineProvider } from '@mantine/core';
-import Navbar from '../widgets/navbar/Navbar';
-import AppRoutes from './provider/routes/AppRoutes';
-import { useAppDispatch } from './provider/store/store';
-import { getAllArenas } from '../entities/arena/ArenaSlice';
-import { tokensRefresh } from '../entities/user/authSlice';
-import { getAllEvents } from '../entities/event/eventSlice';
-import { getAllSports } from '../entities/sports/sportSlice';
-import { getAllMetro } from '../entities/metroStation/MetroSlice';
-import Footer from '../widgets/footer/Footer';
-import { getAllProfiles } from '../entities/profile/profileSlice';
-import { getAllLevels } from '../entities/level/levelSlice';
-import { getFavouriteArenas } from '../entities/favourite/FavouriteSlice';
-import ErrorBoundary from './ErrorrBoundary';
-import { getAllUserEvents } from '../entities/userEvent/userEventSlice';
+import React, { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import elbrusLogo from './assets/elbrus.svg';
 import './App.css';
-import { getAllDates } from '../entities/date/DateSlice';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    console.log(777);
-    
-    void dispatch(getAllArenas());
-    void dispatch(getAllDates());
-    void dispatch(getFavouriteArenas());
-    void dispatch(getAllEvents());
-    void dispatch(tokensRefresh());
-    void dispatch(getAllSports());
-    void dispatch(getAllMetro());
-    void dispatch(getAllProfiles());
-    void dispatch(getAllLevels());
-    void dispatch(getAllUserEvents());
-  }, [dispatch]);
+  const [count, setCount] = useState(0);
 
   return (
-    <MantineProvider>
-      <ErrorBoundary>
-        <div className="app">
-          <Navbar />
-          <div className="app-container">
-            <AppRoutes />
-          </div>
-          <Footer />
-        </div>
-      </ErrorBoundary>
-    </MantineProvider>
+    <div className="App">
+      <div>
+        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+          <img src="/vite.svg" className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://github.com/Elbrus-Bootcamp" target="_blank" rel="noreferrer">
+          <img src={elbrusLogo} className="logo elbrus" alt="Elbrus logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h2>Elbrus Bootcamp</h2>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button type="button" onClick={() => setCount((prev) => prev + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+    </div>
   );
 }
 
