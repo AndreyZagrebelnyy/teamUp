@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios';
 import axiosInstance from '../../../services/axiosInstance';
-import type { User, UserLoginForm, UserRegistrationForm } from '../types/userType';
+import type { User, UserRegistrationForm } from '../types/userType';
 
 type AuthResponse = {
   user: User;
@@ -14,22 +14,20 @@ class AuthApi {
         '/auth/registration',
         data,
       );
-
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Error: ${error.message}`);
     }
   };
 
-  static authorization = async (data: UserLoginForm): Promise<AuthResponse> => {
+  static authorization = async (data: UserRegistrationForm): Promise<AuthResponse> => {
     try {
       const response: AxiosResponse<AuthResponse> = await axiosInstance.post(
         '/auth/authorization',
         data,
       );
-
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Error: ${error.message}`);
     }
   };
@@ -41,6 +39,7 @@ class AuthApi {
 
   static tokensRefresh = async (): Promise<AuthResponse> => {
     const response: AxiosResponse<AuthResponse> = await axiosInstance.get('/tokens/refresh');
+    
     return response.data;
   };
 }

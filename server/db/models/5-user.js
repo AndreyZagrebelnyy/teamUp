@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Event, {
         through: models.UserEvent,
         foreignKey: "userId",
+        // otherKey: "eventId",
+      });
+      this.belongsToMany(models.Arena, {
+        through: models.Favourite,
+        foreignKey: "userId",
       });
       this.hasMany(models.Arena, {
         foreignKey: "creatorId",

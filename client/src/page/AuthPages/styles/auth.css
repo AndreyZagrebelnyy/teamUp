@@ -1,53 +1,25 @@
-/* Общие стили для формы */
 form {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  min-height: 250px;
-  max-height: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+  gap: 1rem;
 }
 
-/* Стили для инпутов */
-form input {
+input {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
 }
 
-/* Стили для кнопок */
-form button {
-  padding: 10px 20px;
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
-  text-decoration: none;
-  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background-color: #45a049;
-}
-
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 600px) {
-  form {
-    padding: 15px;
-  }
-
-  form button {
-    width: 100%;
-    margin-top: 10px;
-  }
+button:hover {
+  background-color: #0056b3;
 }

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-
+const path = require('path');
 const app = express();
 
 const PORT = process.env.PORT;
@@ -11,6 +11,8 @@ const serverConfig = require('./config/serverConfig');
 serverConfig(app);
 
 app.use('/api', indexRouter);
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // всегда внизу
 app.listen(PORT, () => {

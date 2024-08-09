@@ -7,6 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         through: models.ArenaDate,
         foreignKey: "arenaId",
       });
+      this.belongsToMany(models.User, {
+        through: models.Favourite,
+        foreignKey: "arenaId",
+      });
+      this.belongsToMany(models.Favourite, {
+        through: "FavouriteArena",
+        foreignKey: "arenaId",
+      });
 
       this.hasMany(models.Image, {
         foreignKey: "arenaId",
@@ -25,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Arena.init(
     {
-		  title:DataTypes.STRING,
-		  description: DataTypes.TEXT,
+      title: DataTypes.STRING,
+      description: DataTypes.TEXT,
       country: DataTypes.STRING,
       city: DataTypes.STRING,
       street: DataTypes.STRING,

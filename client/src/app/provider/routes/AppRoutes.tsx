@@ -2,14 +2,15 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ArenasPage from '../../../page/arenas/ArenasPage';
 import MainPage from '../../../page/main/MainPage';
+import AdminPanel from '../../../page/admin/AdminPage';
+import EventsPage from '../../../page/events/EventsPage';
+import ProfilePage from '../../../page/profile/ProfilePage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
-import EventsPage from '../../../page/events/EventsPage';
 
 
-type AppRoutesProps = {};
 
-function AppRoutes({}: AppRoutesProps): JSX.Element {
+function AppRoutes(): JSX.Element {
   return (
     <div className="AppRoutes">
       <Routes>
@@ -18,6 +19,9 @@ function AppRoutes({}: AppRoutesProps): JSX.Element {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/authorization" element={<AuthorizationPage />} />
+        <Route path="/admin_panel" element={<AdminPanel />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/*" element={404} />
       </Routes>
     </div>
   );
