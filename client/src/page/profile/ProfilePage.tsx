@@ -8,8 +8,20 @@ import { useAppDispatch, useAppSelector, type RootState } from '../../app/provid
 import FormAddProfile from '../../entities/profile/ui/FormAddProfile';
 import ArenaItem from '../../entities/arena/ui/ArenaItem';
 import { getFavouriteArenas } from '../../entities/favourite/FavouriteSlice';
-import { logout } from '../../entities/user/authSlice';
+import EventItem from '../../entities/event/ui/EventItem';
 
+const Button = styled.button`
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+import { logout } from '../../entities/user/authSlice';
 function ProfilePage(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,14 +30,17 @@ function ProfilePage(): JSX.Element {
     navigate('/'); // Навигация после выхода
   };
   const profiles = useSelector((state: RootState) => state.profile.profiles);
-
-  useEffect(() => {
-    void dispatch(getFavouriteArenas());
-  }, [dispatch]);
-
+  useEffect(() => void dispatch(getFavouriteArenas()), [dispatch]);
+ 
   const favouriteArenas = useAppSelector(
-    (store: RootState) => store.favouriteArenas.favouriteArenas,
-  );
+	(store: RootState) => store.favouriteArenas.favouriteArenas,
+ );
+  const events = useAppSelector(
+	(store: RootState) => store.events.events,
+ );
+const userEvents = events.filter((event) => event.Users.map((user) => user.id).includes(user.id))
+
+
   const user = useSelector((state: RootState) => state.auth.user);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -50,6 +65,10 @@ function ProfilePage(): JSX.Element {
       <div>
         {favouriteArenas &&
           favouriteArenas.map((arena) => <ArenaItem arena={arena} key={arena.id} />)}
+      </div>
+		<div>
+        {userEvents &&
+          userEvents.map((event) => <EventItem event={event} key={event.id} />)}
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ function ArenasPage(): JSX.Element {
     void dispatch(getAllArenas());
   }, [dispatch]);
 
-  const handlePlacemarkClick = (coords: [number, number]) => {
+  const handlePlacemarkClick = (coords: [number, number]): void => {
     setRouteEnd(coords);
   };
 

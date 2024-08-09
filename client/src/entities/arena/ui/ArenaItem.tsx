@@ -25,7 +25,6 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
   const [images, setImages] = useState<string[]>([]);
   const events = useAppSelector((store) => store.events.events || []);
   const { user } = useAppSelector((store) => store.auth);
-
   useEffect(() => {
     if (events && arena.Dates) {
       const busyDates = new Set(
@@ -70,6 +69,13 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
     setSelectedDateId(dateId);
     setModalOpen(true);
   };
+  
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  };
 
   return (
     <div className="arena-card">
@@ -92,6 +98,8 @@ function ArenaItem({ arena }: ArenaItemProps): JSX.Element {
       )}
       <div className="arena-card-info">
         <h2 className="arena-title">{arena.title}</h2>
+      </div>
+      <div className="arena-card-body">
         <p className="arena-description">{arena.description}</p>
         <p className="arena-address">
           {arena.country}, {arena.city}, {arena.street} {arena.building}

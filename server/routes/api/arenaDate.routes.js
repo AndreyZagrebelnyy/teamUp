@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const arenaDateController = require("../../controllers/arenaDateController");
+const dateController = require("../../controllers/dateController");
 const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
-
 router
-  .post("/:arenaId", arenaDateController.createArenaDate)
+  .get("/:arenaId", dateController.getArenaDates)
+  .post("/:arenaId", arenaDateController.createArenaDate);
 
 module.exports = router;

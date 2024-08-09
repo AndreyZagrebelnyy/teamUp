@@ -17,15 +17,17 @@ function DateAddForm({ arenaId, onClose }: DateAddFormProps): JSX.Element {
 
   const addDates = (e: React.FormEvent) => {
     e.preventDefault();
+	 
     if (startDate && endDate) {
       const form = {
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
         arenaId,
       };
+console.log(1111, form);
 
       void dispatch(addDate(form)).then(() => {
-        onClose(); // Закрытие модального окна после успешного добавления
+        onClose();
       });
     }
   };
